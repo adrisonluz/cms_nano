@@ -17,6 +17,10 @@ Route::group(['middleware' => ['web']], function () {
  
 });
  
+Route::group(['middleware' => 'web', 'prefix' => 'usuarios'], function(){
+	Route::get('index', ['uses' => 'UsuarioController@index', 'as' => 'usuario.index']);
+});
+
 Route::group(['middleware' => 'web', 'prefix' => 'admin' ], function () {
 
     /* Rotas */
