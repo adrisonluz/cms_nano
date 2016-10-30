@@ -13,8 +13,8 @@ class CreateMenusItens extends Migration
     public function up()
     {
         Schema::create('menus_itens', function (Blueprint $table) {
-            $table->increments('id');   
-			$table->unsignedInteger('menu_id');         
+            $table->increments('id');
+			$table->unsignedInteger('menu_id');
             $table->foreign('menu_id')
               ->references('id')->on('menus')
               ->onDelete('cascade');
@@ -25,7 +25,7 @@ class CreateMenusItens extends Migration
             $table->string('titulo', 255)->nullable();
             $table->string('link', 255)->nullable();
             $table->string('ativo', 45);
-            $table->timestamp('lixeira')->nullable();
+            $table->string('lixeira', 45)->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
         });

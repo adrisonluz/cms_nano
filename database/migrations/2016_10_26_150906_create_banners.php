@@ -25,10 +25,10 @@ class CreateBanners extends Migration
             $table->string('video', 255)->nullable();
             $table->date('data_ini');
             $table->date('data_fim');
-            $table->string('link', 255)->nullable();  
+            $table->string('link', 255)->nullable();
             $table->integer('ordem');
             $table->string('ativo', 45);
-            $table->timestamp('lixeira')->nullable();
+            $table->string('lixeira', 45)->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
         });

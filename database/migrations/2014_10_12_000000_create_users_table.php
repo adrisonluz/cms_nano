@@ -18,13 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('login', 255)->nullable();
-            
+
             $table->string('rg', 255)->nullable();
             $table->string('cpf', 255)->nullable();
             $table->date('nascimento');
             $table->string('telefone', 255)->nullable();
             $table->string('celular', 255)->nullable();
-            
+
             $table->string('foto', 255)->nullable();
             $table->string('endereco', 255);
             $table->string('bairro', 255);
@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('cep', 255)->nullable();
             $table->mediumText('observacoes')->nullable();
             $table->string('nivel', 45);
-            $table->timestamp('lixeira')->nullable();
+            $table->string('lixeira', 45)->nullable();
             $table->integer('agent_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

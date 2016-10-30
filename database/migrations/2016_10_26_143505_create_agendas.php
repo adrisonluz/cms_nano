@@ -19,9 +19,9 @@ class CreateAgendas extends Migration
             $table->date('data_fim');
             $table->string('imagem', 255)->nullable();
             $table->string('titulo', 255)->nullable();
-            $table->string('url', 255)->nullable();            
+            $table->string('url', 255)->nullable();
             $table->string('ativo', 45);
-            $table->timestamp('lixeira')->nullable();
+            $table->string('lixeira', 45)->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
         });

@@ -19,12 +19,12 @@ class CreateForms extends Migration
               ->references('id')->on('paginas')
               ->onDelete('no action');
             $table->string('titulo', 255)->nullable();
-            $table->string('classe', 255)->nullable(); 
+            $table->string('classe', 255)->nullable();
             $table->string('origem', 255);
             $table->string('tipo', 45);
             $table->integer('ordem');
             $table->string('ativo', 45);
-            $table->timestamp('lixeira')->nullable();
+            $table->string('lixeira', 45)->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
         });

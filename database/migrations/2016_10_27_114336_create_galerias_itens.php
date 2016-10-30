@@ -14,7 +14,7 @@ class CreateGaleriasItens extends Migration
     {
         Schema::create('galerias_itens', function (Blueprint $table) {
             $table->increments('id');
-			$table->unsignedInteger('galeria_id');            
+			$table->unsignedInteger('galeria_id');
 			$table->foreign('galeria_id')
               ->references('id')->on('galerias')
               ->onDelete('cascade');
@@ -24,7 +24,7 @@ class CreateGaleriasItens extends Migration
             $table->string('tipo', 45);
             $table->integer('ordem');
             $table->string('ativo', 45);
-            $table->timestamp('lixeira')->nullable();
+            $table->string('lixeira', 45)->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
         });

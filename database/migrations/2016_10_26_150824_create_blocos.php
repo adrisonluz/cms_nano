@@ -16,10 +16,10 @@ class CreateBlocos extends Migration
             $table->increments('id');
             $table->string('titulo', 255)->nullable();
             $table->text('conteudo');
-            $table->string('imagem', 255)->nullable();  
+            $table->string('imagem', 255)->nullable();
             $table->string('posicao', 45);
             $table->string('ativo', 45);
-            $table->timestamp('lixeira')->nullable();
+            $table->string('lixeira', 45)->nullable();
             $table->integer('agent_id')->nullable();
             $table->timestamps();
         });
