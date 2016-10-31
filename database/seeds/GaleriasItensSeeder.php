@@ -11,7 +11,7 @@ class GaleriasItensSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('galerias_itens')->insert([
+        DB::table('cms_galerias_itens')->insert([
             'sitename' => 'Nome do site',
         ]);
     }

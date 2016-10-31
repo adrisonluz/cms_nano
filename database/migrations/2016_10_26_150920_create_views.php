@@ -12,7 +12,7 @@ class CreateViews extends Migration
      */
     public function up()
     {
-        Schema::create('views', function (Blueprint $table) {
+        Schema::create('cms_views', function (Blueprint $table) {
             $table->increments('id');
             $table->string('mes', 45);
             $table->string('ano', 45);

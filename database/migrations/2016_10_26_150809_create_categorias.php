@@ -12,11 +12,11 @@ class CreateCategorias extends Migration
      */
     public function up()
     {
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('cms_categorias', function (Blueprint $table) {
             $table->increments('id');
 			$table->unsignedInteger('categoria_pai_id')->nullable();
             $table->foreign('categoria_pai_id')
-              ->references('id')->on('categorias')
+              ->references('id')->on('cms_categorias')
               ->onDelete('cascade')->nullable();
             $table->string('titulo', 255)->nullable();
             $table->text('conteudo');
@@ -25,7 +25,10 @@ class CreateCategorias extends Migration
             $table->integer('ordem');
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();
-            $table->integer('agent_id')->nullable();
+            $table->unsignedInteger('agent_id')->nullable();
+            $table->foreign('agent_id')
+              ->references('id')->on('cms_users')
+              ->onDelete('no action')->nullable();
             $table->timestamps();
         });
     }

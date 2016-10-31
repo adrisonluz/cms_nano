@@ -11,7 +11,7 @@ class CategoriasSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('categorias')->insert([
+      DB::table('cms_categorias')->insert([
           'sitename' => 'Nome do site',
       ]);
     }

@@ -12,15 +12,15 @@ class CreateFields extends Migration
      */
     public function up()
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('cms_fields', function (Blueprint $table) {
             $table->increments('id');
 			$table->unsignedInteger('form_id');
             $table->foreign('form_id')
-              ->references('id')->on('forms')
+              ->references('id')->on('cms_forms')
               ->onDelete('cascade');
 			$table->unsignedInteger('input_id');
             $table->foreign('input_id')
-              ->references('id')->on('fields')
+              ->references('id')->on('cms_fields')
               ->onDelete('cascade')->nullable();
             $table->string('nome', 255)->nullable();
             $table->string('valor', 255)->nullable();
@@ -31,7 +31,10 @@ class CreateFields extends Migration
             $table->integer('ordem');
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();
-            $table->integer('agent_id')->nullable();
+            $table->unsignedInteger('agent_id')->nullable();
+            $table->foreign('agent_id')
+              ->references('id')->on('cms_users')
+              ->onDelete('no action')->nullable();
             $table->timestamps();
         });
     }

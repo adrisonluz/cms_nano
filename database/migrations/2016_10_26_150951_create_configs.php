@@ -12,7 +12,7 @@ class CreateConfigs extends Migration
      */
     public function up()
     {
-        Schema::create('configs', function (Blueprint $table) {
+        Schema::create('cms_configs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('chave', 45);
             $table->string('valor', 255)->nullable();

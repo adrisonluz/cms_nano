@@ -12,7 +12,7 @@ class CreateAgendas extends Migration
      */
     public function up()
     {
-        Schema::create('agendas', function (Blueprint $table) {
+        Schema::create('cms_agendas', function (Blueprint $table) {
             $table->increments('id');
             $table->text('conteudo');
             $table->date('data_ini');
@@ -22,7 +22,10 @@ class CreateAgendas extends Migration
             $table->string('url', 255)->nullable();
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();
-            $table->integer('agent_id')->nullable();
+            $table->unsignedInteger('agent_id')->nullable();
+            $table->foreign('agent_id')
+              ->references('id')->on('cms_users')
+              ->onDelete('no action')->nullable();
             $table->timestamps();
         });
     }

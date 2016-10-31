@@ -11,7 +11,7 @@ class PostsSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('posts')->insert([
+      DB::table('cms_posts')->insert([
           'sitename' => 'Nome do site',
       ]);
     }

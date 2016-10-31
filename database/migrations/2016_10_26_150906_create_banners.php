@@ -12,12 +12,12 @@ class CreateBanners extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('cms_banners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipo', 45);
 			$table->unsignedInteger('pagina_id');
             $table->foreign('pagina_id')
-              ->references('id')->on('paginas')
+              ->references('id')->on('cms_paginas')
               ->onDelete('cascade')->nullable();
             $table->string('titulo', 255)->nullable();
             $table->mediumText('conteudo');
@@ -29,7 +29,10 @@ class CreateBanners extends Migration
             $table->integer('ordem');
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();
-            $table->integer('agent_id')->nullable();
+            $table->unsignedInteger('agent_id')->nullable();
+            $table->foreign('agent_id')
+              ->references('id')->on('cms_users')
+              ->onDelete('no action')->nullable();
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ class AgendasSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('agenda')->insert([
+      DB::table('cms_agenda')->insert([
           'sitename' => 'Nome do site',
       ]);
     }

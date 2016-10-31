@@ -12,11 +12,11 @@ class CreateForms extends Migration
      */
     public function up()
     {
-        Schema::create('forms', function (Blueprint $table) {
+        Schema::create('cms_forms', function (Blueprint $table) {
             $table->increments('id');
 			$table->unsignedInteger('pagina_id');
             $table->foreign('pagina_id')
-              ->references('id')->on('paginas')
+              ->references('id')->on('cms_paginas')
               ->onDelete('no action');
             $table->string('titulo', 255)->nullable();
             $table->string('classe', 255)->nullable();
@@ -25,7 +25,10 @@ class CreateForms extends Migration
             $table->integer('ordem');
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();
-            $table->integer('agent_id')->nullable();
+            $table->unsignedInteger('agent_id')->nullable();
+            $table->foreign('agent_id')
+              ->references('id')->on('cms_users')
+              ->onDelete('no action')->nullable();
             $table->timestamps();
         });
     }

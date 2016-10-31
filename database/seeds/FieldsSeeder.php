@@ -11,7 +11,7 @@ class FieldsSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('fields')->insert([
+      DB::table('cms_fields')->insert([
           'sitename' => 'Nome do site',
       ]);
     }

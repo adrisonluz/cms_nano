@@ -12,7 +12,7 @@ class CreateOnlineviews extends Migration
      */
     public function up()
     {
-        Schema::create('onlineviews', function (Blueprint $table) {
+        Schema::create('cms_onlineviews', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ip', 45);
             $table->string('sessao', 255)->nullable();

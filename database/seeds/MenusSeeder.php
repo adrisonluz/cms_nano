@@ -11,7 +11,7 @@ class MenusSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('menus')->insert([
+      DB::table('cms_menus')->insert([
           'sitename' => 'Nome do site',
       ]);
     }

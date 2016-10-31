@@ -11,7 +11,7 @@ class PaginasSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('paginas')->insert([
+      DB::table('cms_paginas')->insert([
           'sitename' => 'Nome do site',
       ]);
     }

@@ -11,7 +11,7 @@ class FormssSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('forms')->insert([
+        DB::table('cms_forms')->insert([
             'sitename' => 'Nome do site',
         ]);
     }

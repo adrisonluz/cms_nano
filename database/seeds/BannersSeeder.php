@@ -11,7 +11,7 @@ class BannersSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('banners')->insert([
+      DB::table('cms_banners')->insert([
           'sitename' => 'Nome do site',
       ]);
     }

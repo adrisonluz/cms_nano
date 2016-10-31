@@ -12,17 +12,20 @@ class CreateBlocosPaginas extends Migration
      */
     public function up()
     {
-        Schema::create('blocos_paginas', function (Blueprint $table) {
+        Schema::create('cms_blocos_paginas', function (Blueprint $table) {
             $table->increments('id');
 			$table->unsignedInteger('bloco_id');
             $table->foreign('bloco_id')
-              ->references('id')->on('blocos')
+              ->references('id')->on('cms_blocos')
               ->onDelete('cascade');
 			$table->unsignedInteger('pagina_id');
             $table->foreign('pagina_id')
-              ->references('id')->on('paginas')
+              ->references('id')->on('cms_paginas')
               ->onDelete('cascade');
-            $table->integer('agent_id')->nullable();
+            $table->unsignedInteger('agent_id')->nullable();
+            $table->foreign('agent_id')
+              ->references('id')->on('cms_users')
+              ->onDelete('no action')->nullable();
             $table->timestamps();
         });
     }
