@@ -39,7 +39,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
+                    <a class="navbar-brand" href="{{ route('cms.dashboard') }}">
                         Nano CMS
                     </a>
                 </div>
@@ -49,7 +49,7 @@
                     <ul class="nav navbar-nav">
 
                         @if (!Auth::guest())
-                        <li><a href="{{ route('admin.usuario.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('cms.usuario.index') }}">Usuários</a></li>
                         @endif
 
                     </ul>
@@ -58,7 +58,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                        <li><a href="{{ url('/admin/login') }}">Login</a></li>
+                        <li><a href="{{ url('/cms/login') }}">Login</a></li>
                         @else
 
 
@@ -68,7 +68,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/admin/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/cms/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
                         @endif

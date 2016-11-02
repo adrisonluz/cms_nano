@@ -9,26 +9,26 @@ use NanoCMS\Http\Requests\CMSUserRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 // Use - Custom
-use NanoCMS\CMSUser;
+use NanoCMS\CMSPagina;
 
-class CMSUserController extends \NanoCMS\Http\Controllers\Controller {
+class CMSPaginasController extends \NanoCMS\Http\Controllers\Controller {
 
     public function __construct(Request $request) {
         $this->middleware('auth');
         $this->retorno = array();
         $this->request = $request->except('_token');
-        $this->area = 'cms.usuarios';
+        $this->area = 'cms.paginas';
     }
 
     /**
      *   Listagem dos usuários
      */
     public function index() {
-        $usuarios = CMSUser::whereNull('lixeira')
+        $paginas = CMSPagina::whereNull('lixeira')
                 ->orWhereIn('lixeira', ['', 'nao'])
                 ->paginate(env('25'));
 
-        $this->retorno['usuarios'] = $usuarios;
+        $this->retorno['paginas'] = $paginas;
 
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');
