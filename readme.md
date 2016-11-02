@@ -1,27 +1,55 @@
-# Laravel PHP Framework
+# Nano CMS
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Nano CMS é um CMS sistema de gerenciamento de conteúdo (Content Manager System) elaborado totalmente em linguagem web, tendo como base o [Laravel Framework](http://laravel.com).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Instalação
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+### Primeiro passo
+Clone o repositório ou faça download para seu localhost ou servidor de preferência. Para isto basta clicar em "Clone or download" > "Download ZIP" ou executar os seguinte comando em seu terminal:
 
-## Official Documentation
+git clone https://github.com/adrisonluz/cms_nano.git
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### Segundo passo
+Agora é necessário baixar as dependências do sistema. Para isto, utilizamos o [Composer](https://getcomposer.org/), consulte caso você não tenha familiaridade com o Composer. Execute o seguinte comando no terminal:
 
-## Contributing
+composer update
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+### Terceiro passo
+Agora vamos editar nosso arquivo ".env", o qual é responsável pelas informações indispensáveis para que o sistema funcione corretamente. Para isso basta editar ou cópiar o arquivo ".env.exemple". Retire o final ".exemple" do arquivo deixando apenas como ".env". 
 
-## Security Vulnerabilities
+Edite o arquivo ".env" com as informações corretas de seu localhost ou servidor. Caso tenha dúvida do que ou como editar, basta editar apenas as seguintes variáveis para que o sistema funcione corretamente para testes:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+APP_ENV=local 
+APP_DEBUG=true
+APP_KEY=SomeRandomString
+APP_URL=http://localhost
+APP_TIMEZONE=UTC
+APP_LOCALE=en
 
-## License
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+### Quarto passo
+Com o banco de dados devidamente configurado, agora precisamos criar as tabelas e alimentá-las com o básico para rodar o sistema. Não se assuste, você não precisa criar tudo "à mão", vamos usar os truques que o Laravel esconde nas mangas. Basta rodas os seguintes comandos:
+
+php artisan migrate
+php artisan db:seed --class=DatabaseSeeder
+
+### Quinto passo
+Se tudo estiver correto, você já pode acessar o Nano CMS utilizando o usuário Teste. Abaixo você tem o email e senha gerado pelo Seed do quarto passo.
+
+teste@teste.com
+teste1234
+
+Obs: Caso seu localhost ou servidor não rode o sistema corretamente, você pode tentar acessá-lo pelo servidor imbutido, executando o comando abaixo e acessando o sistema pelo link http://localhost:8000.
+
+php artisan serve
+
+
+## Contato
+[AdrisonLuz.Com](http://adrisonluz.com)
+[Contato@AdrisonLuz.Com](mailto:contato@adrisonluz.com)
