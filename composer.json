@@ -21,7 +21,10 @@
         ],
         "psr-4": {
             "NanoCMS\\": "app/"
-        }
+        },
+        "files": [
+        "app/Helpers/MyHelper.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [

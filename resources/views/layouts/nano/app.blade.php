@@ -39,7 +39,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ route('dashboard') }}">
+                    <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
                         Nano CMS
                     </a>
                 </div>
@@ -49,7 +49,7 @@
                     <ul class="nav navbar-nav">
 
                         @if (!Auth::guest())
-                        <li><a href="{{ route('usuario.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('admin.usuario.index') }}">Usuários</a></li>
                         @endif
 
                     </ul>
@@ -83,12 +83,8 @@
 
         <footer class="main-footer">
             <div class="container">
-                <!-- To the right -->
-                <div class="pull-right hidden-xs">
-                    Desenvolvido por <a href="http://adrisonluz.com" target="new" title="Entrar em contato">Adrison Luz</a>
-                </div>
-                <!-- Default to the left -->
-                <strong> <a href="#">Nano CMS</a>.</strong> Todos os direitos reservados.
+                <strong> <a href="#">Nano CMS</a>.</strong><spam> Todos os direitos reservados.</span>
+                <div class="pull-right-md">Desenvolvido por <a href="http://adrisonluz.com" target="new" title="Entrar em contato">Adrison Luz</a></div>
             </div>
         </footer>
 
@@ -96,6 +92,10 @@
         <script src="{{ url('js/jquery.min.js') }}"></script>
         <script src="{{ url('js/bootstrap.min.js') }}"></script>
         <script src="{{ url('js/webcam.js') }}"></script>
+        <script src="{{ url('js/input-mask/jquery.inputmask.js') }}"></script>
+        <script src="{{ url('js/input-mask/jquery.date.extensions.js') }}"></script>
+        <script src="{{ url('js/input-mask/jquery.numeric.extensions.js') }}"></script>
+        <script src="{{ url('js/input-mask/jquery.phone.extensions.js') }}"></script>
 
         <script src="{{ url('js/functions.js') }}"></script>
     </body>

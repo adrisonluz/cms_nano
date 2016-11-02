@@ -13,11 +13,9 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', [ 'uses' => 'HomeController@index', 'as' => 'dashboard']);
-});
-
-Route::group(['middleware' => 'web', 'prefix' => 'usuarios'], function() {
-    Route::get('index', ['uses' => 'UsuarioController@index', 'as' => 'usuario.index']);
+    Route::get('/', [ 'uses' => 'HomeController@index', 'as' => 'home']);
+    Route::get('/home', [ 'uses' => 'HomeController@index', 'as' => 'home']);
+    Route::get('/index', [ 'uses' => 'HomeController@index', 'as' => 'home']);
 });
 
 Route::group(['middleware' => 'web', 'prefix' => 'admin'], function () {
@@ -30,18 +28,22 @@ Route::group(['middleware' => 'web', 'prefix' => 'admin'], function () {
         return view('welcome');
     });
 
-    Route::get('/home', [ 'uses' => 'HomeController@index', 'as' => 'dashboard']);
+    Route::get('', [ 'uses' => 'NanoCMS\CMSHomeController@index', 'as' => 'admin.dashboard']);
+    Route::get('/home', [ 'uses' => 'NanoCMS\CMSHomeController@index', 'as' => 'admin.dashboard']);
+    Route::get('/index', [ 'uses' => 'NanoCMS\CMSHomeController@index', 'as' => 'admin.dashboard']);
+    Route::get('/dashboard', [ 'uses' => 'NanoCMS\CMSHomeController@index', 'as' => 'admin.dashboard']);
 
     /* Rotas organizadas para usuários */
     Route::group(['prefix' => 'usuarios', 'where' => ['id' => '[0-9]+']], function () {
 
-        Route::get('', [ 'uses' => 'UserController@index', 'as' => 'usuario.index']);
-        Route::get('index', [ 'uses' => 'UserController@index', 'as' => 'usuario.index']);
-        Route::get('inserir', ['uses' => 'UserController@create', 'as' => 'usuario.create']);
-        Route::post('inserir', ['uses' => 'UserController@store', 'as' => 'usuario.store']);
-        Route::get('{id}/editar', ['uses' => 'UserController@edit', 'as' => 'usuario.edit']);
-        Route::post('{id}/editar', ['uses' => 'UserController@update', 'as' => 'usuario.update']);
-        Route::post('{id}/lixeira', ['uses' => 'UserController@lixeira', 'as' => 'usuario.lixeira']);
-        Route::get('{id}/deletar', ['uses' => 'UserController@delete', 'as' => 'usuario.delete']);
+        Route::get('', [ 'uses' => 'NanoCMS\CMSUserController@index', 'as' => 'admin.usuario.index']);
+        Route::get('index', [ 'uses' => 'NanoCMS\CMSUserController@index', 'as' => 'admin.usuarios.index']);
+        Route::get('inserir', ['uses' => 'NanoCMS\CMSUserController@create', 'as' => 'admin.usuario.create']);
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSUserController@store', 'as' => 'admin.usuario.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSUserController@edit', 'as' => 'admin.usuario.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSUserController@update', 'as' => 'admin.usuario.update']);
+        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSUserController@lixeira', 'as' => 'admin.usuario.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSUserController@ativar', 'as' => 'admin.usuario.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSUserController@delete', 'as' => 'admin.usuario.delete']);
     });
 });

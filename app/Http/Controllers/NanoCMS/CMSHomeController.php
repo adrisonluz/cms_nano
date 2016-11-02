@@ -1,12 +1,12 @@
 <?php
 
-namespace NanoCMS\Http\Controllers;
+namespace NanoCMS\Http\Controllers\NanoCMS;
 
 use NanoCMS\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller {
+class CMSHomeController extends \NanoCMS\Http\Controllers\Controller {
 
     /**
      * Create a new controller instance.

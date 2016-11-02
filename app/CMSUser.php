@@ -3,9 +3,12 @@
 namespace NanoCMS;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
-{
+class CMSUser extends Authenticatable {
+
+    protected $table = 'cms_users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /*
+     * Trata e salva imagem de perfil
+     */
+    public function setImagemFoto($imagemCod, $nomeArquivo) {
+        $imagem = str_replace('data:image/png;base64,', '', $imagemCod);
+        $imgReturn = base64_decode($imagem);
+
+        if (Storage::disk('perfil')->put($nomeArquivo, $imgReturn, 'public')) {
+            return true;
+        }
+    }
+
 }
