@@ -1,7 +1,9 @@
-# Nano CMS 
+# Nano CMS
 **(em desenvolvimento)**
 
 Nano CMS é um CMS sistema de gerenciamento de conteúdo (Content Manager System) elaborado totalmente em linguagem web, tendo como base o [Laravel Framework](http://laravel.com).
+
+-- --
 
 ## Instalação
 
