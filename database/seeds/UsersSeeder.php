@@ -2,19 +2,21 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersSeeder extends Seeder
-{
+class UsersSeeder extends Seeder {
+
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         DB::table('cms_users')->insert([
             'name' => 'Usuario Teste',
             'email' => 'teste@teste.com',
+            'login' => 'teste',
             'password' => bcrypt('teste1234'),
+            'nivel' => 1,
         ]);
     }
+
 }

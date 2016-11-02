@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder {
      */
     public function run() {
         $this->call(ConfigsSeeder::class);
+        $this->call(NiveisSeeder::class);
+        $this->call(NvaccessSeeder::class);
         $this->call(UsersSeeder::class);
         //$this->call(PaginasSeeder::class);
         //$this->call(MenusSeeder::class);
@@ -24,8 +26,6 @@ class DatabaseSeeder extends Seeder {
         //$this->call(BannersSeeder::class);
         //$this->call(GaleriasSeeder::class);
         //$this->call(GaleriasItensSeeder::class);
-        $this->call(NiveisSeeder::class);
-        $this->call(NvaccessSeeder::class);
     }
 
 }

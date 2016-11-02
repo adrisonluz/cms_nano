@@ -3,15 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
-{
+class CreateUsersTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('cms_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -32,12 +31,15 @@ class CreateUsersTable extends Migration
             $table->string('uf', 45);
             $table->string('cep', 255)->nullable();
             $table->mediumText('observacoes')->nullable();
-            $table->string('nivel', 45);
+            $table->unsignedInteger('nivel')->nullable();
+            $table->foreign('nivel')
+                    ->references('id')->on('niveis')
+                    ->onDelete('no action')->nullable();
             $table->string('lixeira', 45)->nullable();
             $table->unsignedInteger('agent_id')->nullable();
             $table->foreign('agent_id')
-              ->references('id')->on('cms_users')
-              ->onDelete('no action')->nullable();
+                    ->references('id')->on('cms_users')
+                    ->onDelete('no action')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -48,8 +50,8 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::drop('users');
     }
+
 }
