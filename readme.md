@@ -1,4 +1,5 @@
-# Nano CMS
+# Nano CMS 
+**(em desenvolvimento)**
 
 Nano CMS é um CMS sistema de gerenciamento de conteúdo (Content Manager System) elaborado totalmente em linguagem web, tendo como base o [Laravel Framework](http://laravel.com).
 
@@ -7,49 +8,59 @@ Nano CMS é um CMS sistema de gerenciamento de conteúdo (Content Manager System
 ### Primeiro passo
 Clone o repositório ou faça download para seu localhost ou servidor de preferência. Para isto basta clicar em "Clone or download" > "Download ZIP" ou executar os seguinte comando em seu terminal:
 
+```
 git clone https://github.com/adrisonluz/cms_nano.git
+```
 
 ### Segundo passo
 Agora é necessário baixar as dependências do sistema. Para isto, utilizamos o [Composer](https://getcomposer.org/), consulte caso você não tenha familiaridade com o Composer. Execute o seguinte comando no terminal:
 
+```
 composer update
+```
 
 ### Terceiro passo
-Agora vamos editar nosso arquivo ".env", o qual é responsável pelas informações indispensáveis para que o sistema funcione corretamente. Para isso basta editar ou cópiar o arquivo ".env.exemple". Retire o final ".exemple" do arquivo deixando apenas como ".env". 
+Agora vamos editar nosso arquivo ".env", o qual é responsável pelas informações indispensáveis para que o sistema funcione corretamente. Para isso basta editar ou cópiar o arquivo ".env.exemple". Retire o final ".exemple" do arquivo deixando apenas como ".env".
 
 Edite o arquivo ".env" com as informações corretas de seu localhost ou servidor. Caso tenha dúvida do que ou como editar, basta editar apenas as seguintes variáveis para que o sistema funcione corretamente para testes:
 
-APP_ENV=local 
-APP_DEBUG=true
-APP_KEY=SomeRandomString
-APP_URL=http://localhost
-APP_TIMEZONE=UTC
+```
+APP_ENV=local  
+APP_DEBUG=true  
+APP_KEY=SomeRandomString  
+APP_URL=http://localhost  
+APP_TIMEZONE=UTC  
 APP_LOCALE=en
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=homestead
-DB_USERNAME=homestead
+DB_CONNECTION=mysql   
+DB_HOST=127.0.0.1    
+DB_PORT=3306   
+DB_DATABASE=homestead   
+DB_USERNAME=homestead    
 DB_PASSWORD=secret
+```
 
 ### Quarto passo
 Com o banco de dados devidamente configurado, agora precisamos criar as tabelas e alimentá-las com o básico para rodar o sistema. Não se assuste, você não precisa criar tudo "à mão", vamos usar os truques que o Laravel esconde nas mangas. Basta rodas os seguintes comandos:
 
-php artisan migrate
+```
+php artisan migrate  
 php artisan db:seed --class=DatabaseSeeder
+```
 
 ### Quinto passo
 Se tudo estiver correto, você já pode acessar o Nano CMS utilizando o usuário Teste. Abaixo você tem o email e senha gerado pelo Seed do quarto passo.
 
-teste@teste.com
+teste@teste.com  
 teste1234
 
 Obs: Caso seu localhost ou servidor não rode o sistema corretamente, você pode tentar acessá-lo pelo servidor imbutido, executando o comando abaixo e acessando o sistema pelo link http://localhost:8000.
 
+```
 php artisan serve
+```
 
 
 ## Contato
-[AdrisonLuz.Com](http://adrisonluz.com)
+[AdrisonLuz.Com](http://adrisonluz.com)  
 [Contato@AdrisonLuz.Com](mailto:contato@adrisonluz.com)
