@@ -46,6 +46,7 @@ DB_PASSWORD=secret
 Com o banco de dados devidamente configurado, agora precisamos criar as tabelas e alimentá-las com o básico para rodar o sistema. Não se assuste, você não precisa criar tudo "à mão", vamos usar os truques que o Laravel esconde nas mangas. Basta rodas os seguintes comandos:
 
 ```
+php artisan key:generate
 php artisan migrate  
 php artisan db:seed --class=DatabaseSeeder
 ```
