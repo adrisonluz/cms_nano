@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSUser;
+use NanoCMS\Nivel;
 
 class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
 
@@ -119,8 +120,10 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
      * 	Edição de usuários
      */
     public function edit($id) {
-        $usuario = CMSUser::find($id);
-        return view($this->area . '.editar', [ 'usuario' => $usuario]);
+        $this->retorno['usuario'] = CMSUser::find($id);
+        $this->retorno['niveis'] = Nivel::all();
+
+        return view($this->area . '.editar', $this->retorno);
     }
 
     /**

@@ -21,7 +21,7 @@
             <h1>Usuários / Inserir</h1>
         </div>
 
-        <form name="frm" action="{{ route("cms.usuario.store")}}" method="post" >
+        <form name="frm" action="{{ route("cms.usuarios.store")}}" method="post" >
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -148,8 +148,34 @@
                     <label for="uf" class="col-sm-1 control-label">UF:</label>
                     <div class="col-sm-4">
                         <select name="uf" class="form-control">
-                            <option value="">Selecione um:</option>
-                            <option value="rs">RS</option>
+                            <option value="">Selecione</option>
+                            <option value="AC" {{ $request['uf'] == 'AC' ? 'selected=selected' : '' }} >AC</option>
+                            <option value="AL" {{ $request['uf'] == 'AL' ? 'selected=selected' : '' }} >AL</option>
+                            <option value="AM" {{ $request['uf'] == 'AM' ? 'selected=selected' : '' }} >AM</option>
+                            <option value="AP" {{ $request['uf'] == 'AP' ? 'selected=selected' : '' }} >AP</option>
+                            <option value="BA" {{ $request['uf'] == 'BA' ? 'selected=selected' : '' }} >BA</option>
+                            <option value="CE" {{ $request['uf'] == 'CE' ? 'selected=selected' : '' }} >CE</option>
+                            <option value="DF" {{ $request['uf'] == 'DF' ? 'selected=selected' : '' }} >DF</option>
+                            <option value="ES" {{ $request['uf'] == 'ES' ? 'selected=selected' : '' }} >ES</option>
+                            <option value="GO" {{ $request['uf'] == 'GO' ? 'selected=selected' : '' }} >GO</option>
+                            <option value="MA" {{ $request['uf'] == 'MA' ? 'selected=selected' : '' }} >MA</option>
+                            <option value="MG" {{ $request['uf'] == 'MG' ? 'selected=selected' : '' }} >MG</option>
+                            <option value="MS" {{ $request['uf'] == 'MS' ? 'selected=selected' : '' }} >MS</option>
+                            <option value="MT" {{ $request['uf'] == 'MT' ? 'selected=selected' : '' }} >MT</option>
+                            <option value="PA" {{ $request['uf'] == 'PA' ? 'selected=selected' : '' }} >PA</option>
+                            <option value="PB" {{ $request['uf'] == 'PB' ? 'selected=selected' : '' }} >PB</option>
+                            <option value="PE" {{ $request['uf'] == 'PE' ? 'selected=selected' : '' }} >PE</option>
+                            <option value="PI" {{ $request['uf'] == 'PI' ? 'selected=selected' : '' }} >PI</option>
+                            <option value="PR" {{ $request['uf'] == 'PR' ? 'selected=selected' : '' }} >PR</option>
+                            <option value="RJ" {{ $request['uf'] == 'RJ' ? 'selected=selected' : '' }} >RJ</option>
+                            <option value="RN" {{ $request['uf'] == 'RN' ? 'selected=selected' : '' }} >RN</option>
+                            <option value="RS" {{ $request['uf'] == 'RS' ? 'selected=selected' : '' }} >RS</option>
+                            <option value="RO" {{ $request['uf'] == 'RO' ? 'selected=selected' : '' }} >RO</option>
+                            <option value="RR" {{ $request['uf'] == 'RR' ? 'selected=selected' : '' }} >RR</option>
+                            <option value="SC" {{ $request['uf'] == 'SC' ? 'selected=selected' : '' }} >SC</option>
+                            <option value="SE" {{ $request['uf'] == 'SE' ? 'selected=selected' : '' }} >SE</option>
+                            <option value="SP" {{ $request['uf'] == 'SP' ? 'selected=selected' : '' }} >SP</option>
+                            <option value="TO" {{ $request['uf'] == 'TO' ? 'selected=selected' : '' }} >TO</option>
                         </select>
                     </div>
                 </div>
@@ -159,7 +185,11 @@
                     <div class="col-sm-9">
                         <select name="nivel" class="form-control">
                             <option value="">Selecione um:</option>
-                            <option value="user">Usuário</option>
+                            @if(count($niveis) > 0)
+                            @foreach($niveis as $nivel)
+                            <option value="{{ $nivel->id }}"  {{ $usuario->nivel == $request['nivel'] ? 'selected=selected' : '' }} >{{ $nivel->nivel }}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
