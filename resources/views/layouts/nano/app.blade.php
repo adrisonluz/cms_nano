@@ -13,6 +13,7 @@
 
         <!-- Styles -->
         <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url('summernote/summernote.css') }}" rel="stylesheet">
         <link href="{{ url('css/style.css') }}" rel="stylesheet">
 
         <style>
@@ -49,8 +50,8 @@
                     <ul class="nav navbar-nav">
 
                         @if (!Auth::guest())
-                        <li><a href="{{ route('cms.usuario.index') }}">Usuários</a></li>
-                        <li><a href="{{ route('cms.pagina.index') }}">Páginas</a></li>
+                        <li><a href="{{ route('cms.usuarios.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('cms.paginas.index') }}">Páginas</a></li>
                         @endif
 
                     </ul>
@@ -72,6 +73,7 @@
                                 <li><a href="{{ url('/cms/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{ url('/cms/configs') }}" alt="Configurações" title="Configurações"><i class="fa fa-btn fa-gears"></i></a></li>
                         @endif
                     </ul>
                 </div>
@@ -97,6 +99,7 @@
         <script src="{{ url('js/input-mask/jquery.date.extensions.js') }}"></script>
         <script src="{{ url('js/input-mask/jquery.numeric.extensions.js') }}"></script>
         <script src="{{ url('js/input-mask/jquery.phone.extensions.js') }}"></script>
+        <script src="{{ url('summernote/summernote.min.js') }}"></script>
 
         <script src="{{ url('js/functions.js') }}"></script>
     </body>

@@ -40,28 +40,37 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
     /* Rotas organizadas para usuários */
     Route::group(['prefix' => 'usuarios', 'where' => ['id' => '[0-9]+']], function () {
 
-        Route::get('', ['uses' => 'NanoCMS\CMSUserController@index', 'as' => 'cms.usuario.index']);
-        Route::get('index', ['uses' => 'NanoCMS\CMSUserController@index', 'as' => 'cms.usuario.index']);
-        Route::get('inserir', ['uses' => 'NanoCMS\CMSUserController@create', 'as' => 'cms.usuario.create']);
-        Route::post('inserir', ['uses' => 'NanoCMS\CMSUserController@store', 'as' => 'cms.usuario.store']);
-        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSUserController@edit', 'as' => 'cms.usuario.edit']);
-        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSUserController@update', 'as' => 'cms.usuario.update']);
-        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSUserController@lixeira', 'as' => 'cms.usuario.lixeira']);
-        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSUserController@ativar', 'as' => 'cms.usuario.ativar']);
-        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSUserController@delete', 'as' => 'cms.usuario.delete']);
+        Route::get('', ['uses' => 'NanoCMS\CMSUserController@index', 'as' => 'cms.usuarios.index']);
+        Route::get('index', ['uses' => 'NanoCMS\CMSUserController@index', 'as' => 'cms.usuarios.index']);
+        Route::get('inserir', ['uses' => 'NanoCMS\CMSUserController@create', 'as' => 'cms.usuarios.create']);
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSUserController@store', 'as' => 'cms.usuarios.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSUserController@edit', 'as' => 'cms.usuarios.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSUserController@update', 'as' => 'cms.usuarios.update']);
+        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSUserController@lixeira', 'as' => 'cms.usuarios.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSUserController@ativar', 'as' => 'cms.usuarios.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSUserController@delete', 'as' => 'cms.usuarios.delete']);
     });
 
     /* Rotas organizadas para páginas */
     Route::group(['prefix' => 'paginas', 'where' => ['id' => '[0-9]+']], function () {
 
-        Route::get('', ['uses' => 'NanoCMS\CMSPaginasController@index', 'as' => 'cms.pagina.index']);
-        Route::get('index', ['uses' => 'NanoCMS\CMSPaginasController@index', 'as' => 'cms.pagina.index']);
-        Route::get('inserir', ['uses' => 'NanoCMS\CMSPaginasController@create', 'as' => 'cms.pagina.create']);
-        Route::post('inserir', ['uses' => 'NanoCMS\CMSPaginasController@store', 'as' => 'cms.pagina.store']);
-        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSPaginasController@edit', 'as' => 'cms.pagina.edit']);
-        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSPaginasController@update', 'as' => 'cms.pagina.update']);
-        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSPaginasController@lixeira', 'as' => 'cms.pagina.lixeira']);
-        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSPaginasController@ativar', 'as' => 'cms.pagina.ativar']);
-        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSPaginasController@delete', 'as' => 'cms.pagina.delete']);
+        Route::get('', ['uses' => 'NanoCMS\CMSPaginasController@index', 'as' => 'cms.paginas.index']);
+        Route::get('index', ['uses' => 'NanoCMS\CMSPaginasController@index', 'as' => 'cms.paginas.index']);
+        Route::get('inserir', ['uses' => 'NanoCMS\CMSPaginasController@create', 'as' => 'cms.paginas.create']);
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSPaginasController@store', 'as' => 'cms.paginas.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSPaginasController@edit', 'as' => 'cms.paginas.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSPaginasController@update', 'as' => 'cms.paginas.update']);
+        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSPaginasController@lixeira', 'as' => 'cms.paginas.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSPaginasController@ativar', 'as' => 'cms.paginas.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSPaginasController@delete', 'as' => 'cms.paginas.delete']);
+    });
+
+    /* Rotas organizadas para configurações */
+    Route::group(['prefix' => 'configs', 'where' => ['id' => '[0-9]+']], function () {
+
+        Route::get('', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'cms.configs.index']);
+        Route::get('index', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'cms.configs.index']);
+        Route::get('/editar', ['uses' => 'NanoCMS\CMSConfigsController@edit', 'as' => 'cms.configs.edit']);
+        Route::post('/editar', ['uses' => 'NanoCMS\CMSConfigsController@update', 'as' => 'cms.configs.update']);
     });
 });

@@ -21,7 +21,7 @@
         </ul>
         @endif
 
-        <form name="frm" action="{{ route("cms.usuario.update", ["id"=> $usuario->id ])}}" method="post" >
+        <form name="frm" action="{{ route("cms.usuarios.update", ["id"=> $usuario->id ])}}" method="post" >
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -146,8 +146,34 @@
                     <label for="uf" class="col-sm-1 control-label">UF:</label>
                     <div class="col-sm-4">
                         <select name="uf" class="form-control">
-                            <option value="">Selecione um:</option>
-                            <option value="rs">RS</option>
+                            <option value="">Selecione</option>
+                            <option value="AC" {{ $usuario->uf == 'AC' ? 'selected=selected' : '' }} >AC</option>
+                            <option value="AL" {{ $usuario->uf == 'AL' ? 'selected=selected' : '' }} >AL</option>
+                            <option value="AM" {{ $usuario->uf == 'AM' ? 'selected=selected' : '' }} >AM</option>
+                            <option value="AP" {{ $usuario->uf == 'AP' ? 'selected=selected' : '' }} >AP</option>
+                            <option value="BA" {{ $usuario->uf == 'BA' ? 'selected=selected' : '' }} >BA</option>
+                            <option value="CE" {{ $usuario->uf == 'CE' ? 'selected=selected' : '' }} >CE</option>
+                            <option value="DF" {{ $usuario->uf == 'DF' ? 'selected=selected' : '' }} >DF</option>
+                            <option value="ES" {{ $usuario->uf == 'ES' ? 'selected=selected' : '' }} >ES</option>
+                            <option value="GO" {{ $usuario->uf == 'GO' ? 'selected=selected' : '' }} >GO</option>
+                            <option value="MA" {{ $usuario->uf == 'MA' ? 'selected=selected' : '' }} >MA</option>
+                            <option value="MG" {{ $usuario->uf == 'MG' ? 'selected=selected' : '' }} >MG</option>
+                            <option value="MS" {{ $usuario->uf == 'MS' ? 'selected=selected' : '' }} >MS</option>
+                            <option value="MT" {{ $usuario->uf == 'MT' ? 'selected=selected' : '' }} >MT</option>
+                            <option value="PA" {{ $usuario->uf == 'PA' ? 'selected=selected' : '' }} >PA</option>
+                            <option value="PB" {{ $usuario->uf == 'PB' ? 'selected=selected' : '' }} >PB</option>
+                            <option value="PE" {{ $usuario->uf == 'PE' ? 'selected=selected' : '' }} >PE</option>
+                            <option value="PI" {{ $usuario->uf == 'PI' ? 'selected=selected' : '' }} >PI</option>
+                            <option value="PR" {{ $usuario->uf == 'PR' ? 'selected=selected' : '' }} >PR</option>
+                            <option value="RJ" {{ $usuario->uf == 'RJ' ? 'selected=selected' : '' }} >RJ</option>
+                            <option value="RN" {{ $usuario->uf == 'RN' ? 'selected=selected' : '' }} >RN</option>
+                            <option value="RS" {{ $usuario->uf == 'RS' ? 'selected=selected' : '' }} >RS</option>
+                            <option value="RO" {{ $usuario->uf == 'RO' ? 'selected=selected' : '' }} >RO</option>
+                            <option value="RR" {{ $usuario->uf == 'RR' ? 'selected=selected' : '' }} >RR</option>
+                            <option value="SC" {{ $usuario->uf == 'SC' ? 'selected=selected' : '' }} >SC</option>
+                            <option value="SE" {{ $usuario->uf == 'SE' ? 'selected=selected' : '' }} >SE</option>
+                            <option value="SP" {{ $usuario->uf == 'SP' ? 'selected=selected' : '' }} >SP</option>
+                            <option value="TO" {{ $usuario->uf == 'TO' ? 'selected=selected' : '' }} >TO</option>
                         </select>
                     </div>
                 </div>
@@ -157,7 +183,11 @@
                     <div class="col-sm-9">
                         <select name="nivel" class="form-control">
                             <option value="">Selecione um:</option>
-                            <option value="user">Usuário</option>
+                            @if(count($niveis) > 0)
+                            @foreach($niveis as $nivel)
+                            <option value="{{ $nivel->id }}"  {{ $usuario->nivel ==  $nivel->id  ? 'selected=selected' : '' }} >{{ $nivel->nivel }}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
