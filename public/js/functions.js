@@ -73,5 +73,12 @@ $(document).ready(function(){
             imageObj.src = dataSrc;
         });
     }
+    
+    // Textarea de edição
+    if($('textarea.editor'))
+        $('textarea.editor').summernote({
+            lang: 'pt-BR',
+            //airMode: true
+        });
 
 });
