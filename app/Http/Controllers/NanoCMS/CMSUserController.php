@@ -11,13 +11,21 @@ use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSUser;
 
-class CMSUserController extends \NanoCMS\Http\Controllers\Controller {
+class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {
+        parent::__construct();
+        parent::checkAcess('acessUsers');
+
         $this->middleware('auth');
         $this->retorno = array();
         $this->request = $request->except('_token');
         $this->area = 'cms.usuarios';
+
+        if (Session::has('mensagem')) {
+            $this->retorno['mensagem'] = Session::get('mensagem');
+            Session::pull('mensagem');
+        }
     }
 
     /**
@@ -30,11 +38,6 @@ class CMSUserController extends \NanoCMS\Http\Controllers\Controller {
 
         $this->retorno['usuarios'] = $usuarios;
 
-        if (Session::has('mensagem')) {
-            $this->retorno['mensagem'] = Session::get('mensagem');
-            Session::pull('mensagem');
-        }
-
         return view($this->area . ".index", $this->retorno);
     }
 
@@ -42,11 +45,6 @@ class CMSUserController extends \NanoCMS\Http\Controllers\Controller {
      * 	Cadastro de usuários
      */
     public function create() {
-        if (Session::has('mensagem')) {
-            $this->retorno['mensagem'] = Session::get('mensagem');
-            Session::pull('mensagem');
-        }
-
         return view($this->area . ".inserir", $this->retorno);
     }
 

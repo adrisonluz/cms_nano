@@ -21,7 +21,7 @@
         </ul>
         @endif
 
-        <form name="frm" action="{{ route("admin.usuario.update", ["id"=> $usuario->id ])}}" method="post" >
+        <form name="frm" action="{{ route("cms.usuario.update", ["id"=> $usuario->id ])}}" method="post" >
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">

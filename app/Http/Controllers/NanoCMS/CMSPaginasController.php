@@ -10,14 +10,23 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSPagina;
+use NanoCMS\CMSConfig;
 
-class CMSPaginasController extends \NanoCMS\Http\Controllers\Controller {
+class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {
+        parent::__construct();
+        parent::checkAcess('acessPages');
+
         $this->middleware('auth');
+        $this->area = 'cms.paginas';
         $this->retorno = array();
         $this->request = $request->except('_token');
-        $this->area = 'cms.paginas';
+
+        if (Session::has('mensagem')) {
+            $this->retorno['mensagem'] = Session::get('mensagem');
+            Session::pull('mensagem');
+        }
     }
 
     /**
@@ -29,12 +38,6 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\Controller {
                 ->paginate(env('25'));
 
         $this->retorno['paginas'] = $paginas;
-
-        if (Session::has('mensagem')) {
-            $this->retorno['mensagem'] = Session::get('mensagem');
-            Session::pull('mensagem');
-        }
-
         return view($this->area . ".index", $this->retorno);
     }
 
@@ -42,11 +45,6 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\Controller {
      * 	Cadastro de usuários
      */
     public function create() {
-        if (Session::has('mensagem')) {
-            $this->retorno['mensagem'] = Session::get('mensagem');
-            Session::pull('mensagem');
-        }
-
         return view($this->area . ".inserir", $this->retorno);
     }
 

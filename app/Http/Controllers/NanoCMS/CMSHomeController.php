@@ -2,33 +2,36 @@
 
 namespace NanoCMS\Http\Controllers\NanoCMS;
 
-use NanoCMS\Http\Requests;
+// Use - Defaults
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use NanoCMS\Http\Requests;
+use NanoCMS\Http\Requests\CMSUserRequest;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+// Use - Custom
+use NanoCMS\CMSPagina;
+use NanoCMS\CMSConfig;
 
-class CMSHomeController extends \NanoCMS\Http\Controllers\Controller {
+class CMSHomeController extends \NanoCMS\Http\Controllers\NanoController {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
+    public function __construct(Request $request) {
+        parent::__construct();
+
         $this->middleware('auth');
-        $this->user = Auth::user();
+        $this->retorno = array();
+        $this->request = $request->except('_token');
+
+        if (Session::has('mensagem')) {
+            $this->retorno['mensagem'] = Session::get('mensagem');
+            Session::pull('mensagem');
+        }
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     *   Listagem dos usuários
      */
     public function index() {
-        $data = [
-            'user' => $this->user
-        ];
-
-        return view('home', $data);
+        return view("home", $this->retorno);
     }
 
 }

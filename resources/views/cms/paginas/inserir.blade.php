@@ -21,7 +21,7 @@
             <h1>Usuários / Inserir</h1>
         </div>
 
-        <form name="frm" action="{{ route("admin.usuario.store")}}" method="post" >
+        <form name="frm" action="{{ route("cms.usuario.store")}}" method="post" >
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">

@@ -50,6 +50,7 @@
 
                         @if (!Auth::guest())
                         <li><a href="{{ route('cms.usuario.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('cms.pagina.index') }}">Páginas</a></li>
                         @endif
 
                     </ul>
@@ -84,7 +85,7 @@
         <footer class="main-footer">
             <div class="container">
                 <strong> <a href="#">Nano CMS</a>.</strong><spam> Todos os direitos reservados.</span>
-                <div class="pull-right-md">Desenvolvido por <a href="http://adrisonluz.com" target="new" title="Entrar em contato">Adrison Luz</a></div>
+                    <div class="pull-right-md">Desenvolvido por <a href="http://adrisonluz.com" target="new" title="Entrar em contato">Adrison Luz</a></div>
             </div>
         </footer>
 
