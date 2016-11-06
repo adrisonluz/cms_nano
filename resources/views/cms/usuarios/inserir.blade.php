@@ -149,33 +149,33 @@
                     <div class="col-sm-4">
                         <select name="uf" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="AC" {{ $request['uf'] == 'AC' ? 'selected=selected' : '' }} >AC</option>
-                            <option value="AL" {{ $request['uf'] == 'AL' ? 'selected=selected' : '' }} >AL</option>
-                            <option value="AM" {{ $request['uf'] == 'AM' ? 'selected=selected' : '' }} >AM</option>
-                            <option value="AP" {{ $request['uf'] == 'AP' ? 'selected=selected' : '' }} >AP</option>
-                            <option value="BA" {{ $request['uf'] == 'BA' ? 'selected=selected' : '' }} >BA</option>
-                            <option value="CE" {{ $request['uf'] == 'CE' ? 'selected=selected' : '' }} >CE</option>
-                            <option value="DF" {{ $request['uf'] == 'DF' ? 'selected=selected' : '' }} >DF</option>
-                            <option value="ES" {{ $request['uf'] == 'ES' ? 'selected=selected' : '' }} >ES</option>
-                            <option value="GO" {{ $request['uf'] == 'GO' ? 'selected=selected' : '' }} >GO</option>
-                            <option value="MA" {{ $request['uf'] == 'MA' ? 'selected=selected' : '' }} >MA</option>
-                            <option value="MG" {{ $request['uf'] == 'MG' ? 'selected=selected' : '' }} >MG</option>
-                            <option value="MS" {{ $request['uf'] == 'MS' ? 'selected=selected' : '' }} >MS</option>
-                            <option value="MT" {{ $request['uf'] == 'MT' ? 'selected=selected' : '' }} >MT</option>
-                            <option value="PA" {{ $request['uf'] == 'PA' ? 'selected=selected' : '' }} >PA</option>
-                            <option value="PB" {{ $request['uf'] == 'PB' ? 'selected=selected' : '' }} >PB</option>
-                            <option value="PE" {{ $request['uf'] == 'PE' ? 'selected=selected' : '' }} >PE</option>
-                            <option value="PI" {{ $request['uf'] == 'PI' ? 'selected=selected' : '' }} >PI</option>
-                            <option value="PR" {{ $request['uf'] == 'PR' ? 'selected=selected' : '' }} >PR</option>
-                            <option value="RJ" {{ $request['uf'] == 'RJ' ? 'selected=selected' : '' }} >RJ</option>
-                            <option value="RN" {{ $request['uf'] == 'RN' ? 'selected=selected' : '' }} >RN</option>
-                            <option value="RS" {{ $request['uf'] == 'RS' ? 'selected=selected' : '' }} >RS</option>
-                            <option value="RO" {{ $request['uf'] == 'RO' ? 'selected=selected' : '' }} >RO</option>
-                            <option value="RR" {{ $request['uf'] == 'RR' ? 'selected=selected' : '' }} >RR</option>
-                            <option value="SC" {{ $request['uf'] == 'SC' ? 'selected=selected' : '' }} >SC</option>
-                            <option value="SE" {{ $request['uf'] == 'SE' ? 'selected=selected' : '' }} >SE</option>
-                            <option value="SP" {{ $request['uf'] == 'SP' ? 'selected=selected' : '' }} >SP</option>
-                            <option value="TO" {{ $request['uf'] == 'TO' ? 'selected=selected' : '' }} >TO</option>
+                            <option value="AC" @if(isset($request)) {{ $request['uf'] == 'AC' ? 'selected=selected' : '' }} @endif>AC</option>
+                            <option value="AL" @if(isset($request)) {{ $request['uf'] == 'AL' ? 'selected=selected' : '' }} @endif>AL</option>
+                            <option value="AM" @if(isset($request)) {{ $request['uf'] == 'AM' ? 'selected=selected' : '' }} @endif>AM</option>
+                            <option value="AP" @if(isset($request)) {{ $request['uf'] == 'AP' ? 'selected=selected' : '' }} @endif>AP</option>
+                            <option value="BA" @if(isset($request)) {{ $request['uf'] == 'BA' ? 'selected=selected' : '' }} @endif>BA</option>
+                            <option value="CE" @if(isset($request)) {{ $request['uf'] == 'CE' ? 'selected=selected' : '' }} @endif>CE</option>
+                            <option value="DF" @if(isset($request)) {{ $request['uf'] == 'DF' ? 'selected=selected' : '' }} @endif>DF</option>
+                            <option value="ES" @if(isset($request)) {{ $request['uf'] == 'ES' ? 'selected=selected' : '' }} @endif>ES</option>
+                            <option value="GO" @if(isset($request)) {{ $request['uf'] == 'GO' ? 'selected=selected' : '' }} @endif>GO</option>
+                            <option value="MA" @if(isset($request)) {{ $request['uf'] == 'MA' ? 'selected=selected' : '' }} @endif>MA</option>
+                            <option value="MG" @if(isset($request)) {{ $request['uf'] == 'MG' ? 'selected=selected' : '' }} @endif>MG</option>
+                            <option value="MS" @if(isset($request)) {{ $request['uf'] == 'MS' ? 'selected=selected' : '' }} @endif>MS</option>
+                            <option value="MT" @if(isset($request)) {{ $request['uf'] == 'MT' ? 'selected=selected' : '' }} @endif>MT</option>
+                            <option value="PA" @if(isset($request)) {{ $request['uf'] == 'PA' ? 'selected=selected' : '' }} @endif>PA</option>
+                            <option value="PB" @if(isset($request)) {{ $request['uf'] == 'PB' ? 'selected=selected' : '' }} @endif>PB</option>
+                            <option value="PE" @if(isset($request)) {{ $request['uf'] == 'PE' ? 'selected=selected' : '' }} @endif>PE</option>
+                            <option value="PI" @if(isset($request)) {{ $request['uf'] == 'PI' ? 'selected=selected' : '' }} @endif>PI</option>
+                            <option value="PR" @if(isset($request)) {{ $request['uf'] == 'PR' ? 'selected=selected' : '' }} @endif>PR</option>
+                            <option value="RJ" @if(isset($request)) {{ $request['uf'] == 'RJ' ? 'selected=selected' : '' }} @endif>RJ</option>
+                            <option value="RN" @if(isset($request)) {{ $request['uf'] == 'RN' ? 'selected=selected' : '' }} @endif>RN</option>
+                            <option value="RS" @if(isset($request)) {{ $request['uf'] == 'RS' ? 'selected=selected' : '' }} @endif>RS</option>
+                            <option value="RO" @if(isset($request)) {{ $request['uf'] == 'RO' ? 'selected=selected' : '' }} @endif>RO</option>
+                            <option value="RR" @if(isset($request)) {{ $request['uf'] == 'RR' ? 'selected=selected' : '' }} @endif>RR</option>
+                            <option value="SC" @if(isset($request)) {{ $request['uf'] == 'SC' ? 'selected=selected' : '' }} @endif>SC</option>
+                            <option value="SE" @if(isset($request)) {{ $request['uf'] == 'SE' ? 'selected=selected' : '' }} @endif>SE</option>
+                            <option value="SP" @if(isset($request)) {{ $request['uf'] == 'SP' ? 'selected=selected' : '' }} @endif>SP</option>
+                            <option value="TO" @if(isset($request)) {{ $request['uf'] == 'TO' ? 'selected=selected' : '' }} @endif>TO</option>
                         </select>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                             <option value="">Selecione um:</option>
                             @if(count($niveis) > 0)
                             @foreach($niveis as $nivel)
-                            <option value="{{ $nivel->id }}"  {{ $usuario->nivel == $request['nivel'] ? 'selected=selected' : '' }} >{{ $nivel->nivel }}</option>
+                            <option value="{{ $nivel->id }}"  @if(isset($request)) {{ $nivel->nivel == $request['nivel'] ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
                             @endforeach
                             @endif
                         </select>

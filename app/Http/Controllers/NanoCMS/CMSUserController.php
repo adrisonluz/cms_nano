@@ -21,6 +21,9 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
         $this->middleware('auth');
         $this->retorno = array();
         $this->request = $request->except('_token');
+        if(!empty($this->request))
+            $this->retorno['request'] = $this->request;
+
         $this->area = 'cms.usuarios';
 
         if (Session::has('mensagem')) {
@@ -46,6 +49,8 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
      * 	Cadastro de usuários
      */
     public function create() {
+        $this->retorno['niveis'] = Nivel::all();
+
         return view($this->area . ".inserir", $this->retorno);
     }
 
@@ -60,20 +65,19 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
             'login' => 'required'
         );
 
+        $this->retorno['niveis'] = Nivel::all();
         if ($this->request['password'] !== $this->request['password_confirmation'] || $this->request['password'] == '') {
             $this->retorno['mensagem'] = [
                 'class' => 'alert-danger',
                 'text' => 'Campo senha não confere com a confirmação de senha ou está vazio.'
             ];
 
-            $this->retorno['request'] = $this->request;
             return view($this->area . '.inserir')->with($this->retorno);
         }
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
             $this->retorno['errors'] = $validator->errors();
-            $this->retorno['request'] = $this->request;
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
             $usuario = new CMSUser;
@@ -92,7 +96,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
             $usuario->uf = $this->request['uf'];
             $usuario->cep = $this->request['cep'];
             $usuario->observacoes = $this->request['observacoes'];
-            $usuario->nivel = $this->request['nivel'];
+            $usuario->nivel = ($this->request['nivel'] !== '' ? $this->request['nivel'] : 2);
             $usuario->lixeira = 'nao';
 
             if ($this->request['codImagem'] !== '') {
@@ -172,18 +176,16 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
             $usuario->nivel = $this->request['nivel'];
             $usuario->lixeira = 'nao';
 
-            if ($usuario->save()) {
-                if ($this->request['codImagem'] !== '') {
-                    $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';
-                    $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
-                }
-
-                Session::put('mensagem', [
-                    'class' => 'alert-success',
-                    'text' => 'Usuário editado com sucesso!'
-                ]);
-                return redirect()->route($this->area . '.index')->with($this->retorno);
+            if ($this->request['codImagem'] !== '') {
+                $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
+                $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';                
             }
+
+            Session::put('mensagem', [
+                'class' => 'alert-success',
+                'text' => 'Usuário editado com sucesso!'
+            ]);
+            return redirect()->route($this->area . '.index')->with($this->retorno);
 
             $this->retorno['mensagem'] = [
                 'class' => 'alert-danger',

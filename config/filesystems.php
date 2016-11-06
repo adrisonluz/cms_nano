@@ -56,7 +56,7 @@ return [
 
         'perfil' => [
             'driver' => 'local',
-            'root' => public_path('perfil'),
+            'root' => public_path('img/perfil'),
             'visibility' => 'public',
         ],
 

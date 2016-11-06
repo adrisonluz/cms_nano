@@ -89,7 +89,7 @@
                 <div class="form-group">
                     <label for="preview" class="col-sm-3 control-label">Preview:</label>
                     <div class="col-sm-9">
-                        <div id="imagem-preview"><canvas id="canvas" src="@if($usuario->foto !== ''){{ asset('perfil/' . $usuario->foto) }}@endif" width="400" height="300"></canvas></div>
+                        <div id="imagem-preview"><canvas id="canvas" src="@if($usuario->foto !== ''){{ asset('img/perfil/' . $usuario->foto) }}@endif" width="400" height="300"></canvas></div>
                         <input type="hidden" name="codImagem" value="">
                     </div>
                 </div>
@@ -195,7 +195,7 @@
                 <div class="form-group">
                     <label for="observacoes" class="col-sm-3 control-label">Observações:</label>
                     <div class="col-sm-9">
-                        <textarea value="{{ $usuario->observacoes}}" rows="4" class="form-control" name="observacoes"></textarea>
+                        <textarea rows="4" class="form-control" name="observacoes">{{ $usuario->observacoes}}</textarea>
                     </div>
                 </div>
 
