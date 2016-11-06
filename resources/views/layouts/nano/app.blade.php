@@ -8,12 +8,13 @@
         <title>Nano CMS</title>
 
         <!-- Fonts -->
-        <link href="{{ url('font-awesome/css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
+        <link href="{{ url('plugins/font-awesome/css/font-awesome.min.css') }}" rel='stylesheet' type='text/css'>
         <link href="{{ url('css/lato.css?family=Lato:100,300,400,700') }}" rel='stylesheet' type='text/css'>
 
         <!-- Styles -->
         <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ url('summernote/summernote.css') }}" rel="stylesheet">
+        <link href="{{ url('plugins/summernote/summernote.css') }}" rel="stylesheet">
+        <link href="{{ url('plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet">
         <link href="{{ url('css/style.css') }}" rel="stylesheet">
 
         <style>
@@ -99,7 +100,8 @@
         <script src="{{ url('js/input-mask/jquery.date.extensions.js') }}"></script>
         <script src="{{ url('js/input-mask/jquery.numeric.extensions.js') }}"></script>
         <script src="{{ url('js/input-mask/jquery.phone.extensions.js') }}"></script>
-        <script src="{{ url('summernote/summernote.min.js') }}"></script>
+        <script src="{{ url('plugins/summernote/summernote.min.js') }}"></script>
+        <script src="{{ url('plugins/select2/dist/js/select2.min.js') }}"></script>
 
         <script src="{{ url('js/functions.js') }}"></script>
     </body>
