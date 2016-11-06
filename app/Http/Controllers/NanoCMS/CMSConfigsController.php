@@ -10,16 +10,21 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSConfig;
+use NanoCMS\Nivel;
+use NanoCMS\Nvaccess;
 
 class CMSConfigsController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {
         parent::__construct();
-        parent::checkAcess('acessConfigs');
+        parent::checkAcess('accessConfigs');
 
         $this->middleware('auth');
         $this->retorno = array();
         $this->request = $request->except('_token');
+        if(!empty($this->request))
+            $this->retorno['request'] = $this->request;
+
         $this->area = 'cms.configs';
 
         if (Session::has('mensagem')) {
@@ -44,74 +49,272 @@ class CMSConfigsController extends \NanoCMS\Http\Controllers\NanoController {
             $returnCfg[$configVal['chave']] = $configVal['valor'];
         }
 
-        return view($this->area . '.editar', [ 'configs' => $returnCfg]);
+        $nivelAcesso = array();
+        
+        $accessUsersArray = Nvaccess::where('key', '=', 'accessUsers')->get()->toArray();
+        if($accessUsersArray){
+            foreach ($accessUsersArray as $accessUsers) {
+                $accessUsersIds[] = $accessUsers['nivel'];
+            }
+            $nivelAcesso['accessUsers'] = $accessUsersIds;
+        }
+
+        $accessPagesArray = Nvaccess::where('key', '=', 'accessPages')->get()->toArray();
+        if($accessPagesArray){
+            foreach ($accessPagesArray as $accessPages) {
+                $accessPagesIds[] = $accessPages['nivel'];
+            }
+            $nivelAcesso['accessPages'] = $accessPagesIds;
+        }
+
+        $accessMenusArray = Nvaccess::where('key', '=', 'accessMenus')->get()->toArray();
+        if($accessMenusArray){
+            foreach ($accessMenusArray as $accessMenus) {
+                $accessMenusIds[] = $accessMenus['nivel'];
+            }
+            $nivelAcesso['accessMenus'] = $accessMenusIds;
+        }
+
+        $accessFormsArray = Nvaccess::where('key', '=', 'accessForms')->get()->toArray();
+        if($accessFormsArray){
+            foreach ($accessFormsArray as $accessForms) {
+                $accessFormsIds[] = $accessForms['nivel'];
+            }
+            $nivelAcesso['accessForms'] = $accessFormsIds;
+        }
+
+        $accessBannersArray = Nvaccess::where('key', '=', 'accessBanners')->get()->toArray();
+        if($accessBannersArray){
+            foreach ($accessBannersArray as $accessBanners) {
+                $accessBannersIds[] = $accessBanners['nivel'];
+            }
+            $nivelAcesso['accessBanners'] = $accessBannersIds;
+        }
+
+        $accessAgendaArray = Nvaccess::where('key', '=', 'accessAgenda')->get()->toArray();
+        if($accessAgendaArray){
+            foreach ($accessAgendaArray as $accessAgenda) {
+                $accessAgendaIds[] = $accessAgenda['nivel'];
+            }
+            $nivelAcesso['accessAgenda'] = $accessAgendaIds;
+        }
+
+        $accessCategoriasArray = Nvaccess::where('key', '=', 'accessCategorias')->get()->toArray();
+        if($accessCategoriasArray){
+            foreach ($accessCategoriasArray as $accessCategorias) {
+                $accessCategoriasIds[] = $accessCategorias['nivel'];
+            }
+            $nivelAcesso['accessCategorias'] = $accessCategoriasIds;
+        }
+
+        $accessBlocosArray = Nvaccess::where('key', '=', 'accessBlocos')->get()->toArray();
+        if($accessBlocosArray){
+            foreach ($accessBlocosArray as $accessBlocos) {
+                $accessBlocosIds[] = $accessBlocos['nivel'];
+            }
+            $nivelAcesso['accessBlocos'] = $accessBlocosIds;
+        }
+
+        $accessPostsArray = Nvaccess::where('key', '=', 'accessPosts')->get()->toArray();
+        if($accessPostsArray){
+            foreach ($accessPostsArray as $accessPosts) {
+                $accessPostsIds[] = $accessPosts['nivel'];
+            }
+            $nivelAcesso['accessPosts'] = $accessPostsIds;
+        }
+
+        $accessSEOArray = Nvaccess::where('key', '=', 'accessSEO')->get()->toArray();
+        if($accessSEOArray){
+            foreach ($accessSEOArray as $accessSEO) {
+                $accessSEOIds[] = $accessSEO['nivel'];
+            }
+            $nivelAcesso['accessSEO'] = $accessSEOIds;
+        }
+
+        $accessGaleriasArray = Nvaccess::where('key', '=', 'accessGalerias')->get()->toArray();
+        if($accessGaleriasArray){
+            foreach ($accessGaleriasArray as $accessGalerias) {
+                $accessGaleriasIds[] = $accessGalerias['nivel'];
+            }
+            $nivelAcesso['accessGalerias'] = $accessGaleriasIds;
+        }
+
+        $accessConfigsArray = Nvaccess::where('key', '=', 'accessConfigs')->get()->toArray();
+        if($accessConfigsArray){
+            foreach ($accessConfigsArray as $accessConfigs) {
+                $accessConfigsIds[] = $accessConfigs['nivel'];
+            }
+            $nivelAcesso['accessConfigs'] = $accessConfigsIds;
+        }
+
+
+        $this->retorno['configs'] = $returnCfg;
+        $this->retorno['niveis'] = Nivel::all();
+        $this->retorno['acessos'] = $nivelAcesso;
+        return view($this->area . '.editar', $this->retorno);
     }
 
     /**
      * 	Editar configurações no banco
      */
-    public function update($id) {
-        $rules = array(
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'login' => 'required'
-        );
+    public function update() {
+        $msg = array();
 
-        if ($this->request['password'] !== $this->request['password_confirmation'] || $this->request['password'] == '') {
-            $this->retorno['mensagem'] = [
-                'class' => 'alert-danger',
-                'text' => 'Campo senha não confere com a confirmação de senha ou está vazio.'
-            ];
-
-            $this->retorno['request'] = $this->request;
-            return view($this->area . '.editar')->with($this->retorno);
-        }
-
-        $validator = Validator($this->request, $rules);
-        if ($validator->fails()) {
-            $this->retorno['errors'] = $validator->errors();
-            $this->retorno['request'] = $this->request;
-            return view($this->area . '.editar')->with($this->retorno);
-        } else {
-            $usuario = CMSUser::find($id);
-            $usuario->name = $this->request['name'];
-            $usuario->email = $this->request['email'];
-            $usuario->password = bcrypt($this->request['password']);
-            $usuario->login = $this->request['login'];
-            $usuario->rg = $this->request['rg'];
-            $usuario->cpf = $this->request['cpf'];
-            $usuario->nascimento = $this->request['nascimento'];
-            $usuario->telefone = $this->request['telefone'];
-            $usuario->celular = $this->request['celular'];
-            $usuario->endereco = $this->request['endereco'];
-            $usuario->bairro = $this->request['bairro'];
-            $usuario->cidade = $this->request['cidade'];
-            $usuario->uf = $this->request['uf'];
-            $usuario->cep = $this->request['cep'];
-            $usuario->observacoes = $this->request['observacoes'];
-            $usuario->nivel = $this->request['nivel'];
-            $usuario->lixeira = 'nao';
-
-            if ($usuario->save()) {
-                if ($this->request['codImagem'] !== '') {
-                    $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';
-                    $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
-                }
-
-                Session::put('mensagem', [
-                    'class' => 'alert-success',
-                    'text' => 'Usuário editado com sucesso!'
-                ]);
-                return redirect()->route($this->area . '.index')->with($this->retorno);
+        $delAcessConfigs = Nvaccess::where('key', '=', 'accessUsers')->delete();
+        if(isset($this->request['accessUsers'])){
+            foreach($this->request['accessUsers'] as $acessUsersId){
+                $setAcessUsers = new Nvaccess;
+                $setAcessUsers->key = 'accessUsers';
+                $setAcessUsers->nivel = $acessUsersId;
+                $setAcessUsers->save();
             }
-
-            $this->retorno['mensagem'] = [
-                'class' => 'alert-danger',
-                'text' => 'Houve algum erro durante o processo. Por favor, tente mais tarde.'
-            ];
-            return view($this->area . '.editar')->with($this->retorno);
+            unset($this->request['accessUsers']);
         }
+
+        $delAcessPages = Nvaccess::where('key', '=', 'accessPages')->delete();
+        if(isset($this->request['accessPages'])){
+            foreach($this->request['accessPages'] as $acessPagesId){
+                $setAcessPages = new Nvaccess;
+                $setAcessPages->key = 'accessPages';
+                $setAcessPages->nivel = $acessPagesId;
+                $setAcessPages->save();
+            }
+            unset($this->request['accessPages']);
+        }
+
+        $delAcessMenus = Nvaccess::where('key', '=', 'accessMenus')->delete();
+        if(isset($this->request['accessMenus'])){
+            foreach($this->request['accessMenus'] as $acessMenusId){
+                $setAcessMenus = new Nvaccess;
+                $setAcessMenus->key = 'accessMenus';
+                $setAcessMenus->nivel = $acessMenusId;
+                $setAcessMenus->save();
+            }
+            unset($this->request['accessMenus']);
+        }
+
+        $delAcessForms = Nvaccess::where('key', '=', 'accessForms')->delete();
+        if(isset($this->request['accessForms'])){
+            foreach($this->request['accessForms'] as $acessFormsId){
+                $setAcessForms = new Nvaccess;
+                $setAcessForms->key = 'accessForms';
+                $setAcessForms->nivel = $acessFormsId;
+                $setAcessForms->save();
+            }
+            unset($this->request['accessForms']);
+        }
+
+        $delAcessBanners = Nvaccess::where('key', '=', 'accessBanners')->delete();
+        if(isset($this->request['accessBanners'])){
+            foreach($this->request['accessBanners'] as $acessBannersId){
+                $setAcessBanners = new Nvaccess;
+                $setAcessBanners->key = 'accessBanners';
+                $setAcessBanners->nivel = $acessBannersId;
+                $setAcessBanners->save();
+            }
+            unset($this->request['accessBanners']);
+        }
+
+        $delAcessAgenda = Nvaccess::where('key', '=', 'accessAgenda')->delete();
+        if(isset($this->request['accessAgenda'])){
+            foreach($this->request['accessAgenda'] as $acessAgendaId){
+                $setAcessAgenda = new Nvaccess;
+                $setAcessAgenda->key = 'accessAgenda';
+                $setAcessAgenda->nivel = $acessAgendaId;
+                $setAcessAgenda->save();
+            }
+            unset($this->request['accessAgenda']);
+        }
+
+        $delAcessCategorias = Nvaccess::where('key', '=', 'accessCategorias')->delete();
+        if(isset($this->request['accessCategorias'])){
+            foreach($this->request['accessCategorias'] as $acessCategoriasId){
+                $setAcessCategorias = new Nvaccess;
+                $setAcessCategorias->key = 'accessCategorias';
+                $setAcessCategorias->nivel = $acessCategoriasId;
+                $setAcessCategorias->save();
+            }
+            unset($this->request['accessCategorias']);
+        }
+
+        $delAcessBlocos = Nvaccess::where('key', '=', 'accessBlocos')->delete();
+        if(isset($this->request['accessBlocos'])){
+            foreach($this->request['accessBlocos'] as $acessBlocosId){
+                $setAcessBlocos = new Nvaccess;
+                $setAcessBlocos->key = 'accessBlocos';
+                $setAcessBlocos->nivel = $acessBlocosId;
+                $setAcessBlocos->save();
+            }
+            unset($this->request['accessBlocos']);
+        }
+
+        $delAcessPosts = Nvaccess::where('key', '=', 'accessPosts')->delete();
+        if(isset($this->request['accessPosts'])){
+            foreach($this->request['accessPosts'] as $acessPostsId){
+                $setAcessPosts = new Nvaccess;
+                $setAcessPosts->key = 'accessPosts';
+                $setAcessPosts->nivel = $acessPostsId;
+                $setAcessPosts->save();
+            }
+            unset($this->request['accessPosts']);
+        }
+
+        $delAcessSEO = Nvaccess::where('key', '=', 'accessSEO')->delete();
+        if(isset($this->request['accessSEO'])){
+            foreach($this->request['accessSEO'] as $acessSEOId){
+                $setAcessSEO = new Nvaccess;
+                $setAcessSEO->key = 'accessSEO';
+                $setAcessSEO->nivel = $acessSEOId;
+                $setAcessSEO->save();
+            }
+            unset($this->request['accessSEO']);
+        }
+
+        $delAcessGalerias = Nvaccess::where('key', '=', 'accessGalerias')->delete();
+        if(isset($this->request['accessGalerias'])){
+            foreach($this->request['accessGalerias'] as $acessGaleriasId){
+                $setAcessGalerias = new Nvaccess;
+                $setAcessGalerias->key = 'accessGalerias';
+                $setAcessGalerias->nivel = $acessGaleriasId;
+                $setAcessGalerias->save();
+            }
+            unset($this->request['accessGalerias']);
+        }
+
+        $delAcessConfigs = Nvaccess::where('key', '=', 'accessConfigs')->delete();
+        if(isset($this->request['accessConfigs'])){
+            foreach($this->request['accessConfigs'] as $acessConfigsId){
+                $setAcessConfigs = new Nvaccess;
+                $setAcessConfigs->key = 'accessConfigs';
+                $setAcessConfigs->nivel = $acessConfigsId;
+                $setAcessConfigs->save();
+            }
+            unset($this->request['accessConfigs']);
+        }
+
+        foreach ($this->request as $key => $value) {
+            $getUpdate = CMSConfig::where('chave', '=', $key)->get()->first();
+            if($getUpdate){
+                $getUpdate->valor = $value;
+                $getUpdate->save();
+                unset($getUpdate);
+            }else{
+                $msg[$key] = 'Erro ao editar o campo ';
+            }
+        }
+
+        if (count($msg) == 0) {
+            Session::put('mensagem', [
+                'class' => 'alert-success',
+                'text' => 'Configurações efetuadas com sucesso!'
+            ]);
+        }else{
+            Session::put('mensagem', [
+                'class' => 'alert-success',
+                'text' => 'Configurações não efetuadas corretamente. Por favor tente novamente.'
+            ]);
+        }
+        return redirect()->route($this->area . '.index')->with($this->retorno);
     }
 
 }

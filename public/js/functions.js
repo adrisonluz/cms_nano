@@ -81,4 +81,8 @@ $(document).ready(function(){
             //airMode: true
         });
 
+    // Select2
+    $('.select2').select2({
+        placeholder: 'Selecione'
+    });
 });

@@ -135,6 +135,191 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="clearfix"></div>
+            <br><br>
+            <div class="panel panel-default">
+                <div class="panel-heading col-md-12">
+                    <div class="">
+                        <h4>Controle de acesso</h4>
+                        <small>Selecione os níveis que podem gerenciar as áreas do CMS. Para deixar uma área totalmente acessível, basta não selecionar nenhum nivel no campo correspondente.</small>
+                    </div>
+                </div>
+          
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Usuários:</label>
+                            <div class="col-sm-8">
+                                <select name="accessUsers[]" class="form-control select2" multiple >
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessUsers'])) {{ in_array($nivel->id, $acessos['accessUsers']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Páginas:</label>
+                            <div class="col-sm-8">
+                                <select name="accessPages[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessPages'])) {{ in_array($nivel->id, $acessos['accessPages']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Menus:</label>
+                            <div class="col-sm-8">
+                                <select name="accessMenus[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessMenus'])) {{ in_array($nivel->id, $acessos['accessMenus']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Formulários:</label>
+                            <div class="col-sm-8">
+                                <select name="accessForms[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessForms'])) {{ in_array($nivel->id, $acessos['accessForms']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Banners:</label>
+                            <div class="col-sm-8">
+                                <select name="accessBanners[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessBanners'])) {{ in_array($nivel->id, $acessos['accessBanners']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Agenda:</label>
+                            <div class="col-sm-8">
+                                <select name="accessAgenda[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessAgenda'])) {{ in_array($nivel->id, $acessos['accessAgenda']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Categorias:</label>
+                            <div class="col-sm-8">
+                                <select name="accessCategorias[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessCategorias'])) {{ in_array($nivel->id, $acessos['accessCategorias']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Blocos:</label>
+                            <div class="col-sm-8">
+                                <select name="accessBlocos[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessBlocos'])) {{ in_array($nivel->id, $acessos['accessBlocos']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Posts:</label>
+                            <div class="col-sm-8">
+                                <select name="accessPosts[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessPosts'])) {{ in_array($nivel->id, $acessos['accessPosts']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">SEO:</label>
+                            <div class="col-sm-8">
+                                <select name="accessSEO[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessSEO'])) {{ in_array($nivel->id, $acessos['accessSEO']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Galerias:</label>
+                            <div class="col-sm-8">
+                                <select name="accessGalerias[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessGalerias'])) {{ in_array($nivel->id, $acessos['accessGalerias']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="acesso" class="col-sm-4 control-label text-capitalize">Configurações:</label>
+                            <div class="col-sm-8">
+                                <select name="accessConfigs[]" class="form-control select2" multiple>
+                                    <option value="">Selecione quantos forem necessários:</option>
+                                    @if(count($niveis) > 0)
+                                    @foreach($niveis as $nivel)
+                                    <option value="{{ $nivel->id }}"  @if(isset($acessos['accessConfigs'])) {{ in_array($nivel->id, $acessos['accessConfigs']) ? 'selected=selected' : '' }} @endif>{{ $nivel->nivel }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-md-12">
                 <div class="form-group">
@@ -151,4 +336,3 @@
     </div>
 </div>
 @endsection
-/

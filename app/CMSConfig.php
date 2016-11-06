@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 class CMSConfig extends Authenticatable {
 
     protected $table = 'cms_configs';
+    public $timestamps = false;
 
     /**
      * Busca valor de configuração

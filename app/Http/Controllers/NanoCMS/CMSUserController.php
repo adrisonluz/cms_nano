@@ -178,7 +178,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
 
             if ($this->request['codImagem'] !== '') {
                 $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
-                $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';                
+                $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';                  
             }
 
             Session::put('mensagem', [
