@@ -34,12 +34,12 @@ class CreateUsersTable extends Migration {
             $table->unsignedInteger('nivel')->nullable();
             $table->foreign('nivel')
                     ->references('id')->on('niveis')
-                    ->onDelete('no action')->nullable();
+                    ->onDelete('set null')->nullable();
             $table->string('lixeira', 45)->nullable();
             $table->unsignedInteger('agent_id')->nullable();
             $table->foreign('agent_id')
                     ->references('id')->on('cms_users')
-                    ->onDelete('no action')->nullable();
+                    ->onDelete('set null')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

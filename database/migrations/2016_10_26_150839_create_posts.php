@@ -14,10 +14,10 @@ class CreatePosts extends Migration
     {
         Schema::create('cms_posts', function (Blueprint $table) {
             $table->increments('id');
-			$table->unsignedInteger('categoria_id');
+			$table->unsignedInteger('categoria_id')->nullable();
             $table->foreign('categoria_id')
               ->references('id')->on('cms_categorias')
-              ->onDelete('cascade');
+              ->onDelete('set null')->nullable();
             $table->string('titulo', 255)->nullable();
             $table->text('conteudo');
             $table->string('imagem', 255)->nullable();
@@ -30,7 +30,7 @@ class CreatePosts extends Migration
             $table->unsignedInteger('agent_id')->nullable();
             $table->foreign('agent_id')
               ->references('id')->on('cms_users')
-              ->onDelete('no action')->nullable();
+              ->onDelete('set null')->nullable();
             $table->timestamps();
         });
     }

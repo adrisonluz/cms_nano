@@ -29,7 +29,7 @@ class CreateMenusItens extends Migration
             $table->unsignedInteger('agent_id')->nullable();
             $table->foreign('agent_id')
               ->references('id')->on('cms_users')
-              ->onDelete('no action')->nullable();
+              ->onDelete('set null')->nullable();
             $table->timestamps();
         });
     }
