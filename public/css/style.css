@@ -36,3 +36,8 @@ h1 {
 #video, #canvas {
     max-width: 100%;
 }
+
+.loading {
+    width: 50%;
+    max-width: 100px;
+}

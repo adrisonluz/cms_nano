@@ -127,11 +127,10 @@
                         <input name="mailhost" type="text" value="{{ $configs['mailhost'] }}" class="form-control">
                     </div>
                 </div>
-                <br>
                 <div class="form-group">
                     <label for="mailresp" class="col-sm-12 control-label text-capitalize">Resposta automática:</label>
                     <div class="col-sm-12">
-                        <textarea rows="10" class="form-control editor" name="mailresp">{{ $configs['mailresp'] }}</textarea>
+                        <textarea rows="15" class="form-control editor" name="mailresp">{{ $configs['mailresp'] }}</textarea>
                     </div>
                 </div>
             </div>
@@ -146,7 +145,7 @@
                     </div>
                 </div>
           
-                <div class="panel-body">
+                <div class="panel-body ctrlAcessos">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="acesso" class="col-sm-4 control-label text-capitalize">Usuários:</label>
@@ -318,6 +317,39 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-xs-12">
+                        <h4>Niveis</h4>    
+                    </div>
+                    
+                    <div class="col-xs-6 divNiveis">
+                        @if(count($niveis) > 0)
+                        @foreach($niveis as $nivel)
+                        <div class="col-sm-4">
+                            <a href="{{ route('nivel.lixeira', ['id' => $nivel->id]) }}" rel="{{ $nivel->id }}" data-toggle="modal" data-target="#modaNiveis" title="Descartar" class="nivelDelete">
+                                <button type="button" class="btn btn-danger btn-xs ">
+                                    <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
+                                </button>
+                            </a>
+                            <span text=""> &nbsp; {{$nivel->nivel}}</span>
+                        </div>
+                        @endforeach
+                        @else
+                        <p class="text-danger">Não há níveis cadastrados no <sistema class=""></sistema></p>
+                        @endif
+                    </div>
+
+                    <div class="col-xs-6">
+                        <label for="imagem" class="col-sm-4 control-label">Novo:</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control inputNivel" name="nivel" type="text" value="">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info btn-flat" id="btnNivel" data-toggle="modal" data-target="#modaNiveis"><i class="fa fa-save"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -336,3 +368,19 @@
     </div>
 </div>
 @endsection
+
+<!-- Modal Niveis -->
+<div class="modal fade" id="modalNiveis" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="box-title">Niveis</strong>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">×</span></button>
+                </h3>
+            </div>
+            <div class="modal-body row text-center">
+                    
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

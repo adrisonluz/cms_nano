@@ -12,7 +12,6 @@
  */
 
 Route::group(['middleware' => ['web']], function () {
-
     Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
     Route::get('/home', ['uses' => 'HomeController@index', 'as' => 'home']);
     Route::get('/index', ['uses' => 'HomeController@index', 'as' => 'home']);
@@ -22,12 +21,15 @@ Route::group(['middleware' => 'web', 'prefix' => 'erro'], function () {
     Route::get('/403', ['uses' => 'ErrorController@erro403', 'as' => '403']);
 });
 
-Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
+/* Rotas organizadas para niveis */
+Route::group(['prefix' => 'nivel', 'where' => ['id' => '[0-9]+']], function () {
+    Route::post('{id}/lixeira', ['uses' => 'NiveisController@lixeira', 'as' => 'nivel.lixeira']);
+    Route::post('/inserir', ['uses' => 'NiveisController@store', 'as' => 'nivel.store']);
+});
 
-    /* Rotas */
+Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
     Route::auth();
 
-// vamos redirecionara a rota criada (register) para a view de boas vindas
     Route::get('register', function () {
         return view('welcome');
     });
@@ -39,7 +41,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
 
     /* Rotas organizadas para usuários */
     Route::group(['prefix' => 'usuarios', 'where' => ['id' => '[0-9]+']], function () {
-
         Route::get('', ['uses' => 'NanoCMS\CMSUserController@index', 'as' => 'cms.usuarios.index']);
         Route::get('index', ['uses' => 'NanoCMS\CMSUserController@index', 'as' => 'cms.usuarios.index']);
         Route::get('inserir', ['uses' => 'NanoCMS\CMSUserController@create', 'as' => 'cms.usuarios.create']);
@@ -53,7 +54,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
 
     /* Rotas organizadas para páginas */
     Route::group(['prefix' => 'paginas', 'where' => ['id' => '[0-9]+']], function () {
-
         Route::get('', ['uses' => 'NanoCMS\CMSPaginasController@index', 'as' => 'cms.paginas.index']);
         Route::get('index', ['uses' => 'NanoCMS\CMSPaginasController@index', 'as' => 'cms.paginas.index']);
         Route::get('inserir', ['uses' => 'NanoCMS\CMSPaginasController@create', 'as' => 'cms.paginas.create']);
@@ -67,7 +67,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
 
     /* Rotas organizadas para configurações */
     Route::group(['prefix' => 'configs', 'where' => ['id' => '[0-9]+']], function () {
-
         Route::get('', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'cms.configs.index']);
         Route::get('index', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'cms.configs.index']);
         Route::get('/editar', ['uses' => 'NanoCMS\CMSConfigsController@edit', 'as' => 'cms.configs.edit']);
