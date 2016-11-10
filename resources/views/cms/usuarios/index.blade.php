@@ -56,7 +56,7 @@
                         <td>{{ $user->nascimento }}</td>
                         <td>{{ $user->telefone }}</td>
                         <td>{{ $user->celular }}</td>
-                        <td>{{ $user->rel_nivel->nivel }}</td>
+                        <td>@if(count($user->rel_nivel) > 0) {{ $user->rel_nivel->nivel }} @endif</td>
                         <td>{{ $user->lixeira }}</td>
                     </tr>
                     @endforeach

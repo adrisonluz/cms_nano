@@ -137,6 +137,10 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
      * 	Editar usuário no banco
      */
     public function update($id) {
+        $this->retorno['request'] = $this->request;
+        $this->retorno['niveis'] = Nivel::all();
+        $this->retorno['usuario'] = CMSUser::find($id);
+
         $rules = array(
             'name' => 'required',
             'email' => 'required',
@@ -149,15 +153,14 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
                 'class' => 'alert-danger',
                 'text' => 'Campo senha não confere com a confirmação de senha ou está vazio.'
             ];
-
-            $this->retorno['request'] = $this->request;
+            
             return view($this->area . '.editar')->with($this->retorno);
         }
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
             $this->retorno['errors'] = $validator->errors();
-            $this->retorno['request'] = $this->request;
+
             return view($this->area . '.editar')->with($this->retorno);
         } else {
             $usuario = CMSUser::find($id);
@@ -177,18 +180,19 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
             $usuario->cep = $this->request['cep'];
             $usuario->observacoes = $this->request['observacoes'];
             $usuario->nivel = $this->request['nivel'];
-            $usuario->lixeira = 'nao';
 
             if ($this->request['codImagem'] !== '') {
                 $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
                 $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';
             }
 
-            Session::put('mensagem', [
-                'class' => 'alert-success',
-                'text' => 'Usuário editado com sucesso!'
-            ]);
-            return redirect()->route($this->area . '.index')->with($this->retorno);
+            if($usuario->save()){
+                Session::put('mensagem', [
+                    'class' => 'alert-success',
+                    'text' => 'Usuário editado com sucesso!'
+                ]);
+                return redirect()->route($this->area . '.index')->with($this->retorno);
+            }
 
             $this->retorno['mensagem'] = [
                 'class' => 'alert-danger',
