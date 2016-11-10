@@ -16,7 +16,7 @@
 
         <div class="col-lg-2">
             <BR>
-            <a href="{{ route('cms.pagina.create') }}" class="btn btn-default btn-success">Novo registro</a>
+            <a href="{{ route('cms.paginas.create') }}" class="btn btn-default btn-success">Novo registro</a>
         </div>
 
 
@@ -38,13 +38,13 @@
                     @foreach ($paginas as $pagina)
                     <tr>
                         <td>
-                            <a href="{{ route('cms.pagina.edit', ['id' => $pagina->id]) }}" title="Editar">
+                            <a href="{{ route('cms.paginas.edit', ['id' => $pagina->id]) }}" title="Editar">
                                 <button type="button" class="btn btn-primary btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
                                 </button>
                             </a>
 
-                            <a href="{{ route('cms.pagina.lixeira', ['id' => $pagina->id]) }}" title="Descartar">
+                            <a href="{{ route('cms.paginas.lixeira', ['id' => $pagina->id]) }}" title="Descartar">
                                 <button type="button" class="btn btn-danger btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
                                 </button>

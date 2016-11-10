@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSPagina;
 use NanoCMS\CMSConfig;
+use Illuminate\Support\Facades\Input;
 
 class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
 
@@ -30,7 +31,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     *   Listagem dos usuários
+     *   Listagem dos página
      */
     public function index() {
         $paginas = CMSPagina::whereNull('lixeira')
@@ -42,7 +43,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Cadastro de usuários
+     * 	Cadastro de página
      */
     public function create() {
         return view($this->area . ".inserir", $this->retorno);
@@ -53,21 +54,9 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
      */
     public function store() {
         $rules = array(
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'login' => 'required'
+            'titulo' => 'required',
+            'conteudo' => 'required',
         );
-
-        if ($this->request['password'] !== $this->request['password_confirmation'] || $this->request['password'] == '') {
-            $this->retorno['mensagem'] = [
-                'class' => 'alert-danger',
-                'text' => 'Campo senha não confere com a confirmação de senha ou está vazio.'
-            ];
-
-            $this->retorno['request'] = $this->request;
-            return view($this->area . '.inserir')->with($this->retorno);
-        }
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
@@ -75,34 +64,24 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
             $this->retorno['request'] = $this->request;
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
-            $usuario = new CMSUser;
-            $usuario->name = $this->request['name'];
-            $usuario->email = $this->request['email'];
-            $usuario->password = bcrypt($this->request['password']);
-            $usuario->login = $this->request['login'];
-            $usuario->rg = $this->request['rg'];
-            $usuario->cpf = $this->request['cpf'];
-            $usuario->nascimento = $this->request['nascimento'];
-            $usuario->telefone = $this->request['telefone'];
-            $usuario->celular = $this->request['celular'];
-            $usuario->endereco = $this->request['endereco'];
-            $usuario->bairro = $this->request['bairro'];
-            $usuario->cidade = $this->request['cidade'];
-            $usuario->uf = $this->request['uf'];
-            $usuario->cep = $this->request['cep'];
-            $usuario->observacoes = $this->request['observacoes'];
-            $usuario->nivel = $this->request['nivel'];
-            $usuario->lixeira = 'nao';
+            $pagina = new CMSPagina;
+            $pagina->titulo = $this->request['titulo'];
+            $pagina->resumo = $this->request['resumo'];
+            $pagina->url = $this->request['url'];
+            $pagina->data = $this->request['data'];
+            $pagina->conteudo = $this->request['conteudo'];
+            $pagina->ativo = 'sim';
 
-            if ($this->request['codImagem'] !== '') {
-                $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';
-                $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
+            if (Input::hasFile('imagem')) {
+                $ext = Input::file('imagem')->getClientOriginalExtension();
+                $pagina->imagem = setUri($pagina->titulo) . '.' . $ext;
+                Input::file('imagem')->move('img/paginas', setUri($pagina->titulo));
             }
 
-            if ($usuario->save()) {
+            if ($pagina->save()) {
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'Usuário criado com sucesso!'
+                    'text' => 'Página criada com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -116,11 +95,12 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Edição de usuários
+     * 	Edição de página
      */
     public function edit($id) {
-        $usuario = CMSUser::find($id);
-        return view($this->area . '.editar', [ 'usuario' => $usuario]);
+        $this->retorno['pagina'] = CMSPagina::find($id);
+
+        return view($this->area . '.editar', $this->retorno);
     }
 
     /**
@@ -128,56 +108,33 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
      */
     public function update($id) {
         $rules = array(
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'login' => 'required'
+            'titulo' => 'required',
+            'conteudo' => 'required',
         );
-
-        if ($this->request['password'] !== $this->request['password_confirmation'] || $this->request['password'] == '') {
-            $this->retorno['mensagem'] = [
-                'class' => 'alert-danger',
-                'text' => 'Campo senha não confere com a confirmação de senha ou está vazio.'
-            ];
-
-            $this->retorno['request'] = $this->request;
-            return view($this->area . '.editar')->with($this->retorno);
-        }
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
             $this->retorno['errors'] = $validator->errors();
             $this->retorno['request'] = $this->request;
-            return view($this->area . '.editar')->with($this->retorno);
+            return view($this->area . '.inserir')->with($this->retorno);
         } else {
-            $usuario = CMSUser::find($id);
-            $usuario->name = $this->request['name'];
-            $usuario->email = $this->request['email'];
-            $usuario->password = bcrypt($this->request['password']);
-            $usuario->login = $this->request['login'];
-            $usuario->rg = $this->request['rg'];
-            $usuario->cpf = $this->request['cpf'];
-            $usuario->nascimento = $this->request['nascimento'];
-            $usuario->telefone = $this->request['telefone'];
-            $usuario->celular = $this->request['celular'];
-            $usuario->endereco = $this->request['endereco'];
-            $usuario->bairro = $this->request['bairro'];
-            $usuario->cidade = $this->request['cidade'];
-            $usuario->uf = $this->request['uf'];
-            $usuario->cep = $this->request['cep'];
-            $usuario->observacoes = $this->request['observacoes'];
-            $usuario->nivel = $this->request['nivel'];
-            $usuario->lixeira = 'nao';
+            $pagina = CMSPagina::find($id);
+            $pagina->titulo = $this->request['titulo'];
+            $pagina->resumo = $this->request['resumo'];
+            $pagina->url = $this->request['url'];
+            $pagina->data = $this->request['data'];
+            $pagina->conteudo = $this->request['conteudo'];
 
-            if ($usuario->save()) {
-                if ($this->request['codImagem'] !== '') {
-                    $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';
-                    $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
-                }
+            if (Input::hasFile('imagem')) {
+                $ext = Input::file('imagem')->getClientOriginalExtension();
+                $pagina->imagem = setUri($pagina->titulo) . '.' . $ext;
+                Input::file('imagem')->move('img/paginas', setUri($pagina->titulo));
+            }
 
+            if ($pagina->save()) {
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'Usuário editado com sucesso!'
+                    'text' => 'Página editada com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -186,21 +143,21 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
                 'class' => 'alert-danger',
                 'text' => 'Houve algum erro durante o processo. Por favor, tente mais tarde.'
             ];
-            return view($this->area . '.editar')->with($this->retorno);
+            return view($this->area . '.inserir')->with($this->retorno);
         }
     }
 
     /**
-     * Desativar usuário
+     * Desativar página
      */
     public function lixeira($id) {
-        $usuario = CMSUser::find($id);
-        $usuario->lixeira = 'sim';
+        $pagina = CMSPagina::find($id);
+        $pagina->lixeira = 'sim';
 
-        if ($usuario->save()) {
+        if ($pagina->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Usuário desativado com sucesso!'
+                'text' => 'Página enviada para a lixeira'
             ]);
         } else {
             Session::put('mensagem', [
@@ -213,16 +170,16 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * Ativar usuário
+     * Ativar página
      */
     public function ativar($id) {
-        $usuario = CMSUser::find($id);
-        $usuario->lixeira = '';
+        $pagina = CMSPagina::find($id);
+        $pagina->lixeira = '';
 
-        if ($usuario->save()) {
+        if ($pagina->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Usuário ativado com sucesso!'
+                'text' => 'Página restaurada com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [
@@ -235,13 +192,13 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Deletar usuários
+     * 	Deletar página
      */
     public function delete($id) {
-        if (CMSUser::find($id)->delete()) {
+        if (CMSPagina::find($id)->delete()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Usuário editado com sucesso!'
+                'text' => '`Página excluída com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [

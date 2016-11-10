@@ -8,18 +8,18 @@
     </ul>
     @endif
 
+    @if ($errors->any())
+    <ul class="alert alert-warning">
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    @endif
+
     <div class="row">
         <div class="col-md-12">
             <h1>Usuários / Editar</h1>
-        </div>
-
-        @if ($errors->any())
-        <ul class="alert alert-warning">
-            @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        @endif
+        </div>        
 
         <form name="frm" action="{{ route("cms.usuarios.update", ["id"=> $usuario->id ])}}" method="post" >
             <div class="col-md-6">
