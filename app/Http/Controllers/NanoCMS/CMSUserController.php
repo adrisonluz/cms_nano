@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSUser;
 use NanoCMS\Nivel;
+use Illuminate\Support\Facades\Input;
+
+;
 
 class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
 
@@ -21,7 +24,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
         $this->middleware('auth');
         $this->retorno = array();
         $this->request = $request->except('_token');
-        if(!empty($this->request))
+        if (!empty($this->request))
             $this->retorno['request'] = $this->request;
 
         $this->area = 'cms.usuarios';
@@ -178,7 +181,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
 
             if ($this->request['codImagem'] !== '') {
                 $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
-                $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';                  
+                $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';
             }
 
             Session::put('mensagem', [
@@ -205,7 +208,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
         if ($usuario->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Usuário desativado com sucesso!'
+                'text' => 'Usuário enviado para a lixeira!'
             ]);
         } else {
             Session::put('mensagem', [
@@ -227,7 +230,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
         if ($usuario->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Usuário ativado com sucesso!'
+                'text' => 'Usuário restaurado com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [
@@ -246,7 +249,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
         if (CMSUser::find($id)->delete()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Usuário editado com sucesso!'
+                'text' => 'Usuário excluído com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [
