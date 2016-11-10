@@ -53,6 +53,7 @@
                         @if (!Auth::guest())
                         <li><a href="{{ route('cms.usuarios.index') }}">Usuários</a></li>
                         <li><a href="{{ route('cms.paginas.index') }}">Páginas</a></li>
+                        <li><a href="{{ route('cms.banners.index') }}">Banners</a></li>
                         @endif
 
                     </ul>

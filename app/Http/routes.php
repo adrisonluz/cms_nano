@@ -65,6 +65,19 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
         Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSPaginasController@delete', 'as' => 'cms.paginas.delete']);
     });
 
+    /* Rotas organizadas para banners */
+    Route::group(['prefix' => 'banners', 'where' => ['id' => '[0-9]+']], function () {
+        Route::get('', ['uses' => 'NanoCMS\CMSBannersController@index', 'as' => 'cms.banners.index']);
+        Route::get('index', ['uses' => 'NanoCMS\CMSBannersController@index', 'as' => 'cms.banners.index']);
+        Route::get('inserir', ['uses' => 'NanoCMS\CMSBannersController@create', 'as' => 'cms.banners.create']);
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSBannersController@store', 'as' => 'cms.banners.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSBannersController@edit', 'as' => 'cms.banners.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSBannersController@update', 'as' => 'cms.banners.update']);
+        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSBannersController@lixeira', 'as' => 'cms.banners.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSBannersController@ativar', 'as' => 'cms.banners.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSBannersController@delete', 'as' => 'cms.banners.delete']);
+    });
+
     /* Rotas organizadas para configurações */
     Route::group(['prefix' => 'configs', 'where' => ['id' => '[0-9]+']], function () {
         Route::get('', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'cms.configs.index']);
