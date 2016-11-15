@@ -54,6 +54,7 @@
                         <li><a href="{{ route('cms.usuarios.index') }}">Usuários</a></li>
                         <li><a href="{{ route('cms.paginas.index') }}">Páginas</a></li>
                         <li><a href="{{ route('cms.banners.index') }}">Banners</a></li>
+                        <li><a href="{{ route('cms.menus.index') }}">Menus</a></li>
                         @endif
 
                     </ul>

@@ -70,26 +70,13 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
         } else {
             $menu = new CMSMenu;
             $menu->titulo = $this->request['titulo'];
-            $menu->conteudo = $this->request['conteudo'];
-            $menu->pagina_id = $this->request['pagina_id'];
             $menu->tipo = $this->request['tipo'];
-            $menu->data_ini = $this->request['data_ini'];
-            $menu->data_fim = $this->request['data_fim'];
-            $menu->link = $this->request['link'];
-            $menu->video = $this->request['video'];
-            $menu->ordem = $this->request['ordem'];
             $menu->ativo = 'sim';
 
             if ($menu->save()) {
-                if (Input::hasFile('imagem')) {
-                    $ext = Input::file('imagem')->getClientOriginalExtension();
-                    $menu->imagem = setUri($menu->titulo) . '_' . $menu->id . '.' . $ext;
-                    Input::file('imagem')->move('img/menus', setUri($menu->imagem));
-                }
-
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'menu cadastrado com sucesso!'
+                    'text' => 'Menu cadastrado com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -130,28 +117,13 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
         } else {
             $menu = CMSMenu::find($id);
             $menu->titulo = $this->request['titulo'];
-            $menu->conteudo = $this->request['conteudo'];
-            $menu->pagina_id = $this->request['pagina_id'];
             $menu->tipo = $this->request['tipo'];
-            $menu->data_ini = $this->request['data_ini'];
-            $menu->data_fim = $this->request['data_fim'];
-            $menu->link = $this->request['link'];
-            $menu->video = $this->request['video'];
-            $menu->ordem = $this->request['ordem'];
             $menu->ativo = 'sim';
-
-            if (Input::hasFile('imagem')) {
-                File::delete('img/menus/' . $menu->imagem);
-
-                $ext = Input::file('imagem')->getClientOriginalExtension();
-                $menu->imagem = setUri($menu->titulo) . '_' . $menu->id . '.' . $ext;
-                Input::file('imagem')->move('img/menus', $menu->imagem);
-            }
 
             if ($menu->save()) {
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'menu editado com sucesso!'
+                    'text' => 'Menu editado com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -174,7 +146,7 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
         if ($menu->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'menu enviado para a lixeira'
+                'text' => 'Menu enviado para a lixeira'
             ]);
         } else {
             Session::put('mensagem', [
@@ -196,7 +168,7 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
         if ($menu->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Página restaurada com sucesso!'
+                'text' => 'Menu restaurado com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [
@@ -215,7 +187,7 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
         if (CMSMenu::find($id)->delete()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => '`Página excluída com sucesso!'
+                'text' => '`Menu excluído com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [

@@ -58,8 +58,8 @@
                     <div class="col-sm-9">
                         <select name="tipo" class="form-control">
                             <option value="">Selecione um:</option>
-                            <option value="banner"  {{ $banner->tipo == 'banner' ? 'selected=selected' : '' }}>Banner</option>
-                            <option value="modal"  {{ $banner->tipo == 'modal' ? 'selected=selected' : '' }}>Modal</option>
+                            <option value="banner" {{ $banner->tipo == 'banner' ? 'selected=selected' : '' }}>Banner</option>
+                            <option value="modal" {{ $banner->tipo == 'modal' ? 'selected=selected' : '' }}>Modal</option>
                         </select>
                     </div>
                 </div>
