@@ -34,8 +34,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
      *   Listagem dos página
      */
     public function index() {
-        $paginas = CMSPagina::whereNull('lixeira')
-                ->orWhereIn('lixeira', ['', 'nao'])
+        $paginas = CMSPagina::ativos()
                 ->paginate(env('25'));
 
         $this->retorno['paginas'] = $paginas;

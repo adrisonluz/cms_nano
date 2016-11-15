@@ -40,4 +40,14 @@ class CMSPagina extends Authenticatable {
         }
     }
 
+    /**
+     * Padrão de busca
+     */
+    public function scopeAtivos() {
+        return $this->whereNull('lixeira')
+        ->orWhereIn('lixeira', ['', 'nao'])
+        ->where('id', '!=', 0);
+    }
+
+
 }
