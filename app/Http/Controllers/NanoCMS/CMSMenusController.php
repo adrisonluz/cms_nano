@@ -72,6 +72,7 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
             $menu->titulo = $this->request['titulo'];
             $menu->tipo = $this->request['tipo'];
             $menu->ativo = 'sim';
+            $menu->agent_id = $this->usuario_logado->id;
 
             if ($menu->save()) {
                 Session::put('mensagem', [
@@ -119,6 +120,7 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
             $menu->titulo = $this->request['titulo'];
             $menu->tipo = $this->request['tipo'];
             $menu->ativo = 'sim';
+            $menu->agent_id = $this->usuario_logado->id;
 
             if ($menu->save()) {
                 Session::put('mensagem', [

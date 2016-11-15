@@ -70,6 +70,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
             $pagina->data = $this->request['data'];
             $pagina->conteudo = $this->request['conteudo'];
             $pagina->ativo = 'sim';
+            $pagina->agent_id = $this->usuario_logado->id;
 
             if (Input::hasFile('imagem')) {
                 $ext = Input::file('imagem')->getClientOriginalExtension();
@@ -123,6 +124,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
             $pagina->url = $this->request['url'];
             $pagina->data = $this->request['data'];
             $pagina->conteudo = $this->request['conteudo'];
+            $pagina->agent_id = $this->usuario_logado->id;
 
             if (Input::hasFile('imagem')) {
                 $ext = Input::file('imagem')->getClientOriginalExtension();

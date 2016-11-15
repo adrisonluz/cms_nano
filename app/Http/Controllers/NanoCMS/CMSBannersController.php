@@ -81,6 +81,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
             $banner->video = $this->request['video'];
             $banner->ordem = $this->request['ordem'];
             $banner->ativo = 'sim';
+            $banner->agent_id = $this->usuario_logado->id;
 
             if ($banner->save()) {
                 if (Input::hasFile('imagem')) {
@@ -141,6 +142,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
             $banner->video = $this->request['video'];
             $banner->ordem = $this->request['ordem'];
             $banner->ativo = 'sim';
+            $banner->agent_id = $this->usuario_logado->id;
 
             if (Input::hasFile('imagem')) {
                 File::delete('img/banners/' . $banner->imagem);

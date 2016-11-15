@@ -99,6 +99,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
             $usuario->observacoes = $this->request['observacoes'];
             $usuario->nivel = ($this->request['nivel'] !== '' ? $this->request['nivel'] : 2);
             $usuario->lixeira = 'nao';
+            $usuario->agent_id = $this->usuario_logado->id;
 
             if ($this->request['codImagem'] !== '') {
                 $usuario->foto = setUri($usuario->name) . '_' . $usuario->id . '.png';
@@ -178,6 +179,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
             $usuario->cep = $this->request['cep'];
             $usuario->observacoes = $this->request['observacoes'];
             $usuario->nivel = $this->request['nivel'];
+            $usuario->agent_id = $this->usuario_logado->id;
 
             if ($this->request['codImagem'] !== '') {
                 $usuario->setImagemFoto($this->request['codImagem'], $usuario->foto);
