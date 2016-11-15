@@ -13,8 +13,6 @@ use NanoCMS\CMSUser;
 use NanoCMS\Nivel;
 use Illuminate\Support\Facades\Input;
 
-;
-
 class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {

@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder {
         $this->call(NiveisSeeder::class);
         $this->call(NvaccessSeeder::class);
         $this->call(UsersSeeder::class);
-        //$this->call(PaginasSeeder::class);
+        $this->call(PaginasSeeder::class);
         //$this->call(MenusSeeder::class);
         //$this->call(MenusItensSeeder::class);
         //$this->call(FormsSeeder::class);

@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSBanner;
 use NanoCMS\CMSConfig;
+use NanoCMS\CMSPagina;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
 
 class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
 
@@ -23,6 +25,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
         $this->area = 'cms.banners';
         $this->retorno = array();
         $this->request = $request->except('_token');
+        $this->retorno['paginas'] = CMSPagina::all();
 
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');
@@ -31,11 +34,12 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     *   Listagem dos página
+     *   Listagem dos banners
      */
     public function index() {
         $banners = CMSBanner::whereNull('lixeira')
                 ->orWhereIn('lixeira', ['', 'nao'])
+                ->orderBy('ordem')
                 ->paginate(env('25'));
 
         $this->retorno['banners'] = $banners;
@@ -43,45 +47,51 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Cadastro de página
+     * 	Cadastro de banner
      */
     public function create() {
         return view($this->area . ".inserir", $this->retorno);
     }
 
     /**
-     * 	Inserir usuário no banco
+     * 	Inserir banner no banco
      */
     public function store() {
+        $this->retorno['request'] = $this->request;
+
         $rules = array(
             'titulo' => 'required',
-            'conteudo' => 'required',
+            'tipo' => 'required',
         );
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
             $this->retorno['errors'] = $validator->errors();
-            $this->retorno['request'] = $this->request;
+
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
             $banner = new CMSBanner;
             $banner->titulo = $this->request['titulo'];
-            $banner->resumo = $this->request['resumo'];
-            $banner->url = $this->request['url'];
-            $banner->data = $this->request['data'];
             $banner->conteudo = $this->request['conteudo'];
+            $banner->pagina_id = $this->request['pagina_id'];
+            $banner->tipo = $this->request['tipo'];
+            $banner->data_ini = $this->request['data_ini'];
+            $banner->data_fim = $this->request['data_fim'];
+            $banner->link = $this->request['link'];
+            $banner->video = $this->request['video'];
+            $banner->ordem = $this->request['ordem'];
             $banner->ativo = 'sim';
 
-            if (Input::hasFile('imagem')) {
-                $ext = Input::file('imagem')->getClientOriginalExtension();
-                $banner->imagem = setUri($banner->titulo) . '.' . $ext;
-                Input::file('imagem')->move('img/banners', setUri($banner->titulo));
-            }
-
             if ($banner->save()) {
+                if (Input::hasFile('imagem')) {
+                    $ext = Input::file('imagem')->getClientOriginalExtension();
+                    $banner->imagem = setUri($banner->titulo) . '_' . $banner->id . '.' . $ext;
+                    Input::file('imagem')->move('img/banners', setUri($banner->imagem));
+                }
+
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'Página criada com sucesso!'
+                    'text' => 'Banner cadastrado com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -95,7 +105,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Edição de página
+     * 	Edição de banner
      */
     public function edit($id) {
         $this->retorno['banner'] = CMSBanner::find($id);
@@ -104,37 +114,46 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Editar usuário no banco
+     * 	Editar banner no banco
      */
     public function update($id) {
+        $this->retorno['request'] = $this->request;
+
         $rules = array(
             'titulo' => 'required',
-            'conteudo' => 'required',
+            'tipo' => 'required',
         );
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
             $this->retorno['errors'] = $validator->errors();
-            $this->retorno['request'] = $this->request;
+
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
             $banner = CMSBanner::find($id);
             $banner->titulo = $this->request['titulo'];
-            $banner->resumo = $this->request['resumo'];
-            $banner->url = $this->request['url'];
-            $banner->data = $this->request['data'];
             $banner->conteudo = $this->request['conteudo'];
+            $banner->pagina_id = $this->request['pagina_id'];
+            $banner->tipo = $this->request['tipo'];
+            $banner->data_ini = $this->request['data_ini'];
+            $banner->data_fim = $this->request['data_fim'];
+            $banner->link = $this->request['link'];
+            $banner->video = $this->request['video'];
+            $banner->ordem = $this->request['ordem'];
+            $banner->ativo = 'sim';
 
             if (Input::hasFile('imagem')) {
+                File::delete('img/banners/' . $banner->imagem);
+
                 $ext = Input::file('imagem')->getClientOriginalExtension();
-                $banner->imagem = setUri($banner->titulo) . '.' . $ext;
-                Input::file('imagem')->move('img/banners', setUri($banner->titulo));
+                $banner->imagem = setUri($banner->titulo) . '_' . $banner->id . '.' . $ext;
+                Input::file('imagem')->move('img/banners', $banner->imagem);
             }
 
             if ($banner->save()) {
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'Página editada com sucesso!'
+                    'text' => 'Banner editado com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -148,7 +167,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * Desativar página
+     * Desativar banner
      */
     public function lixeira($id) {
         $banner = CMSBanner::find($id);
@@ -157,7 +176,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
         if ($banner->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Página enviada para a lixeira'
+                'text' => 'Banner enviado para a lixeira'
             ]);
         } else {
             Session::put('mensagem', [
@@ -170,7 +189,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * Ativar página
+     * Ativar banner
      */
     public function ativar($id) {
         $banner = CMSBanner::find($id);
@@ -192,7 +211,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Deletar página
+     * 	Deletar banner
      */
     public function delete($id) {
         if (CMSBanner::find($id)->delete()) {

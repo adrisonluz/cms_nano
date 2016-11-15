@@ -28,16 +28,11 @@ class CMSBanner extends Authenticatable {
     ];
 
     /*
-     * Trata e salva imagem de perfil
+     * Busa a página relacionada
      */
 
-    public function setImagem($imagemCod, $nomeArquivo) {
-        $imagem = str_replace('data:image/png;base64,', '', $imagemCod);
-        $imgReturn = base64_decode($imagem);
-
-        if (Storage::disk('banners')->put($nomeArquivo, $imgReturn, 'public')) {
-            return true;
-        }
+    public function pagina() {
+        return $this->belongsTo('NanoCMS\CMSPagina');
     }
 
 }
