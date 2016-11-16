@@ -18,7 +18,7 @@ class CreateMenusItens extends Migration
             $table->foreign('menu_id')
               ->references('id')->on('cms_menus')
               ->onDelete('cascade');
-			$table->unsignedInteger('menupai_id');
+			$table->unsignedInteger('menupai_id')->nullable();
             $table->foreign('menupai_id')
               ->references('id')->on('cms_menus_itens')
               ->onDelete('cascade')->nullable();

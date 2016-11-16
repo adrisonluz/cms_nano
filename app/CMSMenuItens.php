@@ -5,9 +5,9 @@ namespace NanoCMS;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
 
-class CMSMenu extends Authenticatable {
+class CMSMenuItens extends Authenticatable {
 
-    protected $table = 'cms_menus';
+    protected $table = 'cms_menus_itens';
 
     /**
      * The attributes that are mass assignable.
@@ -15,10 +15,11 @@ class CMSMenu extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'titulo', 'tipo',
+        'titulo', 'link', 'tipo',
     ];
 
     /**
+
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -28,19 +29,16 @@ class CMSMenu extends Authenticatable {
     ];
 
     /**
-     * Padrão de busca
-     */
-    public function scopeAtivos() {
-        return $this->whereNull('lixeira')
-        ->orWhereIn('lixeira', ['', 'nao']);
+    * Menu pai
+    */
+    public function menu(){
+        return $this->belongsTo('NanoCMS\CMSMenu');
     }
-
 
     /**
-    * Itens relacionados
+    * Item pai
     */
-    public function itens(){
-        return $this->hasMany('NanoCMS\CMSMenuItens', 'menu_id');
+    public function itemPai(){
+        return $this->belongsTo('NanoCMS\CMSMenuItens', 'menupai_id');
     }
-
 }

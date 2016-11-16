@@ -14,7 +14,7 @@ class UsersSeeder extends Seeder {
             'name' => 'Usuario Teste',
             'email' => 'teste@teste.com',
             'login' => 'teste',
-            'password' => bcrypt('teste1234'),
+            'password' => bcrypt('1234'),
             'nivel' => 1,
         ]);
     }

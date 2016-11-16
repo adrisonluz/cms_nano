@@ -91,6 +91,16 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
         Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSMenusController@delete', 'as' => 'cms.menus.delete']);
     });
 
+    /* Rotas organizadas para itens de menus */
+    Route::group(['prefix' => 'menus-itens', 'where' => ['id' => '[0-9]+']], function () {
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSMenusItensController@store', 'as' => 'cms.menus-itens.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSMenusItensController@edit', 'as' => 'cms.menus-itens.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSMenusItensController@update', 'as' => 'cms.menus-itens.update']);
+        Route::post('{id}/lixeira', ['uses' => 'NanoCMS\CMSMenusItensController@lixeira', 'as' => 'cms.menus-itens.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSMenusItensController@ativar', 'as' => 'cms.menus-itens.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSMenusItensController@delete', 'as' => 'cms.menus-itens.delete']);
+    });
+
     /* Rotas organizadas para configurações */
     Route::group(['prefix' => 'configs', 'where' => ['id' => '[0-9]+']], function () {
         Route::get('', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'cms.configs.index']);
