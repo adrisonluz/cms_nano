@@ -19,7 +19,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {
         parent::__construct();
-        parent::checkAcess('acessBanners');
+        parent::checkAcess('accessBanners');
 
         $this->middleware('auth');
         $this->area = 'nano.cms.banners';

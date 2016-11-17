@@ -19,7 +19,7 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {
         parent::__construct();
-        parent::checkAcess('acessMenus');
+        parent::checkAcess('accessMenus');
 
         $this->middleware('auth');
         $this->area = 'nano.cms.menus';

@@ -17,7 +17,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {
         parent::__construct();
-        parent::checkAcess('acessUsers');
+        parent::checkAcess('accessUsers');
 
         $this->middleware('auth');
         $this->retorno = array();
