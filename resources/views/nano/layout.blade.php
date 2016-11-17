@@ -50,6 +50,7 @@
                         <li><a href="{{ route('cms.paginas.index') }}">Páginas</a></li>
                         <li><a href="{{ route('cms.banners.index') }}">Banners</a></li>
                         <li><a href="{{ route('cms.menus.index') }}">Menus</a></li>
+                        <li><a href="{{ route('cms.forms.index') }}">Forms</a></li>
                         @endif
 
                     </ul>

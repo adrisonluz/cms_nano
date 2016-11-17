@@ -101,6 +101,29 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
         Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSMenusItensController@delete', 'as' => 'cms.menus-itens.delete']);
     });
 
+    /* Rotas organizadas para forms */
+    Route::group(['prefix' => 'forms', 'where' => ['id' => '[0-9]+']], function () {
+        Route::get('', ['uses' => 'NanoCMS\CMSFormsController@index', 'as' => 'cms.forms.index']);
+        Route::get('index', ['uses' => 'NanoCMS\CMSFormsController@index', 'as' => 'cms.forms.index']);
+        Route::get('inserir', ['uses' => 'NanoCMS\CMSFormsController@create', 'as' => 'cms.forms.create']);
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSFormsController@store', 'as' => 'cms.forms.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSFormsController@edit', 'as' => 'cms.forms.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSFormsController@update', 'as' => 'cms.forms.update']);
+        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSFormsController@lixeira', 'as' => 'cms.forms.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSFormsController@ativar', 'as' => 'cms.forms.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSFormsController@delete', 'as' => 'cms.forms.delete']);
+    });
+
+    /* Rotas organizadas para itens de menus */
+    Route::group(['prefix' => 'fields', 'where' => ['id' => '[0-9]+']], function () {
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSFieldsController@store', 'as' => 'cms.fields.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSFieldsController@edit', 'as' => 'cms.fields.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSFieldsController@update', 'as' => 'cms.fields.update']);
+        Route::post('{id}/lixeira', ['uses' => 'NanoCMS\CMSFieldsController@lixeira', 'as' => 'cms.fields.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSFieldsController@ativar', 'as' => 'cms.fields.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSFieldsController@delete', 'as' => 'cms.fields.delete']);
+    });
+
     /* Rotas organizadas para configurações */
     Route::group(['prefix' => 'configs', 'where' => ['id' => '[0-9]+']], function () {
         Route::get('', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'cms.configs.index']);

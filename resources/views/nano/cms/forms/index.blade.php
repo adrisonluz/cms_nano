@@ -11,12 +11,12 @@
 
     <div class="row">
         <div class="col-lg-10">
-            <h1>Banners</h1>
+            <h1>Forms</h1>
         </div>
 
         <div class="col-lg-2">
             <BR>
-            <a href="{{ route('cms.banners.create') }}" class="btn btn-default btn-success">Novo registro</a>
+            <a href="{{ route('cms.forms.create') }}" class="btn btn-default btn-success">Novo registro</a>
         </div>
 
 
@@ -28,45 +28,37 @@
                     <td width="7%">Ação</td>
                     <td>ID</td>
                     <td>Título</td>
-                    <td>Página</td>
                     <td>Tipo</td>
-                    <td>Ordem</td>
-                    <td>Data Ini</td>
-                    <td>Data Fim</td>
                     <td>Ativo</td>
                     </thead>
 
 
-                    @foreach ($banners as $banner)
+                    @foreach ($forms as $form)
                     <tr>
                         <td>
-                            <a href="{{ route('cms.banners.edit', ['id' => $banner->id]) }}" title="Editar">
+                            <a href="{{ route('cms.forms.edit', ['id' => $form->id]) }}" title="Editar">
                                 <button type="button" class="btn btn-primary btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
                                 </button>
                             </a>
 
-                            <a href="{{ route('cms.banners.lixeira', ['id' => $banner->id]) }}" title="Descartar">
+                            <a href="{{ route('cms.forms.lixeira', ['id' => $form->id]) }}" title="Descartar">
                                 <button type="button" class="btn btn-danger btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
                                 </button>
                             </a>
                         </td>
-                        <td>{{ $banner->id }}</td>
-                        <td>{{ $banner->titulo }}</td>
-                        <td>{{ $banner->pagina->titulo }}</td>
-                        <td>{{ $banner->tipo }}</td>
-                        <td>{{ $banner->ordem }}</td>
-                        <td>{{ $banner->data_ini }}</td>
-                        <td>{{ $banner->data_fim }}</td>
-                        <td>{{ $banner->ativo }}</td>
+                        <td>{{ $form->id }}</td>
+                        <td>{{ $form->titulo }}</td>
+                        <td>{{ $form->tipo }}</td>
+                        <td>{{ $form->ativo }}</td>
                     </tr>
                     @endforeach
 
                 </table>
             </div>
         </div>
-        {!! $banners->links() !!}
+        {!! $forms->links() !!}
 
     </div>
 
