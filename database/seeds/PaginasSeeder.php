@@ -12,16 +12,16 @@ class PaginasSeeder extends Seeder
     public function run()
     {
       DB::table('cms_paginas')->insert([
-        'id' => 0,
-        'titulo' => 'Todas',
-        'conteudo' => '',
+        'id' => 1,
+        'titulo' => 'Home',
+        'conteudo' => '<h1>Bem vindo ao seu site!</h1>',
         'resumo' => '',
         'imagem' => '',
         'data' => '',
-        'url' => '',
-        'ativo' => '',
+        'url' => '/',
+        'ativo' => 'sim',
         'lixeira' => '',
-        'agent_id' => '',
+        'agent_id' => 1,
         'created_at' => '',
         'updated_at' => ''
       ]);

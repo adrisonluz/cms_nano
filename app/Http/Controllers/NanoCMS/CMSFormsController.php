@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSForm;
+use NanoCMS\CMSField;
 use NanoCMS\CMSConfig;
 use NanoCMS\CMSPagina;
+use NanoCMS\CMSMascara;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 
@@ -26,6 +28,7 @@ class CMSFormsController extends \NanoCMS\Http\Controllers\NanoController {
         $this->retorno = array();
         $this->request = $request->except('_token');
         $this->retorno['paginas'] = CMSPagina::all();
+        $this->retorno['mascaras'] = CMSMascara::all();
         
         $this->retorno['js'] = [
             url('NanoCMS/js/forms.js')
@@ -62,7 +65,6 @@ class CMSFormsController extends \NanoCMS\Http\Controllers\NanoController {
         $this->retorno['request'] = $this->request;
 
         $rules = array(
-            'pagina_id' => 'required',
             'titulo' => 'required',
             'origem' => 'required',
         );
@@ -74,7 +76,17 @@ class CMSFormsController extends \NanoCMS\Http\Controllers\NanoController {
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
             $form = new CMSForm;
-            
+
+            if($this->request['pagina_id'] !== '' && $this->request['pagina_id'] !== 0){
+                $form->pagina_id = null;    
+            }
+
+            $form->titulo = $this->request['titulo'];
+            $form->classe = $this->request['classe'];
+            $form->origem = $this->request['origem'];
+            $form->tipo = $this->request['tipo'];
+            $form->ordem = $this->request['ordem'];
+            $form->ativo = 'sim';
             $form->agent_id = $this->usuario_logado->id;
 
             if ($form->save()) {

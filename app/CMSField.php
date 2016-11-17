@@ -5,9 +5,9 @@ namespace NanoCMS;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
 
-class CMSMenuItens extends Authenticatable {
+class CMSField extends Authenticatable {
 
-    protected $table = 'cms_menus_itens';
+    protected $table = 'cms_fields';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,7 @@ class CMSMenuItens extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'titulo', 'link', 'tipo',
+        'nome', 'valor', 'placeholder', 'obrigatorio', 'tipo'
     ];
 
     /**
@@ -29,16 +29,23 @@ class CMSMenuItens extends Authenticatable {
     ];
 
     /**
-    * Menu pai
+    * Form pai
     */
-    public function menu(){
-        return $this->belongsTo('NanoCMS\CMSMenu');
+    public function form(){
+        return $this->belongsTo('NanoCMS\CMSForm');
     }
 
     /**
-    * Item pai
+    * Input pai
     */
     public function itemPai(){
-        return $this->belongsTo('NanoCMS\CMSMenuItens', 'menupai_id');
+        return $this->belongsTo('NanoCMS\CMSField', 'input_id');
+    }
+
+    /**
+    * Máscara do input
+    */
+    public function mascara(){
+        return $this->hasOne('NanoCMS\CMSMascara');
     }
 }

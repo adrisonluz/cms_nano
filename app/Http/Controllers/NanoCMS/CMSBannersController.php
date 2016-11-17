@@ -73,7 +73,11 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
             $banner = new CMSBanner;
             $banner->titulo = $this->request['titulo'];
             $banner->conteudo = $this->request['conteudo'];
-            $banner->pagina_id = $this->request['pagina_id'];
+            
+            if($this->request['pagina_id'] !== '' && $this->request['pagina_id'] !== 0){
+                $banner->pagina_id = null;    
+            }
+            
             $banner->tipo = $this->request['tipo'];
             $banner->data_ini = $this->request['data_ini'];
             $banner->data_fim = $this->request['data_fim'];
@@ -134,7 +138,11 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
             $banner = CMSBanner::find($id);
             $banner->titulo = $this->request['titulo'];
             $banner->conteudo = $this->request['conteudo'];
-            $banner->pagina_id = $this->request['pagina_id'];
+
+            if($this->request['pagina_id'] !== '' && $this->request['pagina_id'] !== 0){
+                $banner->pagina_id = null;    
+            }
+            
             $banner->tipo = $this->request['tipo'];
             $banner->data_ini = $this->request['data_ini'];
             $banner->data_fim = $this->request['data_fim'];

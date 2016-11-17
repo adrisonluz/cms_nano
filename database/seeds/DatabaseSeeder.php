@@ -9,7 +9,8 @@ class DatabaseSeeder extends Seeder {
      *
      * @return void
      */
-    public function run() {
+    public function run() {        
+        $this->call(MascarasSeeder::class);
         $this->call(ConfigsSeeder::class);
         $this->call(NiveisSeeder::class);
         $this->call(NvaccessSeeder::class);

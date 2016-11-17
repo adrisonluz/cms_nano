@@ -15,7 +15,7 @@ class CreateForms extends Migration
         Schema::create('cms_forms', function (Blueprint $table) {
             $table->increments('id');
 			$table->unsignedInteger('pagina_id');
-            $table->foreign('pagina_id')
+            $table->foreign('pagina_id')->nullable()
               ->references('id')->on('cms_paginas')
               ->onDelete('no action');
             $table->string('titulo', 255)->nullable();

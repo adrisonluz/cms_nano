@@ -131,7 +131,6 @@
                                         <option value="não">Não</option>                          
                                     </select>
                                 </td>
-                                </td>
                             </tfoot>
                         </table>
                     </form>      

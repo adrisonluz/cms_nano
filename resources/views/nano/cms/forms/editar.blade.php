@@ -27,19 +27,19 @@
                 <div class="form-group">
                     <label for="titulo" class="col-sm-3 control-label">Título:</label>
                     <div class="col-sm-9">
-                        <input name="titulo" type="text" value="{{ $menu->titulo }}" class="form-control" />
+                        <input name="titulo" type="text" value="{{ $form->titulo }}" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="origem" class="col-sm-3 control-label">Origem:</label>
                     <div class="col-sm-9">
-                        <input name="origem" type="text" value="{{ $menu->origem }}" class="form-control" />
+                        <input name="origem" type="text" value="{{ $form->origem }}" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="classe" class="col-sm-3 control-label">Classe:</label>
                     <div class="col-sm-9">
-                        <input name="classe" type="text" value="{{ $menu->classe }}" class="form-control" />
+                        <input name="classe" type="text" value="{{ $form->classe }}" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -49,6 +49,7 @@
                     <label for="pagina_id" class="col-sm-3 control-label">Página:</label>
                     <div class="col-sm-9">
                         <select name="pagina_id" class="form-control">
+                            <option value="" >Todas</option>
                             @if(count($paginas) > 0)
                             @foreach($paginas as $pagina)
                             <option value="{{ $pagina->id }}" {{ $pagina->id == $form->pagina_id ? 'selected=selected' : '' }}>{{ $pagina->titulo }}</option>
@@ -73,7 +74,7 @@
                 <div class="form-group">
                     <label for="ordem" class="col-sm-3 control-label">Ordem:</label>
                     <div class="col-sm-9">
-                        <input name="ordem" type="number" value="{{ $menu->ordem }}" class="form-control" />
+                        <input name="ordem" type="number" value="{{ $form->ordem }}" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -99,12 +100,85 @@
                 </div>
           
                 <div class="panel-body">
-                    <form class="forms-fields" action="{{ route("nano.cms.forms-fields.store") }}" method="post">
+                    <form class="fields" action="{{ route("nano.cms.fields.store") }}" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="form_id" value="{{ $form->id }}">
                         <input type="hidden" name="editId" value="">
                         <table class="table table-striped table-bordded">
-                            
+                            <thead>
+                                <td>Ação</td>
+                                <td>Nome</td>
+                                <td>Valor</td>
+                                <td>Placeholder</td>
+                                <td>Máscara</td>
+                                <td>Obrigatório</td>
+                                <td>Tipo</td>
+                                <td>Ordem</td>
+                            </thead>
+                            @if(count($form->fields) > 0)
+                            @foreach($form->fields as $field)
+                            <tr>
+                                <td>
+                                    <a href="{{ route('nano.cms.fields.edit', ['id' => $field->id]) }}" title="Editar" class="editar" rel="{{ $field->id }}">
+                                        <button type="button" class="btn btn-primary btn-xs">
+                                            <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
+                                        </button>
+                                    </a>
+
+                                    <a href="{{ route('nano.cms.fields.lixeira', ['id' => $field->id]) }}" title="Descartar" class="delete" rel="{{ $field->id }}">
+                                        <button type="button" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td>{{ $field->nome }}</td>
+                                <td>{{ $field->valor }}</td>
+                                <td>{{ $field->placeholder }}</td>
+                                <td>{{ (isset($field->mascara) ? $field->mascara->mask : 'nenhuma') }}</td>
+                                <td>{{ $field->obrigatorio }}</td>
+                                <td>{{ $field->tipo }}</td>
+                                <td>{{ $field->ordem }}</td>
+                            </tr>
+                            @endforeach
+                            @endif
+                            <tr>
+                                <td colspan="8" class="separator">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="8"><strong>Novo field:</strong></td>
+                            </tr>
+                            <tfoot>
+                                <td><button type="submit"  class="btn btn-primary enviar"><i class="fa fa-save"></i></button></td>
+                                <td><input name="nome" type="text" value="" class="form-control" ></td>
+                                <td><input name="valor" type="text" value="" class="form-control" ></td>
+                                <td><input name="placeholder" type="text" value="" class="form-control" ></td>
+                                <td>
+                                    <select name="mascara_id" class="form-control">
+                                        @if(count($mascaras) > 0)
+                                            @foreach($mascaras as $mask)
+                                            <option value="{{ $mask->mascara_id }}">{{ $mask->mask }}</option>
+                                            @endforeach          
+                                        @endif                                     
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="obrigatorio" class="form-control">
+                                        <option value="sim">Sim</option> 
+                                        <option value="não">Não</option>                          
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="tipo" class="form-control">
+                                        <option value="input">Input texto</option> 
+                                        <option value="hidden">Input hidden</option>
+                                        <option value="select">Select</option>
+                                        <option value="option">Option</option>
+                                        <option value="checkbox">Option</option>
+                                        <option value="textarea">Text area</option>                
+                                    </select>
+                                </td>
+                                <td><input name="ordem" type="number" value="" class="form-control" ></td>
+                            </tfoot>
                         </table>
                     </form>      
                 </div>

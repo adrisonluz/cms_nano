@@ -44,6 +44,7 @@
                     <label for="pagina_id" class="col-sm-3 control-label">Página:</label>
                     <div class="col-sm-9">
                         <select name="pagina_id" class="form-control">
+                            <option value="0">Todas</option>
                             @if(count($paginas) > 0)
                             @foreach($paginas as $pagina)
                             <option value="{{ $pagina->id }}"  @if(isset($request)) {{ $pagina->id == $request['pagina_id'] ? 'selected=selected' : '' }} @endif>{{ $pagina->titulo }}</option>

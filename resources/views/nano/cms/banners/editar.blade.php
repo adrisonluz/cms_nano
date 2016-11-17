@@ -44,6 +44,7 @@
                     <label for="pagina_id" class="col-sm-3 control-label">Página:</label>
                     <div class="col-sm-9">
                         <select name="pagina_id" class="form-control">
+                            <option value="0">Todas</option>
                             @if(count($paginas) > 0)
                             @foreach($paginas as $pagina)
                             <option value="{{ $pagina->id }}"  {{ $banner->pagina_id == $pagina->id ? 'selected=selected' : '' }}>{{ $pagina->titulo }}</option>
@@ -117,7 +118,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-9 off-set-3 pull-right">
-                        <img src="{{ url('img/banners/' . ($banner->imagem !== '' ? $banner->imagem : 'noimage.png')) }}" alt="Preview" title="Preview">
+                        <img src="{{ url('NanoCMS/img/banners/' . ($banner->imagem !== '' ? $banner->imagem : 'noimage.png')) }}" alt="Preview" title="Preview">
                     </div>
                 </div>
             </div>

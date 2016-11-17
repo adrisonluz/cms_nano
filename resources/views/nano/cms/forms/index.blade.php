@@ -34,8 +34,6 @@
                     <td>Orem</td>
                     <td>Ativo</td>
                     </thead>
-
-
                     @foreach ($forms as $form)
                     <tr>
                         <td>
@@ -54,13 +52,12 @@
                         <td>{{ $form->id }}</td>
                         <td>{{ $form->titulo }}</td>
                         <td>{{ $form->origem }}</td>
-                        <td>{{ $form->pagina->url }}</td>
+                        <td>{{ $form->pagina->url or 'Todas' }}</td>
                         <td>{{ $form->tipo }}</td>
                         <td>{{ $form->ordem }}</td>
                         <td>{{ $form->Ativo }}</td>
                     </tr>
                     @endforeach
-
                 </table>
             </div>
         </div>

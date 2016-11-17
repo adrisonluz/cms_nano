@@ -54,7 +54,7 @@
                         </td>
                         <td>{{ $banner->id }}</td>
                         <td>{{ $banner->titulo }}</td>
-                        <td>{{ $banner->pagina->titulo }}</td>
+                        <td>{{ $banner->pagina->titulo or 'Todas'  }}</td>
                         <td>{{ $banner->tipo }}</td>
                         <td>{{ $banner->ordem }}</td>
                         <td>{{ $banner->data_ini }}</td>

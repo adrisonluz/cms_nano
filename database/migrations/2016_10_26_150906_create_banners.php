@@ -15,10 +15,10 @@ class CreateBanners extends Migration
         Schema::create('cms_banners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipo', 45);
-			$table->unsignedInteger('pagina_id');
+			$table->unsignedInteger('pagina_id')->nullable();
             $table->foreign('pagina_id')
               ->references('id')->on('cms_paginas')
-              ->onDelete('cascade')->nullable();
+              ->onDelete('no action')->nullable();
             $table->string('titulo', 255)->nullable();
             $table->mediumText('conteudo');
             $table->string('imagem', 255)->nullable();

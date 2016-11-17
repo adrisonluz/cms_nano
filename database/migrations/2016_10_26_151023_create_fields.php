@@ -14,18 +14,21 @@ class CreateFields extends Migration
     {
         Schema::create('cms_fields', function (Blueprint $table) {
             $table->increments('id');
-			$table->unsignedInteger('form_id');
+		        $table->unsignedInteger('form_id');
             $table->foreign('form_id')
               ->references('id')->on('cms_forms')
               ->onDelete('cascade');
-			$table->unsignedInteger('input_id');
+			      $table->unsignedInteger('input_id')->nullable();
             $table->foreign('input_id')
               ->references('id')->on('cms_fields')
               ->onDelete('cascade')->nullable();
             $table->string('nome', 255)->nullable();
             $table->string('valor', 255)->nullable();
             $table->string('placeholder', 255)->nullable();
-            $table->string('classe', 255)->nullable();
+            $table->unsignedInteger('mascara_id')->nullable();
+            $table->foreign('mascara_id')
+              ->references('id')->on('cms_mascaras')
+              ->onDelete('no action');
             $table->string('obrigatorio', 45);
             $table->string('tipo', 45);
             $table->integer('ordem');
