@@ -62,8 +62,9 @@ class CMSFormsController extends \NanoCMS\Http\Controllers\NanoController {
         $this->retorno['request'] = $this->request;
 
         $rules = array(
+            'pagina_id' => 'required',
             'titulo' => 'required',
-            'tipo' => 'required',
+            'origem' => 'required',
         );
 
         $validator = Validator($this->request, $rules);

@@ -63,7 +63,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'login' => 'required'
+            'nivel' => 'required'
         );
 
         $this->retorno['niveis'] = Nivel::all();
