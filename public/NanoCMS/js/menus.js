@@ -3,7 +3,7 @@ $(document).ready(function(){
     $(document).on('click', 'form.menus-itens button.enviar', function(e){
         e.preventDefault();
         $('#modalMenusItens').modal('show');
-        $('#modalMenusItens .modal-body').html('<img src="' + SERVER + '/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
+        $('#modalMenusItens .modal-body').html('<img src="' + SERVER + '/NanoCMS/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
 
         var data =  $('form.menus-itens').serialize();
         token = $('input[name=_token]').val();
@@ -83,7 +83,7 @@ $(document).ready(function(){
     $(document).on('click', 'form.menus-itens .delete', function(e){
         e.preventDefault();
         $('#modalMenusItens').modal('show');
-        $('#modalMenusItens .modal-body').html('<img src="' + SERVER + '/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
+        $('#modalMenusItens .modal-body').html('<img src="' + SERVER + '/NanoCMS/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
 
         var id = $(this).attr('rel');
         token = $('input[name=_token]').val();

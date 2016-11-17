@@ -87,7 +87,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
                 if (Input::hasFile('imagem')) {
                     $ext = Input::file('imagem')->getClientOriginalExtension();
                     $banner->imagem = setUri($banner->titulo) . '_' . $banner->id . '.' . $ext;
-                    Input::file('imagem')->move('img/banners', setUri($banner->imagem));
+                    Input::file('imagem')->move('NanoCMS/img/banners', setUri($banner->imagem));
                 }
 
                 Session::put('mensagem', [
@@ -145,11 +145,11 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
             $banner->agent_id = $this->usuario_logado->id;
 
             if (Input::hasFile('imagem')) {
-                File::delete('img/banners/' . $banner->imagem);
+                File::delete('NanoCMS/img/banners/' . $banner->imagem);
 
                 $ext = Input::file('imagem')->getClientOriginalExtension();
                 $banner->imagem = setUri($banner->titulo) . '_' . $banner->id . '.' . $ext;
-                Input::file('imagem')->move('img/banners', $banner->imagem);
+                Input::file('imagem')->move('NanoCMS/img/banners', $banner->imagem);
             }
 
             if ($banner->save()) {

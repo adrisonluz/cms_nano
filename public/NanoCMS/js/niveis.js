@@ -3,7 +3,7 @@ $(document).ready(function(){
     $(document).on('click', '#btnNivel', function(e){
         e.preventDefault();
         $('#modalNiveis').modal('show');
-        $('#modalNiveis .modal-body').html('<img src="' + SERVER + '/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
+        $('#modalNiveis .modal-body').html('<img src="' + SERVER + '/NanoCMS/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
 
         token = $('input[name=_token]').val();
         $.ajax({
@@ -35,7 +35,7 @@ $(document).ready(function(){
     $(document).on('click', '.nivelDelete', function(e){
         e.preventDefault();
         $('#modalNiveis').modal('show');
-        $('#modalNiveis .modal-body').html('<img src="' + SERVER + '/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
+        $('#modalNiveis .modal-body').html('<img src="' + SERVER + '/NanoCMS/img/loading.gif" class="loading" title="Processando ..." alt="Processando ..." />');
 
         var id = $(this).attr('rel');
         token = $('input[name=_token]').val();

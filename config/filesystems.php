@@ -56,7 +56,7 @@ return [
 
         'perfil' => [
             'driver' => 'local',
-            'root' => public_path('img/perfil'),
+            'root' => public_path('NanoCMS/img/perfil'),
             'visibility' => 'public',
         ],
 

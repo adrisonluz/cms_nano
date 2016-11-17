@@ -75,7 +75,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
             if (Input::hasFile('imagem')) {
                 $ext = Input::file('imagem')->getClientOriginalExtension();
                 $pagina->imagem = setUri($pagina->titulo) . '.' . $ext;
-                Input::file('imagem')->move('img/paginas', setUri($pagina->titulo));
+                Input::file('imagem')->move('NanoCMS/img/paginas', setUri($pagina->titulo));
             }
 
             if ($pagina->save()) {
@@ -129,7 +129,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
             if (Input::hasFile('imagem')) {
                 $ext = Input::file('imagem')->getClientOriginalExtension();
                 $pagina->imagem = setUri($pagina->titulo) . '.' . $ext;
-                Input::file('imagem')->move('img/paginas', setUri($pagina->titulo));
+                Input::file('imagem')->move('NanoCMS/img/paginas', setUri($pagina->titulo));
             }
 
             if ($pagina->save()) {
