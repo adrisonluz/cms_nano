@@ -21,7 +21,7 @@
             <h1>Páginas / Inserir</h1>
         </div>
 
-        <form name="frm" action="{{ route("cms.paginas.store")}}" method="post" enctype="multipart/form-data">
+        <form name="frm" action="{{ route("nano.cms.paginas.store")}}" method="post" enctype="multipart/form-data">
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">

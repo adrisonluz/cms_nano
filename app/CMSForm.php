@@ -32,9 +32,16 @@ class CMSForm extends Authenticatable {
      */
     public function scopeAtivos() {
         return $this->whereNull('lixeira')
-        ->orWhereIn('lixeira', ['', 'nao']);
+        ->orWhereIn('lixeira', ['', 'nao'])
+        ->orderBy('ordem');
     }
 
+    /**
+    * Página relacionada
+    */
+    public function pagina(){
+        return $this->belongsTo('NanoCMS\CMSPagina');
+    }    
 
     /**
     * Fields relacionados
@@ -42,5 +49,4 @@ class CMSForm extends Authenticatable {
     public function fields(){
         return $this->hasMany('NanoCMS\CMSField', 'form_id');
     }
-
 }

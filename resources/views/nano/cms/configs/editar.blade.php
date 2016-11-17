@@ -21,7 +21,7 @@
         </ul>
         @endif
 
-        <form name="frm" action="{{ route("cms.configs.update")}}" method="post" >
+        <form name="frm" action="{{ route("nano.cms.configs.update")}}" method="post" >
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <h4>Dados do site</h4>

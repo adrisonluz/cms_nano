@@ -21,7 +21,7 @@
             <h1>Menus / Editar</h1>
         </div>
 
-        <form name="frm" action="{{ route("cms.menus.update", ["id"=> $menu->id ])}}" method="post" enctype="multipart/form-data">
+        <form name="frm" action="{{ route("nano.cms.menus.update", ["id"=> $menu->id ])}}" method="post" enctype="multipart/form-data">
             <div class="col-md-5">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -68,7 +68,7 @@
                 </div>
           
                 <div class="panel-body">
-                    <form class="menus-itens" action="{{ route("cms.menus-itens.store") }}" method="post">
+                    <form class="menus-itens" action="{{ route("nano.cms.menus-itens.store") }}" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                         <input type="hidden" name="editId" value="">
@@ -84,13 +84,13 @@
                             @foreach($menu->itens as $item)
                             <tr>
                                 <td>
-                                    <a href="{{ route('cms.menus-itens.edit', ['id' => $item->id]) }}" title="Editar" class="editar" rel="{{ $item->id }}">
+                                    <a href="{{ route('nano.cms.menus-itens.edit', ['id' => $item->id]) }}" title="Editar" class="editar" rel="{{ $item->id }}">
                                         <button type="button" class="btn btn-primary btn-xs">
                                             <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
                                         </button>
                                     </a>
 
-                                    <a href="{{ route('cms.menus-itens.lixeira', ['id' => $item->id]) }}" title="Descartar" class="delete" rel="{{ $item->id }}">
+                                    <a href="{{ route('nano.cms.menus-itens.lixeira', ['id' => $item->id]) }}" title="Descartar" class="delete" rel="{{ $item->id }}">
                                         <button type="button" class="btn btn-danger btn-xs">
                                             <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
                                         </button>

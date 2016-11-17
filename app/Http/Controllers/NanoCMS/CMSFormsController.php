@@ -74,9 +74,7 @@ class CMSFormsController extends \NanoCMS\Http\Controllers\NanoController {
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
             $form = new CMSForm;
-            $form->titulo = $this->request['titulo'];
-            $form->tipo = $this->request['tipo'];
-            $form->ativo = 'sim';
+            
             $form->agent_id = $this->usuario_logado->id;
 
             if ($form->save()) {

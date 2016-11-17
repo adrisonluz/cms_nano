@@ -16,7 +16,7 @@
 
         <div class="col-lg-2">
             <BR>
-            <a href="{{ route('cms.menus.create') }}" class="btn btn-default btn-success">Novo registro</a>
+            <a href="{{ route('nano.cms.menus.create') }}" class="btn btn-default btn-success">Novo registro</a>
         </div>
 
 
@@ -36,13 +36,13 @@
                     @foreach ($menus as $menu)
                     <tr>
                         <td>
-                            <a href="{{ route('cms.menus.edit', ['id' => $menu->id]) }}" title="Editar">
+                            <a href="{{ route('nano.cms.menus.edit', ['id' => $menu->id]) }}" title="Editar">
                                 <button type="button" class="btn btn-primary btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
                                 </button>
                             </a>
 
-                            <a href="{{ route('cms.menus.lixeira', ['id' => $menu->id]) }}" title="Descartar">
+                            <a href="{{ route('nano.cms.menus.lixeira', ['id' => $menu->id]) }}" title="Descartar">
                                 <button type="button" class="btn btn-danger btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
                                 </button>

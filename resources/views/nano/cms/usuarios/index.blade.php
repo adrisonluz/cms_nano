@@ -16,7 +16,7 @@
 
         <div class="col-lg-2">
             <BR>
-            <a href="{{ route('cms.usuarios.create') }}" class="btn btn-default btn-success">Novo registro</a>
+            <a href="{{ route('nano.cms.usuarios.create') }}" class="btn btn-default btn-success">Novo registro</a>
         </div>
 
 
@@ -39,13 +39,13 @@
                     @foreach ($usuarios as $user)
                     <tr>
                         <td>
-                            <a href="{{ route('cms.usuarios.edit', ['id' => $user->id]) }}" title="Editar">
+                            <a href="{{ route('nano.cms.usuarios.edit', ['id' => $user->id]) }}" title="Editar">
                                 <button type="button" class="btn btn-primary btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
                                 </button>
                             </a>
 
-                            <a href="{{ route('cms.usuarios.lixeira', ['id' => $user->id]) }}" title="Descartar">
+                            <a href="{{ route('nano.cms.usuarios.lixeira', ['id' => $user->id]) }}" title="Descartar">
                                 <button type="button" class="btn btn-danger btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
                                 </button>

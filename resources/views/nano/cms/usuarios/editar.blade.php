@@ -21,7 +21,7 @@
             <h1>Usuários / Editar</h1>
         </div>        
 
-        <form name="frm" action="{{ route("cms.usuarios.update", ["id"=> $usuario->id ])}}" method="post" >
+        <form name="frm" action="{{ route("nano.cms.usuarios.update", ["id"=> $usuario->id ])}}" method="post" >
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">

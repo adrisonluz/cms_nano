@@ -21,7 +21,7 @@
             <h1>Banners / Editar</h1>
         </div>
 
-        <form name="frm" action="{{ route("cms.banners.update", ["id"=> $banner->id ])}}" method="post" enctype="multipart/form-data">
+        <form name="frm" action="{{ route("nano.cms.banners.update", ["id"=> $banner->id ])}}" method="post" enctype="multipart/form-data">
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">

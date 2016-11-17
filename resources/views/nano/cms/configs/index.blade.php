@@ -25,7 +25,7 @@
                     <a href="javascript:history.back(-1)">
                         <button type="button" class="btn btn-default">Voltar</button>
                     </a>
-                    <a href="{{ route("cms.configs.edit") }}">
+                    <a href="{{ route("nano.cms.configs.edit") }}">
                         <button type="button" class="btn btn-danger">Prosseguir</button>
                     </a>
                 </div>

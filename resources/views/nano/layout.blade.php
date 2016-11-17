@@ -36,7 +36,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ route('cms.dashboard') }}">
+                    <a class="navbar-brand" href="{{ route('nano.cms.dashboard') }}">
                         Nano CMS
                     </a>
                 </div>
@@ -46,11 +46,11 @@
                     <ul class="nav navbar-nav">
 
                         @if (!Auth::guest())
-                        <li><a href="{{ route('cms.usuarios.index') }}">Usuários</a></li>
-                        <li><a href="{{ route('cms.paginas.index') }}">Páginas</a></li>
-                        <li><a href="{{ route('cms.banners.index') }}">Banners</a></li>
-                        <li><a href="{{ route('cms.menus.index') }}">Menus</a></li>
-                        <li><a href="{{ route('cms.forms.index') }}">Forms</a></li>
+                        <li><a href="{{ route('nano.cms.usuarios.index') }}">Usuários</a></li>
+                        <li><a href="{{ route('nano.cms.paginas.index') }}">Páginas</a></li>
+                        <li><a href="{{ route('nano.cms.banners.index') }}">Banners</a></li>
+                        <li><a href="{{ route('nano.cms.menus.index') }}">Menus</a></li>
+                        <li><a href="{{ route('nano.cms.forms.index') }}">Forms</a></li>
                         @endif
 
                     </ul>

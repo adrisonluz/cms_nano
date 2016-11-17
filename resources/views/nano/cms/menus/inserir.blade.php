@@ -21,7 +21,7 @@
             <h1>Menus / Inserir</h1>
         </div>
 
-        <form name="frm" action="{{ route("cms.menus.store")}}" method="post" enctype="multipart/form-data">
+        <form name="frm" action="{{ route("nano.cms.menus.store")}}" method="post" enctype="multipart/form-data">
             <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">
