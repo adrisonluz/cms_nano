@@ -25,7 +25,7 @@ class CMSConfigsController extends \NanoCMS\Http\Controllers\NanoController {
         if(!empty($this->request))
             $this->retorno['request'] = $this->request;
 
-        $this->area = 'cms.configs';
+        $this->area = 'nano.cms.configs';
 
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');

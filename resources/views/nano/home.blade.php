@@ -10,11 +10,17 @@
             </ul>
             @endif
 
-            <div class="panel panel-danger">
-                <div class="panel-heading">Erro</div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                @if (session('mensagem'))
+                <div class="alert alert-success">
+                    {{ session('mensagem') }}
+                </div>
+                @endif
 
                 <div class="panel-body">
-                    <p class="text-danger">{{ $erroMensagem }}</p>
+                    Seja bem vindo {{ Auth::user()->name }}!
                 </div>
             </div>
         </div>

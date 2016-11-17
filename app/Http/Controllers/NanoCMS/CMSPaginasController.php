@@ -20,7 +20,7 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
         parent::checkAcess('acessPages');
 
         $this->middleware('auth');
-        $this->area = 'cms.paginas';
+        $this->area = 'nano.cms.paginas';
         $this->retorno = array();
         $this->request = $request->except('_token');
 

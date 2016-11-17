@@ -1,4 +1,4 @@
-@extends('layouts.nano.app')
+@extends('nano.layout')
 
 <!-- Main Content -->
 @section('content')

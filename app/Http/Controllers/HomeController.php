@@ -28,7 +28,7 @@ class HomeController extends Controller {
             'user' => $this->user
         ];
 
-        return view('home', $data);
+        return view('nano.home', $data);
     }
 
 }

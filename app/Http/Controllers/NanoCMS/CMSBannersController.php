@@ -22,7 +22,7 @@ class CMSBannersController extends \NanoCMS\Http\Controllers\NanoController {
         parent::checkAcess('acessBanners');
 
         $this->middleware('auth');
-        $this->area = 'cms.banners';
+        $this->area = 'nano.cms.banners';
         $this->retorno = array();
         $this->request = $request->except('_token');
         $this->retorno['paginas'] = CMSPagina::all();

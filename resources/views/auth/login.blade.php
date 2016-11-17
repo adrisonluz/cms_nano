@@ -1,4 +1,4 @@
-@extends('layouts.nano.app')
+@extends('nano.layout')
 
 @section('content')
 <div class="container">

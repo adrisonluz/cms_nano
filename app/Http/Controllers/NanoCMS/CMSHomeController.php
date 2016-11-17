@@ -31,7 +31,7 @@ class CMSHomeController extends \NanoCMS\Http\Controllers\NanoController {
      *   Listagem dos usuários
      */
     public function index() {
-        return view("home", $this->retorno);
+        return view("nano.home", $this->retorno);
     }
 
 }

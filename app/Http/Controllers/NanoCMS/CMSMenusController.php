@@ -22,7 +22,7 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
         parent::checkAcess('acessMenus');
 
         $this->middleware('auth');
-        $this->area = 'cms.menus';
+        $this->area = 'nano.cms.menus';
         $this->retorno = array();
         $this->request = $request->except('_token');
         $this->retorno['paginas'] = CMSPagina::all();

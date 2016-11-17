@@ -25,7 +25,7 @@ class CMSUserController extends \NanoCMS\Http\Controllers\NanoController {
         if (!empty($this->request))
             $this->retorno['request'] = $this->request;
 
-        $this->area = 'cms.usuarios';
+        $this->area = 'nano.cms.usuarios';
 
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');
