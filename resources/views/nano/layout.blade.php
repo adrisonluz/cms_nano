@@ -101,10 +101,10 @@
         <script src="{{ url('NanoCMS/plugins/select2/dist/js/select2.min.js') }}"></script>
 
         <script src="{{ url('NanoCMS/js/functions.js') }}"></script>
-        @if(isset($js))
-        @foreach($js as $_js)
-        <script src="{{ $_js }}"></script>        
-        @endforeach
-        @endif
+    @if(isset($js))
+    @foreach($js as $_js)
+    <script src="{{ $_js }}"></script>        
+    @endforeach
+    @endif
     </body>
 </html>

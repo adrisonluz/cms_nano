@@ -27,6 +27,10 @@ class CMSConfigsController extends \NanoCMS\Http\Controllers\NanoController {
 
         $this->area = 'nano.cms.configs';
 
+        $this->retorno['js'] = [
+            url('NanoCMS/js/niveis.js')
+        ];
+
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');
             Session::pull('mensagem');

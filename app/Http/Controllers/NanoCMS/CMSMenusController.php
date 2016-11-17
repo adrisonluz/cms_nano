@@ -26,6 +26,10 @@ class CMSMenusController extends \NanoCMS\Http\Controllers\NanoController {
         $this->retorno = array();
         $this->request = $request->except('_token');
         $this->retorno['paginas'] = CMSPagina::all();
+        
+        $this->retorno['js'] = [
+            url('NanoCMS/js/menus.js')
+        ];
 
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');
