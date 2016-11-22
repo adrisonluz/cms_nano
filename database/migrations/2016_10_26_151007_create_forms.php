@@ -23,6 +23,8 @@ class CreateForms extends Migration
             $table->string('origem', 255);
             $table->string('tipo', 45);
             $table->integer('ordem');
+            $table->string('envio_email', 45)->nullable();
+            $table->string('resposta', 45)->nullable();
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();
             $table->unsignedInteger('agent_id')->nullable();

@@ -42,6 +42,12 @@
                         <input name="classe" type="text" value="@if(isset($request['classe'])) {{$request['classe']}} @endif" class="form-control" />
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="classe" class="col-sm-3 control-label">Enviar por email:</label>
+                    <div class="col-sm-9">
+                        <input name="envio_email" type="checkbox" value="sim" class="" />
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-6"> 
@@ -75,6 +81,13 @@
                     <label for="ordem" class="col-sm-3 control-label">Ordem:</label>
                     <div class="col-sm-9">
                         <input name="ordem" type="number" value="@if(isset($request['ordem'])) {{$request['ordem']}} @endif" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="classe" class="col-sm-3 control-label">Resposta automática:</label>
+                    <div class="col-sm-9">
+                        <input name="resposta" type="checkbox" value="sim" class="" />
                     </div>
                 </div>
             </div>

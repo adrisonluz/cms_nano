@@ -189,7 +189,7 @@ $(document).ready(function(){
                  type : 'POST', 
                  data: 'editId=' +  id,
                  dataType: 'json',
-                 success: function(result){
+                 success: function(result){ 
                     $('.delete[rel=' + id + ']').parent().parent().remove();
                     $('#modalFields .separator').html('<p class="alert alert-' + result.type + '">' + result.msg + '</p>');
                     setTimeout(function(){

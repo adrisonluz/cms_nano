@@ -110,7 +110,12 @@
                                 <td colspan="5"><strong>Novo item de menu:</strong></td>
                             </tr>
                             <tfoot>
-                                <td><button type="submit"  class="btn btn-primary enviar"><i class="fa fa-save"></i></button></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary enviar btn-sm pull-left"><i class="fa fa-save"></i></button>
+                                    <button type="reset" class="btn btn-success btn-sm pull-right">
+                                        <span class="glyphicon" aria-hidden="true"><i class="fa fa-eraser"></i></span>
+                                    </button>
+                                </td>
                                 <td><input name="titulo" type="text" value="" class="form-control" ></td>
                                 <td><input name="link" type="text" value="" class="form-control" ></td>
                                 <td>

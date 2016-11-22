@@ -86,6 +86,8 @@ class CMSFormsController extends \NanoCMS\Http\Controllers\NanoController {
             $form->origem = $this->request['origem'];
             $form->tipo = $this->request['tipo'];
             $form->ordem = $this->request['ordem'];
+            $form->envio_email = (!empty($this->request['envio_email']) ? $this->request['envio_email'] : '');
+            $form->resposta = (!empty($this->request['resposta']) ? $this->request['resposta'] : '');;
             $form->ativo = 'sim';
             $form->agent_id = $this->usuario_logado->id;
 
@@ -133,7 +135,12 @@ class CMSFormsController extends \NanoCMS\Http\Controllers\NanoController {
         } else {
             $form = CMSForm::find($id);
             $form->titulo = $this->request['titulo'];
+            $form->classe = $this->request['classe'];
+            $form->origem = $this->request['origem'];
             $form->tipo = $this->request['tipo'];
+            $form->ordem = $this->request['ordem'];
+            $form->envio_email = (!empty($this->request['envio_email']) ? $this->request['envio_email'] : '');
+            $form->resposta = (!empty($this->request['resposta']) ? $this->request['resposta'] : '');;
             $form->ativo = 'sim';
             $form->agent_id = $this->usuario_logado->id;
 
