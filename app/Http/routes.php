@@ -118,8 +118,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
     Route::group(['prefix' => 'fields', 'where' => ['id' => '[0-9]+']], function () {
         Route::post('inserir', ['uses' => 'NanoCMS\CMSFieldsController@store', 'as' => 'nano.cms.fields.store']);
         Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSFieldsController@edit', 'as' => 'nano.cms.fields.edit']);
-        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSFieldsController@getField', 'as' => 'nano.cms.fields.update']);
-        Route::post('dados', ['uses' => 'NanoCMS\CMSFieldsController@dados', 'as' => 'nano.cms.fields.dados']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSFieldsController@update', 'as' => 'nano.cms.fields.update']);
         Route::post('{id}/lixeira', ['uses' => 'NanoCMS\CMSFieldsController@lixeira', 'as' => 'nano.cms.fields.lixeira']);
         Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSFieldsController@ativar', 'as' => 'nano.cms.fields.ativar']);
         Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSFieldsController@delete', 'as' => 'nano.cms.fields.delete']);

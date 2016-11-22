@@ -86,30 +86,24 @@ $(document).ready(function(){
                 if(result.fieldTipo == 'select' || result.fieldTipo == 'checkbox'){
                     $('#modalFields').modal('show');
 
-                    $.ajax({
-                         url : SERVER + '/cms/fields/dados',
-                         headers: {'X-CSRF-TOKEN': token},
-                         type : 'POST', 
-                         data: 'id=' +  id,
-                         dataType: 'json',
-                         success: function(result){
-                            console.log(result);
-                            return false;
+                    if(result.fieldOptions !== null){
+                        var options = result.fieldOptions;
+                        for (i = 0; i < options.length; i++) {
                             var html = '<tr>'
-                                        + '<td>'
-                                            + '<a href="" title="Descartar" class="delete" rel="' + SERVER + '/cms/fields/' + result.fieldId + '/lixeira">'
-                                                + '<button type="button" class="btn btn-danger btn-xs">'
-                                                    + '<span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>'
-                                                + '</button>'
-                                            + '</a>'
-                                        + '</td>'
-                                        + '<td>' + nome.value + '</td>'
-                                        + '<td>' + valor.value + '</td>'
-                                        + '<td>' + ordem.value + '</td>'
-                                    + '</tr>';
+                                + '<td>'
+                                    + '<a href="' + SERVER + '/cms/fields/' + options[i].id + '/lixeira" title="Descartar" class="delete" rel="' + options[i].id + '">'
+                                        + '<button type="button" class="btn btn-danger btn-xs">'
+                                            + '<span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>'
+                                        + '</button>'
+                                    + '</a>'
+                                + '</td>'
+                                + '<td>' + options[i].nome + '</td>'
+                                + '<td>' + options[i].valor + '</td>'
+                                + '<td>' + options[i].ordem + '</td>'
+                            + '</tr>';
                             $('form.options .separator').parent().before(html);
                         }
-                    });
+                    }
                 }
 
                 $('form.fields input[name=editId]').val(id);
@@ -196,6 +190,7 @@ $(document).ready(function(){
                  data: 'editId=' +  id,
                  dataType: 'json',
                  success: function(result){
+                    $('.delete[rel=' + id + ']').parent().parent().remove();
                     $('#modalFields .separator').html('<p class="alert alert-' + result.type + '">' + result.msg + '</p>');
                     setTimeout(function(){
                         if(result.type == 'success'){

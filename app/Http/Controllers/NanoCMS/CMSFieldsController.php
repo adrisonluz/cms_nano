@@ -99,9 +99,9 @@ class CMSFieldsController  extends \NanoCMS\Http\Controllers\NanoController {
         die();
     }
 
-    public function dados(){
-        if(!empty($_POST['id']))
-            $id = $_POST['id'];
+    public function update(){
+        if(!empty($_POST['editId']))
+            $id = $_POST['editId'];
 
         if($id){
                 $field = CMSField::find($id);
