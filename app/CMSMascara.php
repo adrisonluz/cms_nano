@@ -32,6 +32,6 @@ class CMSMascara extends Authenticatable {
     * Inputs pai
     */
     public function inputs(){
-        return $this->belongsToMany('NanoCMS\CMSfield', 'mascara_id');
+        return $this->hasMany('NanoCMS\CMSfield', 'mascara_id');
     }
 }

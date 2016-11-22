@@ -53,3 +53,7 @@ h1 {
     width: 50%;
     max-width: 100px;
 }
+
+.fields tfoot button{
+    display: inline;
+}

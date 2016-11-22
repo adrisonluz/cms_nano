@@ -55,7 +55,7 @@
                         <td>{{ $form->pagina->url or 'Todas' }}</td>
                         <td>{{ $form->tipo }}</td>
                         <td>{{ $form->ordem }}</td>
-                        <td>{{ $form->Ativo }}</td>
+                        <td>{{ $form->ativo }}</td>
                     </tr>
                     @endforeach
                 </table>

@@ -22,7 +22,7 @@
         </div>
 
         <form name="frm" action="{{ route("nano.cms.forms.update", ["id"=> $form->id ])}}" method="post" enctype="multipart/form-data">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="titulo" class="col-sm-3 control-label">Título:</label>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="col-sm-12">
-                <div class="form-group">
+                <div class="form-group pull-right">
                     <a href="javascript:history.back(-1)">
                         <button type="button" class="btn btn-default">Voltar</button>
                     </a>
@@ -117,8 +117,9 @@
                             </thead>
                             @if(count($form->fields) > 0)
                             @foreach($form->fields as $field)
+                            @if($field->input_id == null)
                             <tr>
-                                <td>
+                                <td width="85">
                                     <a href="{{ route('nano.cms.fields.edit', ['id' => $field->id]) }}" title="Editar" class="editar" rel="{{ $field->id }}">
                                         <button type="button" class="btn btn-primary btn-xs">
                                             <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
@@ -134,11 +135,12 @@
                                 <td>{{ $field->nome }}</td>
                                 <td>{{ $field->valor }}</td>
                                 <td>{{ $field->placeholder }}</td>
-                                <td>{{ (isset($field->mascara) ? $field->mascara->mask : 'nenhuma') }}</td>
+                                <td>{{ $field->mascara->nome or 'nenhuma' }}</td>
                                 <td>{{ $field->obrigatorio }}</td>
                                 <td>{{ $field->tipo }}</td>
                                 <td>{{ $field->ordem }}</td>
                             </tr>
+                            @endif
                             @endforeach
                             @endif
                             <tr>
@@ -148,15 +150,21 @@
                                 <td colspan="8"><strong>Novo field:</strong></td>
                             </tr>
                             <tfoot>
-                                <td><button type="submit"  class="btn btn-primary enviar"><i class="fa fa-save"></i></button></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary enviar btn-sm pull-left"><i class="fa fa-save"></i></button>
+                                    <button type="reset" class="btn btn-success btn-sm pull-right">
+                                        <span class="glyphicon" aria-hidden="true"><i class="fa fa-eraser"></i></span>
+                                    </button>
+                                </td>
                                 <td><input name="nome" type="text" value="" class="form-control" ></td>
                                 <td><input name="valor" type="text" value="" class="form-control" ></td>
                                 <td><input name="placeholder" type="text" value="" class="form-control" ></td>
                                 <td>
                                     <select name="mascara_id" class="form-control">
+                                        <option value="">Nenhuma</option>   
                                         @if(count($mascaras) > 0)
                                             @foreach($mascaras as $mask)
-                                            <option value="{{ $mask->mascara_id }}">{{ $mask->mask }}</option>
+                                            <option value="{{ $mask->id }}">{{ $mask->nome }}</option>
                                             @endforeach          
                                         @endif                                     
                                     </select>
@@ -172,12 +180,12 @@
                                         <option value="input">Input texto</option> 
                                         <option value="hidden">Input hidden</option>
                                         <option value="select">Select</option>
-                                        <option value="option">Option</option>
-                                        <option value="checkbox">Option</option>
-                                        <option value="textarea">Text area</option>                
+                                        <option value="checkbox">Checkbox</option>
+                                        <option value="textarea">Text area</option>
+                                        <option value="captcha">Captcha</option>                
                                     </select>
                                 </td>
-                                <td><input name="ordem" type="number" value="" class="form-control" ></td>
+                                <td width="50px"><input name="ordem" type="number" value="" class="form-control" ></td>
                             </tfoot>
                         </table>
                     </form>      
@@ -187,8 +195,8 @@
 </div>
 @endsection
 
-<!-- Modal Niveis -->
-<div class="modal fade" id="modalFields" role="dialog">
+<!-- Modal Forms -->
+<div class="modal fade" id="modalForms" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -198,6 +206,46 @@
             </div>
             <div class="modal-body row text-center">
                     
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal Fields -->
+<div class="modal fade" id="modalFields" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="box-title">Opções no field</strong>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">×</span></button>
+                </h3>
+                <p>Este field exige pelo menos uma opção. Os campos são obrigatórios e o campo valor não pode possuir espaços ou caracteres especiais, apenas letras e números.</p>
+            </div>
+            <div class="modal-body row text-center">
+                <div class="col-xs-12">
+                    <form class="options" action="{{ route("nano.cms.fields.store") }}" method="post">
+                        <table class="table table-striped table-bordded">
+                            <thead>
+                                <td>Ação</td>
+                                <td>Nome</td>
+                                <td>Valor</td>
+                                <td>Ordem</td>
+                            </thead>                            
+                            <tr>
+                                <td colspan="4" class="separator">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><strong>Novo option:</strong></td>
+                            </tr>
+                            <tfoot>
+                                <td><button type="submit"  class="btn btn-primary enviar"><i class="fa fa-save"></i></button></td>
+                                <td><input name="nome" type="text" value="" class="form-control" ></td>
+                                <td><input name="valor" type="text" value="" class="form-control" ></td>
+                                <td width="50px"><input name="ordem" type="number" value="" class="form-control" ></td>
+                            </tfoot>
+                        </table>
+                    </form>    
+                </div>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

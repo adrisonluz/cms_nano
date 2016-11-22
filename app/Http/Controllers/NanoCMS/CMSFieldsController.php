@@ -22,35 +22,69 @@ class CMSFieldsController  extends \NanoCMS\Http\Controllers\NanoController {
         if(!empty($_POST['editId']))
             $editId = $_POST['editId'];
 
-        $titulo = $_POST['titulo'];
-        $link = $_POST['link'];
-        $ativo = $_POST['ativo'];
-        $form_id = $_POST['form_id'];
-        $input_id = ($_POST['tipo'] == 'item' ? 0 : $_POST['tipo']);
-
-        if($titulo !== '' && $link !== ''){
-            if(isset($editId)){
-                $menuItem = CMSField::find($editId);
-                $resposta = 'editado';
-            }else{
-                $menuItem = new CMSField();
-                $resposta = 'criado';
+        if(!empty($_POST['optionData'])){
+            foreach ($_POST['optionData'] as $data) {
+                $optionArray[] = json_decode($data);    
             }
             
-            $menuItem->titulo = $titulo;
-            $menuItem->link = $link;
-            $menuItem->ativo = $ativo;
-            $menuItem->form_id = $form_id;
-            $menuItem->input_id = $input_id;
+            unset($_POST['optionData']);
+        }
 
-            if($menuItem->save()){
+        $nome = $_POST['nome'];
+        $tipo = $_POST['tipo'];
+        unset($_POST['_token']);
+        unset($_POST['editId']);
+
+        if(empty($_POST['mascara_id']))
+            $_POST['mascara_id'] = null;
+
+        if($nome !== '' && $tipo !== ''){
+            if(isset($editId)){
+                $field = CMSField::find($editId);
+                $resposta = 'editado';
+            }else{
+                $field = new CMSField();
+                $resposta = 'criado';
+            }
+
+            foreach ($_POST as $key => $val) {
+                $field->$key = $val;
+            }
+
+            if($field->save()){
+                $mascara = (count($field->mascara) > 0 ? $field->mascara->nome : 'nenhuma');
+                $msg = '';
+
+                if(isset($optionArray)){
+                    $tipoOption = ($field->tipo == 'select' ? 'option' : 'checkbox');
+
+                    foreach($optionArray as $optionInfo){   
+                        $option = new CMSField();
+                        $option->nome = $optionInfo[0]->value;
+                        $option->valor = $optionInfo[1]->value;
+                        $option->ordem = $optionInfo[2]->value;
+                        $option->tipo = $tipoOption;
+                        $option->form_id = $field->form_id;
+                        $option->input_id = $field->id;
+                        
+                        if(!$option->save()){
+                            $msg = 'Houve algum erro ao salvar as opções, favor verificar e tentar novamente.';
+                        }
+                    }
+                }
+
                 $this->retorno['type'] = 'success';
-                $this->retorno['msg'] = 'Field ' . $resposta . ' com sucesso!';
-                $this->retorno['menuItemId'] = $menuItem->id;
-                $this->retorno['menuItemTitulo'] = $menuItem->titulo;
-                $this->retorno['menuItemLink'] = $menuItem->link;
-                $this->retorno['menuItemTipo'] = ($menuItem->tipo == 0) ? 'item' : 'sub-item';
-                $this->retorno['menuItemAtivo'] = $menuItem->ativo;
+                $msg = ($msg == '' ? 'Field ' . $resposta . ' com sucesso!' : $msg);
+
+                $this->retorno['msg'] = $msg;
+                $this->retorno['fieldId'] = $field->id;
+                $this->retorno['fieldNome'] = $field->nome;
+                $this->retorno['fieldValor'] = $field->valor;
+                $this->retorno['fieldPlaceholder'] = $field->placeholder;
+                $this->retorno['fieldMask'] = $mascara;
+                $this->retorno['fieldObrigatorio'] = $field->obrigatorio;
+                $this->retorno['fieldTipo'] = $field->tipo;
+                $this->retorno['fieldOrdem'] = $field->ordem;
                 $this->retorno['resposta'] = $resposta;
             }else{
                 $this->retorno['type'] = 'danger';
@@ -65,8 +99,30 @@ class CMSFieldsController  extends \NanoCMS\Http\Controllers\NanoController {
         die();
     }
 
+    public function dados(){
+        if(!empty($_POST['id']))
+            $id = $_POST['id'];
+
+        if($id){
+                $field = CMSField::find($id);
+
+                $this->retorno['fieldId'] = $field->id;
+                $this->retorno['fieldNome'] = $field->nome;
+                $this->retorno['fieldValor'] = $field->valor;
+                $this->retorno['fieldPlaceholder'] = $field->placeholder;
+                $this->retorno['fieldMask'] = $field->mascara_id;
+                $this->retorno['fieldObrigatorio'] = $field->obrigatorio;
+                $this->retorno['fieldTipo'] = $field->tipo;
+                $this->retorno['fieldOrdem'] = $field->ordem;
+                $this->retorno['fieldOptions'] = (count($field->options) > 0 ? $field->options->toArray() : null);
+        }
+
+        echo json_encode($this->retorno);
+        die();
+    }
+
     public function lixeira(){
-        $fieldsId = $_POST['id'];
+        $fieldsId = $_POST['editId'];
         if(CMSField::find($fieldsId)->delete()){
             $this->retorno['type'] = 'success';
             $this->retorno['msg'] = 'Field excluido com sucesso!';

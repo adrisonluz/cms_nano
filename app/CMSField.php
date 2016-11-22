@@ -38,7 +38,7 @@ class CMSField extends Authenticatable {
     /**
     * Input pai
     */
-    public function itemPai(){
+    public function inputPai(){
         return $this->belongsTo('NanoCMS\CMSField', 'input_id');
     }
 
@@ -46,6 +46,13 @@ class CMSField extends Authenticatable {
     * Máscara do input
     */
     public function mascara(){
-        return $this->hasOne('NanoCMS\CMSMascara');
+        return $this->belongsTo('NanoCMS\CMSMascara');
+    }
+
+    /**
+    *
+    */
+    public function options(){
+        return $this->hasMany('NanoCMS\CMSField', 'input_id');
     }
 }
