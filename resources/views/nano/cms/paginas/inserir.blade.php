@@ -47,12 +47,12 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!--div class="form-group">
                     <label for="data" class="col-sm-3 control-label">Data:</label>
                     <div class="col-sm-9">
                         <input name="data" type="date" value="@if(isset($request['data'])) {{$request['data']}} @endif" class="form-control"/>
                     </div>
-                </div>
+                </div-->
 
                 <div class="form-group">
                     <label for="imegem" class="col-sm-3 control-label">Imagem (capa):</label>

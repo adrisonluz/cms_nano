@@ -31,7 +31,7 @@
                     <td>Resumo</td>
                     <td>URL</td>
                     <td>Ativo</td>
-                    <td>Data</td>
+                    <!--td>Data</td-->
                     </thead>
 
 
@@ -55,7 +55,7 @@
                         <td>{{ $pagina->resumo }}</td>
                         <td>{{ $pagina->url }}</td>
                         <td>{{ $pagina->ativo }}</td>
-                        <td>{{ $pagina->data }}</td>
+                        <!--td>{{ $pagina->data }}</td-->
                     </tr>
                     @endforeach
 

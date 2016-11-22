@@ -18,7 +18,7 @@ class CreatePaginas extends Migration
             $table->text('conteudo');
             $table->mediumText('resumo');
             $table->string('imagem', 255)->nullable();
-            $table->date('data');
+            //$table->string('data', 50);
             $table->string('url', 255)->nullable();
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();
