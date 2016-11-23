@@ -4,9 +4,9 @@ namespace NanoCMS;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class CMSPagina extends Authenticatable {
+class CMSPost extends Authenticatable {
 
-    protected $table = 'cms_paginas';
+    protected $table = 'cms_posts';
 
     /**
      * The attributes that are mass assignable.

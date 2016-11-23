@@ -11,12 +11,12 @@
 
     <div class="row">
         <div class="col-lg-10">
-            <h1>Banners</h1>
+            <h1>Posts</h1>
         </div>
 
         <div class="col-lg-2">
             <BR>
-            <a href="{{ route('nano.cms.banners.create') }}" class="btn btn-default btn-success">Novo registro</a>
+            <a href="{{ route('nano.cms.posts.create') }}" class="btn btn-default btn-success">Novo registro</a>
         </div>
 
 
@@ -28,45 +28,45 @@
                     <td width="7%">Ação</td>
                     <td>ID</td>
                     <td>Título</td>
-                    <td>Página</td>
-                    <td>Tipo</td>
-                    <td>Ordem</td>
-                    <td>Data Ini</td>
-                    <td>Data Fim</td>
+                    <td>Categoria</td>
+                    <td>URL</td>
+                    <td>Destaque</td>
+                    <td>Data</td>
                     <td>Ativo</td>
+                    <td>Ordem</td>
                     </thead>
 
 
-                    @foreach ($banners as $banner)
+                    @foreach ($posts as $post)
                     <tr>
                         <td>
-                            <a href="{{ route('nano.cms.banners.edit', ['id' => $banner->id]) }}" title="Editar">
+                            <a href="{{ route('nano.cms.posts.edit', ['id' => $post->id]) }}" title="Editar">
                                 <button type="button" class="btn btn-primary btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-edit"></i></span>
                                 </button>
                             </a>
 
-                            <a href="{{ route('nano.cms.banners.lixeira', ['id' => $banner->id]) }}" title="Descartar">
+                            <a href="{{ route('nano.cms.posts.lixeira', ['id' => $post->id]) }}" title="Descartar">
                                 <button type="button" class="btn btn-danger btn-xs ">
                                     <span class="glyphicon" aria-hidden="true"><i class="fa fa-trash"></i></span>
                                 </button>
                             </a>
                         </td>
-                        <td>{{ $banner->id }}</td>
-                        <td>{{ $banner->titulo }}</td>
-                        <td>{{ $banner->pagina->titulo }}</td>
-                        <td>{{ $banner->tipo }}</td>
-                        <td>{{ $banner->ordem }}</td>
-                        <td>{{ $banner->data_ini }}</td>
-                        <td>{{ $banner->data_fim }}</td>
-                        <td>{{ $banner->ativo }}</td>
+                        <td>{{ $post->id }}</td>
+                        <td>{{ $post->titulo }}</td>
+                        <td>{{ $post->categotia->nome or 'não listado' }}</td>
+                        <td>{{ $post->url }}</td>
+                        <td>{{ $post->destaque }}</td>
+                        <td>{{ $post->data }}</td>
+                        <td>{{ $post->ativo }}</td>
+                        <td>{{ $post->ordem }}</td>
                     </tr>
                     @endforeach
 
                 </table>
             </div>
         </div>
-        {!! $banners->links() !!}
+        {!! $posts->links() !!}
 
     </div>
 
