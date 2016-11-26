@@ -10,13 +10,14 @@
     @endif
 
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-9">
             <h1>Posts</h1>
         </div>
 
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <BR>
             <a href="{{ route('nano.cms.posts.create') }}" class="btn btn-default btn-success">Novo registro</a>
+            <a href="{{ route('nano.cms.categorias.index') }}" class="btn btn-default btn-primary">Categorias</a>
         </div>
 
 

@@ -9,20 +9,27 @@ use NanoCMS\Http\Requests\CMSUserRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 // Use - Custom
-use NanoCMS\CMSPagina;
+use NanoCMS\CMSCategoria;
 use NanoCMS\CMSConfig;
+use NanoCMS\CMSPost;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
 
-class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
+class CMSCategoriasController extends \NanoCMS\Http\Controllers\NanoController {
 
     public function __construct(Request $request) {
         parent::__construct();
-        parent::checkAcess('accessPages');
+        parent::checkAcess('accessPosts');
 
         $this->middleware('auth');
-        $this->area = 'nano.cms.paginas';
+        $this->area = 'nano.cms.categorias';
         $this->retorno = array();
         $this->request = $request->except('_token');
+        $this->retorno['posts'] = CMSPost::all();
+        
+        $this->retorno['js'] = [
+            url('NanoCMS/js/categorias.js')
+        ];
 
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');
@@ -31,59 +38,61 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     *   Listagem dos página
+     *   Listagem dos categorias
      */
     public function index() {
-        $paginas = CMSPagina::ativos()
+        $categorias = CMSCategoria::ativos()
                 ->paginate(env('25'));
 
-        $this->retorno['paginas'] = $paginas;
+        $this->retorno['categorias'] = $categorias;
         return view($this->area . ".index", $this->retorno);
     }
 
     /**
-     * 	Cadastro de página
+     * 	Cadastro de categoria
      */
     public function create() {
+        $this->retorno['categorias'] = CMSCategoria::ativos()->get();
         return view($this->area . ".inserir", $this->retorno);
     }
 
     /**
-     * 	Inserir usuário no banco
+     * 	Inserir categoria no banco
      */
     public function store() {
+        $this->retorno['request'] = $this->request;
+
         $rules = array(
             'titulo' => 'required',
-            'conteudo' => 'required',
         );
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
             $this->retorno['errors'] = $validator->errors();
-            $this->retorno['request'] = $this->request;
+
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
-            $pagina = new CMSPagina;
-            $pagina->titulo = $this->request['titulo'];
-            $pagina->resumo = $this->request['resumo'];
-            $pagina->url = $this->request['url'];
-            //$pagina->data = $this->request['data'];
-            $pagina->conteudo = $this->request['conteudo'];
-            $pagina->ativo = 'sim';
-            $pagina->agent_id = $this->usuario_logado->id;
+            $categoria = new CMSCategoria;
+            $categoria->titulo = $this->request['titulo'];
+            $categoria->categoria_pai_id = (isset($this->request['categoria_pai_id']) ? $this->request['categoria_pai_id'] : null);
+            $categoria->conteudo = $this->request['conteudo'];
+            $categoria->url = $this->request['url'];
+            $categoria->ordem = $this->request['ordem'];
+            $categoria->ativo = 'sim';
+            $categoria->agent_id = $this->usuario_logado->id;
 
             if (Input::hasFile('imagem')) {
                 $ext = Input::file('imagem')->getClientOriginalExtension();
-                $pagina->imagem = setUri($pagina->titulo) . '.' . $ext;
-                Input::file('imagem')->move('NanoCMS/img/paginas', setUri($pagina->titulo));
+                $categoria->imagem = setUri($categoria->titulo) . '.' . $ext;
+                Input::file('imagem')->move('NanoCMS/img/categorias', setUri($categoria->titulo));
             }else{
-                $pagina->imagem = 'noimage.png';
+                $categoria->imagem = 'noimage.png';
             }
 
-            if ($pagina->save()) {
+            if ($categoria->save()) {
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'Página criada com sucesso!'
+                    'text' => 'Categoria cadastrada com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -97,47 +106,48 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Edição de página
+     * 	Edição de categoria
      */
     public function edit($id) {
-        $this->retorno['pagina'] = CMSPagina::find($id);
-
+        $this->retorno['categoria'] = CMSCategoria::find($id);
+        $this->retorno['categorias'] = CMSCategoria::ativos()->get();
         return view($this->area . '.editar', $this->retorno);
     }
 
     /**
-     * 	Editar usuário no banco
+     * 	Editar categoria no banco
      */
     public function update($id) {
+        $this->retorno['request'] = $this->request;
+
         $rules = array(
             'titulo' => 'required',
-            'conteudo' => 'required',
         );
 
         $validator = Validator($this->request, $rules);
         if ($validator->fails()) {
             $this->retorno['errors'] = $validator->errors();
-            $this->retorno['request'] = $this->request;
+
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
-            $pagina = CMSPagina::find($id);
-            $pagina->titulo = $this->request['titulo'];
-            $pagina->resumo = $this->request['resumo'];
-            $pagina->url = $this->request['url'];
-            //$pagina->data = $this->request['data'];
-            $pagina->conteudo = $this->request['conteudo'];
-            $pagina->agent_id = $this->usuario_logado->id;
+            $categoria = CMSCategoria::find($id);
+            $categoria->titulo = $this->request['titulo'];
+            $categoria->categoria_pai_id = (isset($this->request['categoria_pai_id']) ? $this->request['categoria_pai_id'] : null);
+            $categoria->conteudo = $this->request['conteudo'];
+            $categoria->url = $this->request['url'];
+            $categoria->ordem = $this->request['ordem'];
+            $categoria->agent_id = $this->usuario_logado->id;
 
             if (Input::hasFile('imagem')) {
                 $ext = Input::file('imagem')->getClientOriginalExtension();
-                $pagina->imagem = setUri($pagina->titulo) . '.' . $ext;
-                Input::file('imagem')->move('NanoCMS/img/paginas', setUri($pagina->titulo));
+                $categoria->imagem = setUri($categoria->titulo) . '.' . $ext;
+                Input::file('imagem')->move('NanoCMS/img/categorias', setUri($categoria->titulo));
             }
 
-            if ($pagina->save()) {
+            if ($categoria->save()) {
                 Session::put('mensagem', [
                     'class' => 'alert-success',
-                    'text' => 'Página editada com sucesso!'
+                    'text' => 'Categoria editada com sucesso!'
                 ]);
                 return redirect()->route($this->area . '.index')->with($this->retorno);
             }
@@ -151,16 +161,16 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * Desativar página
+     * Desativar categoria
      */
     public function lixeira($id) {
-        $pagina = CMSPagina::find($id);
-        $pagina->lixeira = 'sim';
+        $categoria = CMSCategoria::find($id);
+        $categoria->lixeira = 'sim';
 
-        if ($pagina->save()) {
+        if ($categoria->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Página enviada para a lixeira'
+                'text' => 'Categoria enviada para a lixeira'
             ]);
         } else {
             Session::put('mensagem', [
@@ -173,16 +183,16 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * Ativar página
+     * Ativar categoria
      */
     public function ativar($id) {
-        $pagina = CMSPagina::find($id);
-        $pagina->lixeira = '';
+        $categoria = CMSCategoria::find($id);
+        $categoria->lixeira = '';
 
-        if ($pagina->save()) {
+        if ($categoria->save()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => 'Página restaurada com sucesso!'
+                'text' => 'Categoria restaurada com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [
@@ -195,13 +205,13 @@ class CMSPaginasController extends \NanoCMS\Http\Controllers\NanoController {
     }
 
     /**
-     * 	Deletar página
+     * 	Deletar categoria
      */
     public function delete($id) {
-        if (CMSPagina::find($id)->delete()) {
+        if (CMSCategoria::find($id)->delete()) {
             Session::put('mensagem', [
                 'class' => 'alert-success',
-                'text' => '`Página excluída com sucesso!'
+                'text' => 'Categoria excluído com sucesso!'
             ]);
         } else {
             Session::put('mensagem', [
