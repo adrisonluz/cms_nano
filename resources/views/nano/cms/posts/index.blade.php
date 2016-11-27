@@ -32,7 +32,7 @@
                     <td>Categoria</td>
                     <td>URL</td>
                     <td>Destaque</td>
-                    <td>Data</td>
+                    <!--td>Data</td-->
                     <td>Ativo</td>
                     <td>Ordem</td>
                     </thead>
@@ -55,10 +55,10 @@
                         </td>
                         <td>{{ $post->id }}</td>
                         <td>{{ $post->titulo }}</td>
-                        <td>{{ $post->categotia->nome or 'não listado' }}</td>
+                        <td>{{ $post->categoria->titulo or 'nenhuma' }}</td>
                         <td>{{ $post->url }}</td>
                         <td>{{ $post->destaque }}</td>
-                        <td>{{ $post->data }}</td>
+                        <!--td>{{ $post->data }}</td-->
                         <td>{{ $post->ativo }}</td>
                         <td>{{ $post->ordem }}</td>
                     </tr>

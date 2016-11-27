@@ -32,21 +32,30 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="resumo" class="col-sm-3 control-label">Resumo:</label>
+                    <label for="categoria_id" class="col-sm-3 control-label">Categoria:</label>
                     <div class="col-sm-9">
-                        <textarea rows="3" class="form-control" name="resumo">@if(isset($request['resumo'])) {{$request['resumo']}} @endif</textarea>
+                        <select name="categoria_id" class="form-control">
+                            <option>Nenhuma</option>
+                            @if(count($categorias) > 0)
+                            @foreach($categorias as $categoria)
+                            <option value="{{ $categoria->id }}" {{ (isset($request['categoria_id']) && $request['categoria_id'] == $categoria->id ) ? 'selected=selected' : '' }}>{{ $categoria->titulo }}</option>
+                            @endforeach
+                            @else
+                            <option value="" disabled="disabled">Não há categorias cadastradas.</option>
+                            @endif
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-3 control-label">URL:</label>
+                    <div class="col-sm-9">
+                        <input name="url" type="text" value="@if(isset($request['url'])) {{$request['url']}} @endif" class="form-control" placeholder="exemplo-de-url" />
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="url" class="col-sm-3 control-label">URL de acesso:</label>
-                    <div class="col-sm-9">
-                        <input name="url" type="text" value="@if(isset($request['url'])) {{$request['url']}} @endif" class="form-control" placeholder="exemplo-de-url" />
-                    </div>
-                </div>
-
                 <!--div class="form-group">
                     <label for="data" class="col-sm-3 control-label">Data:</label>
                     <div class="col-sm-9">
@@ -63,6 +72,23 @@
                                 <button type="button" class="btn btn-info btn-flat" onclick="javascript:document.getElementById('imagem').click()"><i class="fa fa-file"></i></button>
                             </span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="destaque" class="col-sm-3 control-label">Destaque:</label>
+                    <div class="col-sm-9">
+                        <select name="destaque" class="form-control">
+                            <option value="sim"  @if(isset($request)) {{ $request['destaque'] == 'sim' ? 'selected=selected' : '' }} @endif>Sim</option>
+                            <option value="não"  @if(isset($request)) {{ $request['destaque'] == 'não' ? 'selected=selected' : '' }} @endif>Não</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="link" class="col-sm-3 control-label">Ordem:</label>
+                    <div class="col-sm-9">
+                        <input name="ordem" type="number" value="@if(isset($request['ordem'])) {{$request['ordem']}} @endif" class="form-control">
                     </div>
                 </div>
             </div>

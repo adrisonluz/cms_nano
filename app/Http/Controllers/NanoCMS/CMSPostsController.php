@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 // Use - Custom
 use NanoCMS\CMSPost;
+use NanoCMS\CMSCategoria;
 use NanoCMS\CMSConfig;
 use Illuminate\Support\Facades\Input;
 
@@ -23,6 +24,7 @@ class CMSPostsController extends \NanoCMS\Http\Controllers\NanoController {
         $this->area = 'nano.cms.posts';
         $this->retorno = array();
         $this->request = $request->except('_token');
+        $this->retorno['categorias'] = CMSCategoria::ativos()->get();
 
         if (Session::has('mensagem')) {
             $this->retorno['mensagem'] = Session::get('mensagem');
@@ -64,11 +66,16 @@ class CMSPostsController extends \NanoCMS\Http\Controllers\NanoController {
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
             $post = new CMSPost;
-            $post->titulo = $this->request['titulo'];
-            $post->resumo = $this->request['resumo'];
+            $post->titulo = $this->request['titulo'];            
             $post->url = $this->request['url'];
             //$post->data = $this->request['data'];
             $post->conteudo = $this->request['conteudo'];
+            
+            if(isset($this->request['categoria_id']))
+                $post->categoria_id;
+            
+            $post->destaque = $this->request['destaque'];
+            $post->ordem = $this->request['ordem'];
             $post->ativo = 'sim';
             $post->agent_id = $this->usuario_logado->id;
 
@@ -119,11 +126,16 @@ class CMSPostsController extends \NanoCMS\Http\Controllers\NanoController {
             return view($this->area . '.inserir')->with($this->retorno);
         } else {
             $post = CMSPost::find($id);
-            $post->titulo = $this->request['titulo'];
-            $post->resumo = $this->request['resumo'];
+            $post->titulo = $this->request['titulo'];            
             $post->url = $this->request['url'];
             //$post->data = $this->request['data'];
             $post->conteudo = $this->request['conteudo'];
+
+            if(isset($this->request['categoria_id']))
+                $post->categoria_id = $this->request['categoria_id'];
+            
+            $post->destaque = $this->request['destaque'];
+            $post->ordem = $this->request['ordem'];
             $post->agent_id = $this->usuario_logado->id;
 
             if (Input::hasFile('imagem')) {

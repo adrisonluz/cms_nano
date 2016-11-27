@@ -35,5 +35,11 @@ class CMSPost extends Authenticatable {
         ->where('id', '!=', 0);
     }
 
+    /**
+    *  Categoria do post
+    */
+    public function categoria() {
+        return $this->belongsTo('NanoCMS\CMSCategoria');
+    }
 
 }
