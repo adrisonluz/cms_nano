@@ -52,6 +52,7 @@
                         <li><a href="{{ route('nano.cms.menus.index') }}">Menus</a></li>
                         <li><a href="{{ route('nano.cms.forms.index') }}">Forms</a></li>
                         <li><a href="{{ route('nano.cms.posts.index') }}">Posts</a></li>
+                        <li><a href="{{ route('nano.cms.agendas.index') }}">Agenda</a></li>
                         @endif
 
                     </ul>

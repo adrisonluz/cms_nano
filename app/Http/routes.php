@@ -150,6 +150,19 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
         Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSCategoriasController@delete', 'as' => 'nano.cms.categorias.delete']);
     });
 
+    /* Rotas organizadas para agendas */
+    Route::group(['prefix' => 'agendas', 'where' => ['id' => '[0-9]+']], function () {
+        Route::get('', ['uses' => 'NanoCMS\CMSAgendasController@index', 'as' => 'nano.cms.agendas.index']);
+        Route::get('index', ['uses' => 'NanoCMS\CMSAgendasController@index', 'as' => 'nano.cms.agendas.index']);
+        Route::get('inserir', ['uses' => 'NanoCMS\CMSAgendasController@create', 'as' => 'nano.cms.agendas.create']);
+        Route::post('inserir', ['uses' => 'NanoCMS\CMSAgendasController@store', 'as' => 'nano.cms.agendas.store']);
+        Route::get('{id}/editar', ['uses' => 'NanoCMS\CMSAgendasController@edit', 'as' => 'nano.cms.agendas.edit']);
+        Route::post('{id}/editar', ['uses' => 'NanoCMS\CMSAgendasController@update', 'as' => 'nano.cms.agendas.update']);
+        Route::get('{id}/lixeira', ['uses' => 'NanoCMS\CMSAgendasController@lixeira', 'as' => 'nano.cms.agendas.lixeira']);
+        Route::get('{id}/ativar', ['uses' => 'NanoCMS\CMSAgendasController@ativar', 'as' => 'nano.cms.agendas.ativar']);
+        Route::get('{id}/deletar', ['uses' => 'NanoCMS\CMSAgendasController@delete', 'as' => 'nano.cms.agendas.delete']);
+    });
+
     /* Rotas organizadas para configurações */
     Route::group(['prefix' => 'configs', 'where' => ['id' => '[0-9]+']], function () {
         Route::get('', ['uses' => 'NanoCMS\CMSConfigsController@index', 'as' => 'nano.cms.configs.index']);
