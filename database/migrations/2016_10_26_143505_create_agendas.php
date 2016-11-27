@@ -15,9 +15,9 @@ class CreateAgendas extends Migration
         Schema::create('cms_agendas', function (Blueprint $table) {
             $table->increments('id');
             $table->text('conteudo');
-            $table->date('data_ini');
-            $table->date('data_fim');
-            $table->string('imagem', 255)->nullable();
+            $table->string('data_ini', 50);
+            $table->string('data_fim', 50);
+            $table->string('imagem', 255)->nullable()->default('noimage.png');
             $table->string('titulo', 255)->nullable();
             $table->string('url', 255)->nullable();
             $table->string('ativo', 45);

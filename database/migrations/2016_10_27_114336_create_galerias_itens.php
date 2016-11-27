@@ -19,7 +19,7 @@ class CreateGaleriasItens extends Migration
               ->references('id')->on('cms_galerias')
               ->onDelete('cascade');
             $table->string('titulo', 255)->nullable();
-            $table->string('src', 255)->nullable();
+            $table->string('src', 255)->nullable()->default('noimage.png');
             $table->string('url', 255)->nullable();
             $table->string('tipo', 45);
             $table->integer('ordem');

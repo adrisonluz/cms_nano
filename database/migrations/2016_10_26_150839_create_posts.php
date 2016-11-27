@@ -20,7 +20,7 @@ class CreatePosts extends Migration
               ->onDelete('set null')->nullable();
             $table->string('titulo', 255)->nullable();
             $table->text('conteudo');
-            $table->string('imagem', 255)->nullable();
+            $table->string('imagem', 255)->nullable()->default('noimage.png');
             $table->date('data');
             $table->string('url', 255)->nullable();
             $table->string('destaque', 45);

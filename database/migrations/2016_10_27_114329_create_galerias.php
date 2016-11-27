@@ -22,7 +22,7 @@ class CreateGalerias extends Migration {
                     ->references('id')->on('cms_posts')
                     ->onDelete('no action')->nullable();
             $table->string('titulo', 255)->nullable();
-            $table->string('imagem', 255)->nullable();
+            $table->string('imagem', 255)->nullable()->default('noimage.png');
             $table->string('tipo', 45);
             $table->string('ativo', 45);
             $table->string('lixeira', 45)->nullable();

@@ -21,7 +21,7 @@ class CreateBanners extends Migration
               ->onDelete('no action')->nullable();
             $table->string('titulo', 255)->nullable();
             $table->mediumText('conteudo');
-            $table->string('imagem', 255)->nullable();
+            $table->string('imagem', 255)->nullable()->default('noimage.png');
             $table->string('video', 255)->nullable();
             $table->date('data_ini');
             $table->date('data_fim');

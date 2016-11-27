@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration {
             $table->string('telefone', 255)->nullable();
             $table->string('celular', 255)->nullable();
 
-            $table->string('foto', 255)->nullable();
+            $table->string('foto', 255)->nullable()->default('noimage.png');
             $table->string('endereco', 255);
             $table->string('bairro', 255);
             $table->string('cidade', 255);

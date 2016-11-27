@@ -20,7 +20,7 @@ class CreateCategorias extends Migration
               ->onDelete('cascade')->nullable();
             $table->string('titulo', 255)->nullable();
             $table->text('conteudo');
-            $table->string('imagem', 255)->nullable();
+            $table->string('imagem', 255)->nullable()->default('noimage.png');
             $table->string('url', 255)->nullable();
             $table->integer('ordem');
             $table->string('ativo', 45);

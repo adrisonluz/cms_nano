@@ -17,7 +17,7 @@ class CreatePaginas extends Migration
             $table->string('titulo', 255)->nullable();
             $table->text('conteudo');
             $table->mediumText('resumo');
-            $table->string('imagem', 255)->nullable();
+            $table->string('imagem', 255)->nullable()->default('noimage.png');
             //$table->string('data', 50);
             $table->string('url', 255)->nullable();
             $table->string('ativo', 45);
