@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Console\Commands;
+namespace Nano\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

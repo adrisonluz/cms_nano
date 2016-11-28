@@ -1,9 +1,9 @@
 <?php
 
-namespace Nano\Http\Requests;
+namespace Nano\Nano\Requests;
 
-use Nano\Http\Requests\Request;
-use Nano\CMSUser;
+use Nano\Nano\Requests\Request;
+use Nano\Nano\CMSUser;
 
 class CMSUserRequest extends Request {
 

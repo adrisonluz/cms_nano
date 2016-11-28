@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Exceptions;
+namespace Nano\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;

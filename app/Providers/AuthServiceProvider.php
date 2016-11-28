@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Providers;
+namespace Nano\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'NanoCMS\Model' => 'NanoCMS\Policies\ModelPolicy',
+        'Nano\Model' => 'Nano\Policies\ModelPolicy',
     ];
 
     /**

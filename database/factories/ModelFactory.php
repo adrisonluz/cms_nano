@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(NanoCMS\User::class, function (Faker\Generator $faker) {
+$factory->define(Nano\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,

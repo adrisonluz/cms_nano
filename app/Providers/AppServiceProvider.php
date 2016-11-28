@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Providers;
+namespace Nano\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

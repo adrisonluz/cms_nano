@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Console;
+namespace Nano\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

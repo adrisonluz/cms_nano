@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => NanoCMS\User::class,
+        'model' => Nano\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

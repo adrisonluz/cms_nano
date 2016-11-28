@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Http\Middleware;
+namespace Nano\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

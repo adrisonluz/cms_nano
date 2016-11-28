@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Events;
+namespace Nano\Events;
 
 abstract class Event
 {

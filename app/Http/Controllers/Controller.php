@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Http\Controllers;
+namespace Nano\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nano\Http\Requests;
+namespace Nano\Nano\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

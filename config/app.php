@@ -133,10 +133,10 @@ return [
         /*
          * Application Service Providers...
          */
-        NanoCMS\Providers\AppServiceProvider::class,
-        NanoCMS\Providers\AuthServiceProvider::class,
-        NanoCMS\Providers\EventServiceProvider::class,
-        NanoCMS\Providers\RouteServiceProvider::class,
+        Nano\Providers\AppServiceProvider::class,
+        Nano\Providers\AuthServiceProvider::class,
+        Nano\Providers\EventServiceProvider::class,
+        Nano\Providers\RouteServiceProvider::class,
     ],
     /*
       |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Providers;
+namespace Nano\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'NanoCMS\Events\SomeEvent' => [
-            'NanoCMS\Listeners\EventListener',
+        'Nano\Events\SomeEvent' => [
+            'Nano\Listeners\EventListener',
         ],
     ];
 

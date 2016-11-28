@@ -1,8 +1,8 @@
 <?php
 
-namespace NanoCMS\Http\Controllers;
+namespace Nano\Http\Controllers;
 
-use NanoCMS\Http\Requests;
+use Nano\Nano\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +14,8 @@ class HomeController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth');
-        $this->user = Auth::user();
+
+
     }
 
     /**
@@ -24,11 +24,8 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data = [
-            'user' => $this->user
-        ];
 
-        return view('nano.home', $data);
+        return view('site.home');
     }
 
 }

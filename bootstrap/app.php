@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    NanoCMS\Http\Kernel::class
+    Nano\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    NanoCMS\Console\Kernel::class
+    Nano\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    NanoCMS\Exceptions\Handler::class
+    Nano\Exceptions\Handler::class
 );
 
 /*

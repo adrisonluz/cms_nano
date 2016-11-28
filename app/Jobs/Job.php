@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Jobs;
+namespace Nano\Jobs;
 
 use Illuminate\Bus\Queueable;
 

@@ -20,7 +20,7 @@
             "database"
         ],
         "psr-4": {
-            "NanoCMS\\": "app/"
+            "Nano\\": "app/"
         },
         "files": [
         "app/Helpers/MyHelper.php"

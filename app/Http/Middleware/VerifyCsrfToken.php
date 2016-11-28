@@ -1,6 +1,6 @@
 <?php
 
-namespace NanoCMS\Http\Middleware;
+namespace Nano\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
