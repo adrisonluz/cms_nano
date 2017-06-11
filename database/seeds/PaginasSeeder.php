@@ -17,7 +17,6 @@ class PaginasSeeder extends Seeder
         'conteudo' => '<h1>Bem vindo ao seu site!</h1>',
         'resumo' => '',
         'imagem' => '',
-        'data' => '',
         'url' => '/',
         'ativo' => 'sim',
         'lixeira' => '',
