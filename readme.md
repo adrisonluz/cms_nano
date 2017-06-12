@@ -42,6 +42,8 @@ DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
 
+Obs: Não esqueça de criar o banco de dados citado nas configurações de sua aplicação.
+
 ### Quarto passo
 Com o banco de dados devidamente configurado, agora precisamos criar as tabelas e alimentá-las com o básico para rodar o sistema. Não se assuste, você não precisa criar tudo "à mão", vamos usar os truques que o Laravel esconde nas mangas. Basta rodas os seguintes comandos:
 

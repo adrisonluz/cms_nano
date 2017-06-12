@@ -19,7 +19,7 @@ class NanoCMSAuthAuthProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        Auth::extend('customUser', function($app) {
+        Auth::extend('CMSUser', function($app) {
             // Return an instance of Illuminate\Contracts\Auth\UserProvider...
             return new CustomUserProvider(new User);
         });

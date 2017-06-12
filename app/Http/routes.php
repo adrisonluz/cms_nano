@@ -173,3 +173,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'cms'], function () {
         Route::post('/editar', ['uses' => '\Nano\NanoCMS\Controllers\CMSConfigsController@update', 'as' => 'nano.cms.configs.update']);
     });
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

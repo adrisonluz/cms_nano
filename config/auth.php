@@ -62,11 +62,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => Nano\NanoCMS\CMSUser::class,
         ],
         'nanocms' => [
             'driver' => 'database',
-            'model' => App\Models\CMSUser::class,
+            'model' => Nano\NanoCMS\CMSUser::class,
             'table' => 'cms_users',
         ],
     // 'users' => [
